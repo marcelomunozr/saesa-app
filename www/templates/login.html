@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">iniciar sesión</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+  
+    <div class="logo-login"></div>
+    <form ng-submit="doLogin()">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="RUT">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Clave">
+        </label>
+        <label>
+          <button class="button button-block" type="submit">Ingresar</button>
+        </label>
+        <a ng-click="register()" class="pull-left">Registrarme</a>
+        <a ng-click="forgotPassword()" class="pull-right">Olvidé mi clave</a>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
