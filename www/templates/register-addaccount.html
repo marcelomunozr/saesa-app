@@ -1,0 +1,32 @@
+<div class="registerForm2">
+  <form>
+    <div class="list list-inset">
+
+<!--
+	    <div class="row">
+	      <div class="col col-75">
+	        <label class="item item-input">
+	          <input type="text" placeholder="Agregar Cuenta" name="account[]">
+	        </label>
+	      </div>
+	      <div class="col">?</div>
+	    </div>
+-->
+
+	    <div ng-repeat="cuenta in cuentas">
+			<div class="row">
+			    <div class="col col-75" ng-bind-html="cuenta.elinput" angular-compile="numCuentas"></div>
+				<div ng-if="cuenta.ayuda" class="col">?</div>
+				<div ng-if="!cuenta.ayuda" class="col">
+					<button ng-click="removeAccount($index)">X</button>
+				</div>
+			</div>
+	    </div>
+
+      <a ng-click="addAccount()" class="pull-right">Agregar otra cuenta</a>
+      <label>
+        <button class="button button-block" type="submit">Continuar</button>
+      </label>
+    </div>
+  </form>
+</div>

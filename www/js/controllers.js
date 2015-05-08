@@ -1,7 +1,7 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -57,8 +57,8 @@ angular.module('starter.controllers', [])
   }
 
   //register effects
-  $scope.nextRegister = function() {   
-    jQuery("li.one").removeClass("active");   
+  $scope.nextRegister = function() {
+    jQuery("li.one").removeClass("active");
     jQuery("li.two").addClass("active");
     jQuery(".registerForm1").hide();
     jQuery(".registerForm2").fadeIn(300);
@@ -66,28 +66,50 @@ angular.module('starter.controllers', [])
 
 
   //add account
-  var maxAccounts = 100;  
-  var i = 1;  
-  $scope.addAcount = function() { 
-    if(i < maxAccounts){
-        i++;
-        jQuery(".input_fields_wrap").append('<div class="row"><div class="col col-75"><label class="item item-input"><input type="text" name="account['+i+']" placeholder="Agregar Cuenta"/><a href="#" ng-click="removeAccount()">Eliminar</a></label></div><div class="col">?</div></div>');
-        console.log(i);
-    }
-  
-    $scope.removeAccount = function(){
-      jQuery(this).parent('.item-input').remove();
-      i--;
-      console.log(i);
-    }
-
-  }
-
 
 
 
 
 })
+.controller('RegisterCtrl', function($scope) {
+	$scope.regdata = {};
+	console.log('paso', $scope.regdata);
+})
 
+.controller('RegisterFormCtrl', function($scope, $sce, $compile){
+	$scope.regdata.paso = 1;
+	console.log('paso', $scope.regdata);
+})
 
-  
+.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile){
+	console.log('paso', $scope.regdata);
+	$scope.regdata.paso = 2;
+
+	$scope.cuentas = [{
+		'elinput' : $sce.trustAsHtml('<label class="item item-input"><input type="text" placeholder="Agregar Cuenta" name="account[]"></label>'),
+		'ayuda' : true
+	}];
+	$scope.numCuentas = $scope.cuentas.length;
+
+	var maxAccounts = 10;
+	var i = 1;
+
+	$scope.addAccount = function() {
+		if(i <= maxAccounts){
+			i++;
+			console.log(i);
+			$scope.cuentas.push({
+				'elinput' : $sce.trustAsHtml('<label class="item item-input"><input type="text" placeholder="Agregar Cuenta" name="account[]"></label>')
+			})
+		}
+	}
+	$scope.removeAccount = function(index){
+		i--;
+	    $scope.cuentas.splice(index,1);
+		$scope.numCuentas = $scope.cuentas.length;
+
+		console.log(i);
+	}
+
+})
+;

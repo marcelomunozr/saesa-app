@@ -15,7 +15,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-
   .state('app', {
     url: "/app",
     abstract: true,
@@ -31,14 +30,33 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
-  .state('app.register', {
+
+  .state('register', {
     url: "/register",
+    controller: 'RegisterCtrl',
+	templateUrl: "templates/register.html"
+  })
+
+  .state('register.form', {
+    url: "/form",
     views: {
-      'menuContent': {
-        templateUrl: "templates/register.html"
+      'registros': {
+        templateUrl: "templates/register-form.html",
+		controller: 'RegisterFormCtrl'
       }
     }
   })
+
+  .state('register.addaccount', {
+    url: "/addaccount",
+    views: {
+      'registros': {
+        templateUrl: "templates/register-addaccount.html",
+		controller: 'RegisterAddAccountCtrl'
+      }
+    }
+  })
+
   .state('app.search', {
     url: "/search",
     views: {
@@ -47,6 +65,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
-  
-  $urlRouterProvider.otherwise('/app/search');
+  .state('login', {
+    url: "/login",
+	templateUrl: "templates/login.html"
+  })
+
+  $urlRouterProvider.otherwise('/login');
 });

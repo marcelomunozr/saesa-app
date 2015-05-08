@@ -1,61 +1,14 @@
-<ion-modal-view>
   <ion-header-bar>
     <h1 class="title">Registrarme</h1>
     <div>
-      <button class="button button-clear back-header" ng-click="closeRegister()"><span class="ti-back-left"></span></button>
+      <button class="button button-clear back-header" ui-sref="login"><span class="ti-back-left"></span></button>
     </div>
   </ion-header-bar>
   <ion-content>
     <ul class="pasos">
-      <li class="one active"><strong>1</strong></li>
-      <li class="two"><strong>2</strong></li>
+      <li class="one" ng-class="{1 : 'active'}[regdata.paso]"><strong>1</strong></li>
+      <li class="two" ng-class="{2 : 'active'}[regdata.paso]"><strong>2</strong></li>
       <div class="clearfix"></div>
     </ul>
-    <div class="registerForm1">
-      <form>
-        <div class="list list-inset">
-          <label class="item item-input">
-            <input type="text" placeholder="Nombre">
-          </label>
-          <label class="item item-input">
-            <input type="text" placeholder="RUT">
-          </label>
-          <label class="item item-input">
-            <input type="email" placeholder="Email">
-          </label>
-          <label class="item item-input">
-            <input type="password" placeholder="Contraseña">
-          </label>
-          <label class="item item-input">
-            <input type="password" placeholder="Repetir contraseña">
-          </label>
-          <label>
-            <button class="button button-block" ng-click="nextRegister()" type="submit">Continuar</button>
-          </label>
-        </div>
-      </form>
-    </div>
-    <div class="registerForm2">
-      <form>
-        <div class="list list-inset">
-
-          <div class="input_fields_wrap">            
-            <div class="row">
-              <div class="col col-75">
-                <label class="item item-input">  
-                  <input type="text" placeholder="Agregar Cuenta" name="account[]">
-                </label>
-              </div>
-              <div class="col">?</div>
-            </div>
-          </div>
-
-          <a ng-click="addAcount()" class="pull-right">Agregar otra cuenta</a>
-          <label>
-            <button class="button button-block" type="submit">Continuar</button>
-          </label>
-        </div>
-      </form>
-    </div>
+	<div ui-view name="registros"></div>
   </ion-content>
-</ion-modal-view>
