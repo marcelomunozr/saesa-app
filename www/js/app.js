@@ -15,6 +15,43 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+
+  //register content
+  .state('register', {
+      url: "/register",
+      controller: 'RegisterCtrl',
+      templateUrl: "templates/register.html"
+  })
+
+  //registrar datos
+  .state('register.form', {
+    url: "/form",
+    views: {
+      'register': {
+        templateUrl: "templates/register-form.html",
+		    controller: 'RegisterFormCtrl'
+      }
+    }
+  })
+
+  //registrar cuenta
+  .state('register.addaccount', {
+    url: "/addaccount",
+    views: {
+      'register': {
+        templateUrl: "templates/register-addaccount.html",
+		    controller: 'RegisterAddAccountCtrl'
+      }
+    }
+  })
+
+  //olvido contraseña
+  .state('forgot-password', {
+    url: "/forgot-password",
+    templateUrl: "templates/forgot-password.html"
+  })
+
+  //menu
   .state('app', {
     url: "/app",
     abstract: true,
@@ -22,37 +59,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.forgot-password', {
-    url: "/forgot-password",
+  //resumen cuenta
+  .state('app.resumen-cuenta', {
+    url: "/resumen-cuenta",
     views: {
-      'menuContent': {
-        templateUrl: "templates/forgot-password.html"
-      }
-    }
-  })
-
-  .state('register', {
-    url: "/register",
-    controller: 'RegisterCtrl',
-	templateUrl: "templates/register.html"
-  })
-
-  .state('register.form', {
-    url: "/form",
-    views: {
-      'registros': {
-        templateUrl: "templates/register-form.html",
-		controller: 'RegisterFormCtrl'
-      }
-    }
-  })
-
-  .state('register.addaccount', {
-    url: "/addaccount",
-    views: {
-      'registros': {
-        templateUrl: "templates/register-addaccount.html",
-		controller: 'RegisterAddAccountCtrl'
+      'menuContent':{
+        templateUrl: "templates/resumen-cuenta.html"
       }
     }
   })
@@ -67,7 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
   .state('login', {
     url: "/login",
-	templateUrl: "templates/login.html"
+    templateUrl: "templates/login.html"
   })
 
   $urlRouterProvider.otherwise('/login');

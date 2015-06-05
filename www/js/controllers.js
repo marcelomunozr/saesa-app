@@ -5,23 +5,7 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modalLogin = modal;
-    $scope.modalLogin.show();
-  });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modalLogin.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modalLogin.show();
-  };
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
@@ -30,43 +14,6 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-
-  //modal register
-  $scope.closeRegister = function() {
-    $scope.modalRegister.hide();
-  };
-  $scope.register= function(){
-    $ionicModal.fromTemplateUrl('templates/register.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modalRegister = modal;
-      $scope.modalRegister.show();
-    });
-  }
-  //modal forgot password
-  $scope.closeForgot = function() {
-    $scope.modalForgot.hide();
-  };
-  $scope.forgotPassword= function(){
-    $ionicModal.fromTemplateUrl('templates/forgot-password.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modalForgot = modal;
-      $scope.modalForgot.show();
-    });
-  }
-
-  //register effects
-  $scope.nextRegister = function() {
-    jQuery("li.one").removeClass("active");
-    jQuery("li.two").addClass("active");
-    jQuery(".registerForm1").hide();
-    jQuery(".registerForm2").fadeIn(300);
-  };
-
-
-  //add account
-
 
 
 
@@ -105,7 +52,7 @@ angular.module('starter.controllers', [])
 	}
 	$scope.removeAccount = function(index){
 		i--;
-	    $scope.cuentas.splice(index,1);
+    $scope.cuentas.splice(index,1);
 		$scope.numCuentas = $scope.cuentas.length;
 
 		console.log(i);

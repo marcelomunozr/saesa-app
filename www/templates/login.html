@@ -4,7 +4,7 @@
   </ion-header-bar>
   <ion-content>
 
-    <div class="logo-login"></div>
+    <div ui-sref="app.resumen-cuenta" class="logo-login"></div>
     <form ng-submit="doLogin()">
       <div class="list list-inset">
         <label class="item item-input">
@@ -17,7 +17,7 @@
           <button class="button button-block" type="submit">Ingresar</button>
         </label>
         <a ui-sref="register.form" class="pull-left">Registrarme</a>
-        <a ng-click="forgotPassword()" class="pull-right">Olvidé mi clave</a>
+        <a ui-sref="forgot-password" class="pull-right">Olvidé mi clave</a>
       </div>
     </form>
   </ion-content>
