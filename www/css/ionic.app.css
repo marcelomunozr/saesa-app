@@ -7856,6 +7856,18 @@ ul.pasos li.active:first-child:before {
   border-bottom: 30px solid transparent;
   border-left: 15px solid #d4d4d4; }
 
+.add-account .input-label {
+  font-size: 14px;
+  color: #b6b6b6; }
+.add-account .item-select select {
+  padding: 0 48px 4px 16px;
+  color: #b6b6b6;
+  font-size: 14px; }
+.add-account .row.no-padding {
+  margin-bottom: 15px; }
+.add-account .row + .row {
+  margin-top: 0; }
+
 .pane {
   background: #fcfcfc; }
 
