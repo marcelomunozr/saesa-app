@@ -3,6 +3,7 @@
     <div class="list list-inset">
 
 	    <div ng-repeat="cuenta in cuentas" class="add-account">
+	    	<div ng-if="!cuenta.ayuda" class="separate"></div>
 			<label class="item item-input item-select">
 				<div class="input-label">
 					Empresa
@@ -16,24 +17,22 @@
 			</label>
 			<div class="row no-padding">
 			    <div class="col col-75 no-padding" ng-bind-html="cuenta.elinput" angular-compile="numCuentas"></div>
-				<div ng-if="cuenta.ayuda" class="col no-padding"><div class="op-addAccount"><span class="ti-help"></span></div></div>
-				<div ng-if="!cuenta.ayuda" class="col no-padding">
-					<div ng-click="removeAccount($index)" class="op-addAccount"><span class="ti-close"></span></div>
-				</div>
+				<div class="col no-padding"><div class="op-addAccount"><span class="ti-help"></span></div></div>
 			</div>
 			<div class="row no-padding">
 			    <div class="col col-75 no-padding" ng-bind-html="cuenta.elinput" angular-compile="numCuentas"></div>
-				<div ng-if="cuenta.ayuda" class="col no-padding"><div class="op-addAccount"><span class="ti-help"></span></div></div>
-				<div ng-if="!cuenta.ayuda" class="col no-padding">
-					<div ng-click="removeAccount($index)" class="op-addAccount"><span class="ti-close"></span></div>
-				</div>
+				<div class="col no-padding"><div class="op-addAccount"><span class="ti-help"></span></div></div>
 			</div>
 			<label class="item item-input">
 				<input type="text" placeholder="Nombre o razón social">
 			</label>
+			<div class="text-right">
+				<a ng-click="addAccount()" class="pull-right">Agregar otra cuenta</a>
+				<a ng-if="!cuenta.ayuda" ng-click="removeAccount($index)" class="pull-right rojo">Eliminar esta cuenta</a>
+			</div>
+			<div class="clearfix"></div>
 	    </div>
 
-      <a ng-click="addAccount()" class="pull-right clear-20">Agregar otra cuenta</a>
       <label>
         <button class="button button-block" type="submit">Continuar</button>
       </label>

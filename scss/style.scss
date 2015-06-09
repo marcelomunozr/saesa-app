@@ -39,6 +39,9 @@ a{
 	clear:both;
 	padding: 10px 0;
 }
+.rojo{
+	color:#ec0a0a;
+}
 .no-padding{
 	padding: 0;
 }
@@ -205,6 +208,27 @@ ul.pasos {
 	.row + .row{
 		margin-top: 0;
 	}
+	.separate{
+		text-align: right;
+		margin: 15px 0;
+		padding: 15px 0 0 0;
+		border-top: 1px solid #ddd;
+		.op-addAccount {
+			width: 24px;
+			height: 24px;
+			line-height: 20px;
+			display: inline-block;
+			margin: 0;
+			.ti-close{
+				font-size: 8px;
+			}
+		}	
+	}
+	.text-right{
+		a{
+			margin: 0 0 0 15px;
+		}
+	}
 }
 .pane{
 	background: #fcfcfc;
@@ -281,5 +305,14 @@ ul.pasos {
 			font-size: 11px;
 			font-style: italic;
 		}
+		.canvasjs-chart-container{
+			background: #fcfcfc;
+		}
+		.canvasjs-chart-credit{
+			display: none;
+		}
+	}
+	.box.resumen{
+		padding: 10px 5px;
 	}
 }

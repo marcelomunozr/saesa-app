@@ -7708,6 +7708,9 @@ a {
   clear: both;
   padding: 10px 0; }
 
+.rojo {
+  color: #ec0a0a; }
+
 .no-padding {
   padding: 0; }
 
@@ -7867,6 +7870,21 @@ ul.pasos li.active:first-child:before {
   margin-bottom: 15px; }
 .add-account .row + .row {
   margin-top: 0; }
+.add-account .separate {
+  text-align: right;
+  margin: 15px 0;
+  padding: 15px 0 0 0;
+  border-top: 1px solid #ddd; }
+  .add-account .separate .op-addAccount {
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    display: inline-block;
+    margin: 0; }
+    .add-account .separate .op-addAccount .ti-close {
+      font-size: 8px; }
+.add-account .text-right a {
+  margin: 0 0 0 15px; }
 
 .pane {
   background: #fcfcfc; }
@@ -7931,3 +7949,9 @@ ul.pasos li.active:first-child:before {
       margin-top: 10px;
       font-size: 11px;
       font-style: italic; }
+    .contenido .box .canvasjs-chart-container {
+      background: #fcfcfc; }
+    .contenido .box .canvasjs-chart-credit {
+      display: none; }
+  .contenido .box.resumen {
+    padding: 10px 5px; }

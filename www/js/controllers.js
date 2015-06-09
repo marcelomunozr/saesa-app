@@ -60,38 +60,60 @@ angular.module('starter.controllers', [])
 
 })
 .controller('ResumenCtrl', function($scope){
+    CanvasJS.addColorSet("colorCol",
+      [//color
+      "#d7e4ec",
+      "#17c300"             
+      ]
+    );
     var chart = new CanvasJS.Chart("chartContainer",
     {
+      animationEnabled: true,
+      interactivityEnabled: false,
+      backgroundColor: "#fcfcfc",
+      colorSet: "colorCol",
       title:{
         text: "Cuadro Comparativo"
       
-      },   
+      },
+      dataPointMaxWidth: 12,
+      height: 160,
+      axisY:{
+        maximum: 150
+      },
       data: [{        
         type: "column",
+        showInLegend: false,
         dataPoints: [
-        { x: 10, y: 171 },
-        { x: 20, y: 155},
-        { x: 30, y: 150 },
-        { x: 40, y: 165 },
-        { x: 50, y: 195 },
-        { x: 60, y: 168 },
-        { x: 70, y: 128 },
-        { x: 80, y: 134 },
-        { x: 90, y: 114}
+        { label: "ENE", y: 120 },
+        { label: "FEB", y: 60 },
+        { label: "MAR", y: 90 },
+        { label: "ABR", y: 70 },
+        { label: "MAY", y: 110 },
+        { label: "JUN", y: 100 },
+        { label: "JUL", y: 50 },
+        { label: "AGO", y: 70 },
+        { label: "SEP", y: 80 },
+        { label: "OCT", y: 60 },
+        { label: "NOV", y: 90 },
+        { label: "DIC", y: 110 }
         ]
       },
       {        
         type: "line",
         dataPoints: [
-        { x: 10, y: 71 },
-        { x: 20, y: 55},
-        { x: 30, y: 50 },
-        { x: 40, y: 65 },
-        { x: 50, y: 95 },
-        { x: 60, y: 68 },
-        { x: 70, y: 28 },
-        { x: 80, y: 34 },
-        { x: 90, y: 14}
+        { label: "ENE", y: 100 },
+        { label: "FEB", y: 80 },
+        { label: "MAR", y: 60 },
+        { label: "ABR", y: 90 },
+        { label: "MAY", y: 50 }/*,
+        { label: "JUN", y: 60 },
+        { label: "JUL", y: 90 },
+        { label: "AGO", y: 70 },
+        { label: "SEP", y: 110 },
+        { label: "OCT", y: 100 },
+        { label: "NOV", y: 70 },
+        { label: "DIC", y: 90 }*/
         ]
       }
         
