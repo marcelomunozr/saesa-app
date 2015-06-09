@@ -62,9 +62,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   //resumen cuenta
   .state('app.resumen-cuenta', {
     url: "/resumen-cuenta",
+    cache: false,
     views: {
       'menuContent':{
-        templateUrl: "templates/resumen-cuenta.html"
+        templateUrl: "templates/resumen-cuenta.html",
+        controller: "ResumenCtrl"
       }
     }
   })
