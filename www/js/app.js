@@ -71,6 +71,52 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  //servicios asociados
+  .state('app.servicios-asociados', {
+    url: "/servicios-asociados",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/servicios-asociados.html",
+        controller: "AsociadosCtrl"
+      }
+    }
+  }) 
+  /*detalle servicio*/
+  .state('app.servicios-asociados.detalle', {
+    url: "/servicios-asociados/:id",
+    cache: true,
+    views: {
+      'contenedorAsociados':{
+        templateUrl: "templates/detalle-asociados.html",
+        controller: "AsociadosCtrl"
+      }
+    }
+  }) 
+
+  //informar falla
+  .state('app.informar-falla', {
+    url: "/informar-falla",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/informar-falla.html",
+        controller: "FallaCtrl"
+      }
+    }
+  }) 
+
+  //oficinas
+  .state('app.oficinas', {
+    url: "/oficinas",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/oficinas.html"
+      }
+    }
+  }) 
+
   .state('app.search', {
     url: "/search",
     views: {
@@ -79,6 +125,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+
+
   .state('login', {
     url: "/login",
     templateUrl: "templates/login.html"

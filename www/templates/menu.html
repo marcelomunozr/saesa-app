@@ -14,22 +14,69 @@
 
   <ion-side-menu side="right">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Menú</h1>
+      
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
-          Login
+      
+        <ion-item nav-clear menu-close ui-sref="app.resumen-cuenta">
+          <div class="row">
+            <div class="col col-75">
+              <h2>Edilia Sanchez</h2>
+              <h3>Titular: Lunamedia Corps</h3>
+            </div>
+            <div class="col">
+              <span class="ticon ti-settings pull-right"></span>
+            </div>
+          </div>
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/search">
-          Search
+        <ion-item nav-clear menu-close ui-sref="app.servicios-asociados.detalle({id:1})">
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-layers-alt pull-left"></span>
+              <h4>Servicios Asociados</h4>
+              <ul>
+                <li class="vencida">Mi casa</li>
+                <li>Casa campo</li>
+                <li class="por-vencer">Casa de Vacaciones</li>
+              </ul>
+              <a href="#" class="agregar-servicio">Agregar Servicio</a>
+            </div>
+          </div>
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/forgot-password">
-          Forgot Pass
+        <ion-item nav-clear menu-close ui-sref="app.informar-falla">
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-flag pull-left"></span>
+              <h4>Informar Falla</h4>
+            </div>
+          </div>
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
+        <ion-item nav-clear menu-close ui-sref="app.oficinas">
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-location-pin pull-left"></span>
+              <h4>Oficinas</h4>
+            </div>
+          </div>
         </ion-item>
+        <ion-item nav-clear menu-close>
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-bell pull-left"></span>
+              <h4>Notificaciones (3)</h4>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item nav-clear menu-close>
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-clipboard pull-left"></span>
+              <h4>Contáctactanos</h4>
+            </div>
+          </div>
+        </ion-item>
+
       </ion-list>
     </ion-content>
   </ion-side-menu>

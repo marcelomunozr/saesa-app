@@ -1,0 +1,56 @@
+<ion-view view-title="informar falla">
+  <ion-header-bar>
+    <h1 class="title">informar falla</h1>
+    <div>
+      <button class="button button-clear back-header" ui-sref="login"><span class="ti-back-left"></span></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+      <form>
+        <div class="list list-inset">
+
+          <div class="add-account">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Selecionar servicio
+              </div>
+              <select>
+                <option value="miCasa">Mi casa</option>
+                <option value="casaCampo">Casa campo</option>
+                <option value="casaVacaciones">Casa de Vacaciones</option>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Tipo de eventualidad
+              </div>
+              <select>
+                <option value="01">Caso 1</option>
+                <option value="02">Caso 2</option>
+                <option value="03">Caso 3</option>
+                <option value="05">Caso 4</option>
+              </select>
+            </label>
+            <label class="item item-input">
+              <textarea placeholder="Comments"></textarea>
+            </label>
+            <div class="text-center">
+              <label id="for-file-upload" class="item item-input upload">
+                Adjuntar imagen <span class="ti-camera"></span>
+              </label>
+              <input type="file" id="file-upload">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <label>
+            <button class="button button-block" type="submit">Continuar</button>
+          </label>
+        </div>
+      </form>
+
+  </ion-content>
+</ion-view>
+
+

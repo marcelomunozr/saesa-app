@@ -7859,38 +7859,66 @@ ul.pasos li.active:first-child:before {
   border-bottom: 30px solid transparent;
   border-left: 15px solid #d4d4d4; }
 
-.add-account .input-label {
+.list-inset .add-account .input-label {
   font-size: 14px;
   color: #b6b6b6; }
-.add-account .item-select select {
+.list-inset .add-account .item-select select {
   padding: 0 48px 4px 16px;
   color: #b6b6b6;
-  font-size: 14px; }
-.add-account .row.no-padding {
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  max-width: 50%;
+  position: relative;
+  top: 2px; }
+.list-inset .add-account textarea {
+  color: #b6b6b6;
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  min-height: 100px;
+  padding-top: 10px; }
+.list-inset .add-account input[type="file"] {
+  display: none; }
+.list-inset .add-account .row.no-padding {
   margin-bottom: 15px; }
-.add-account .row + .row {
+.list-inset .add-account .row + .row {
   margin-top: 0; }
-.add-account .separate {
+.list-inset .add-account .separate {
   text-align: right;
   margin: 15px 0;
   padding: 15px 0 0 0;
   border-top: 1px solid #ddd; }
-  .add-account .separate .op-addAccount {
+  .list-inset .add-account .separate .op-addAccount {
     width: 24px;
     height: 24px;
     line-height: 20px;
     display: inline-block;
     margin: 0; }
-    .add-account .separate .op-addAccount .ti-close {
+    .list-inset .add-account .separate .op-addAccount .ti-close {
       font-size: 8px; }
-.add-account .text-right a {
+.list-inset .add-account .text-right a {
   margin: 0 0 0 15px; }
+.list-inset .add-account .item.item-input input {
+  padding-right: 15px; }
+.list-inset .add-account .item.item-input.upload {
+  width: auto;
+  display: inline-block;
+  color: #00599b;
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  padding: 0 16px 6px 16px;
+  font-size: 13px;
+  line-height: 13px; }
+  .list-inset .add-account .item.item-input.upload span {
+    font-size: 22px;
+    margin-left: 10px;
+    position: relative;
+    top: 3px; }
 
 .pane {
   background: #fcfcfc; }
 
 .contenido {
-  padding: 10px; }
+  padding: 10px;
+  margin-bottom: 20px; }
   .contenido .datos h3 {
     font-size: 16px;
     line-height: 18px;
@@ -7949,9 +7977,192 @@ ul.pasos li.active:first-child:before {
       margin-top: 10px;
       font-size: 11px;
       font-style: italic; }
+    .contenido .box .chartStyle {
+      height: 150px;
+      width: 100%; }
+    .contenido .box .chartTitle {
+      text-align: center;
+      font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+      font-size: 11px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: -20px; }
+    .contenido .box .chart-comp {
+      display: inline-block;
+      border-radius: 2px;
+      border: 1px solid #f3f3f3;
+      color: #666;
+      position: relative;
+      font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+      font-size: 11px;
+      padding: 4px 10px 2px;
+      line-height: 11px; }
+      .contenido .box .chart-comp .icon-chart-actual {
+        width: 20px;
+        height: 10px;
+        background: url(../img/chart-actual.png) no-repeat;
+        display: inline-block;
+        background-size: contain;
+        margin-right: 5px; }
+      .contenido .box .chart-comp .icon-chart-anterior {
+        width: 15px;
+        height: 10px;
+        background: #d7e4ec;
+        display: inline-block;
+        background-size: contain;
+        margin-right: 5px; }
     .contenido .box .canvasjs-chart-container {
       background: #fcfcfc; }
     .contenido .box .canvasjs-chart-credit {
-      display: none; }
+      display: none;
+      font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
   .contenido .box.resumen {
     padding: 10px 5px; }
+  .contenido .btn-main .btn {
+    background: #edf3f6;
+    color: #00599b;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -o-border-radius: 2px;
+    display: inline-block;
+    border-bottom: 2px solid #cde1eb;
+    font-size: 14px;
+    text-align: center;
+    width: 130px;
+    height: 38px;
+    line-height: 42px;
+    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+    .contenido .btn-main .btn span {
+      margin-right: 4px;
+      font-size: 18px;
+      position: relative;
+      top: 1px; }
+
+.menu .list .item {
+  padding: 5px; }
+  .menu .list .item .item-content {
+    padding: 0;
+    margin: 0;
+    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+  .menu .list .item h2 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #454545;
+    margin: 0;
+    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+  .menu .list .item h3 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #848484;
+    margin: 0;
+    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+  .menu .list .item .ticon {
+    color: #00599b;
+    font-size: 20px; }
+  .menu .list .item .ttl .ticon {
+    margin-right: 10px;
+    font-size: 16px; }
+  .menu .list .item .ttl h4 {
+    color: #00599b;
+    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 16px;
+    margin: 0; }
+  .menu .list .item .ttl ul {
+    margin: 5px 0 0 0;
+    padding: 0 0 0 50px; }
+    .menu .list .item .ttl ul li {
+      font-size: 12px;
+      font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+      width: 130px;
+      position: relative;
+      margin: 0 0 2px; }
+    .menu .list .item .ttl ul li:before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 100%;
+      -moz-border-radius: 100%;
+      -webkit-border-radius: 100%;
+      -o-border-radius: 100%;
+      background: #26c281;
+      position: absolute;
+      right: 100%;
+      top: 6px;
+      margin-right: 5px; }
+    .menu .list .item .ttl ul li.por-vencer:before {
+      background: #f7ca18; }
+    .menu .list .item .ttl ul li.vencida:before {
+      background: #dc3023; }
+  .menu .list .item .ttl a.agregar-servicio {
+    float: right;
+    font-size: 12px; }
+
+/*servicios asociados*/
+.wide-as-needed {
+  white-space: nowrap; }
+
+.scroll {
+  min-width: 100%; }
+
+.gradient {
+  width: 52px;
+  height: 32px;
+  background: url(../img/gradient.png) no-repeat;
+  background-size: 100%;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  z-index: 1; }
+
+.menu-asociados {
+  position: relative; }
+  .menu-asociados a {
+    color: #666666;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    margin-right: 40px;
+    padding: 0 0 5px 0;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block; }
+  .menu-asociados a:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -o-border-radius: 100%;
+    background: #26c281;
+    position: relative;
+    display: inline-block;
+    margin-left: 15px; }
+  .menu-asociados a.por-vencer:after {
+    background: #f7ca18; }
+  .menu-asociados a.vencida:after {
+    background: #dc3023; }
+  .menu-asociados a.active {
+    border-bottom: 2px solid #00599b; }
+
+.contenedor-asociados .alert {
+  color: #d03131;
+  font-size: 13px;
+  margin-bottom: 20px; }
+  .contenedor-asociados .alert span {
+    font-size: 17px;
+    margin-right: 15px;
+    position: relative;
+    top: 2px; }
+.contenedor-asociados .alert.vencida {
+  background: #fbdbdb; }
+.contenedor-asociados .alert.por-vencer {
+  background: #faf0cb; }
+
+p {
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  color: #8e8e8e;
+  font-size: 13px;
+  line-height: 15px;
+  margin-bottom: 15px; }

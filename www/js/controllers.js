@@ -72,10 +72,13 @@ angular.module('starter.controllers', [])
       interactivityEnabled: false,
       backgroundColor: "#fcfcfc",
       colorSet: "colorCol",
-      title:{
-        text: "Cuadro Comparativo"
+      /*title:{
+        text: "cuadro comparativo",
+        fontFamily: "Tahoma",
+        fontSize: 12,
+        fontWeight: "normal"
       
-      },
+      },*/
       dataPointMaxWidth: 12,
       height: 160,
       axisY:{
@@ -120,6 +123,19 @@ angular.module('starter.controllers', [])
       ]
     });
     chart.render();
+})
+
+.controller('AsociadosCtrl', function($scope){
+  $(".menu-asociados a").click(function(){
+    $(".menu-asociados a").removeClass('active');
+    $(this).addClass('active');
+  });
+})
+
+.controller('FallaCtrl', function($scope){
+  $('#for-file-upload').on("tap",function(){
+    $('#file-upload').click();
+  });
 })
 
 ;
