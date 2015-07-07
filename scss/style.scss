@@ -414,6 +414,15 @@ ul.pasos {
     		}
 		}
 	}
+	.map-content{
+		height: 400px;
+		#map{
+			height: 400px;
+		}
+	}
+}
+.angular-leaflet-map {
+  height: 400px;
 }
 .menu .list {
 	.item{

@@ -138,4 +138,33 @@ angular.module('starter.controllers', [])
   });
 })
 
+.controller('MapCtrl', function($scope) {
+  $scope.initialize = function() {
+    var myLatlng = new google.maps.LatLng(-40.5730256,-73.13853890000001);
+    
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map"),
+        mapOptions);
+
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Grupo Saesa'
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+
+    $scope.map = map;
+  }
+  //google.maps.event.addDomListener(window, 'load', initialize);
+})
+
+
 ;

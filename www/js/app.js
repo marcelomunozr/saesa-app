@@ -112,7 +112,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     cache: false,
     views: {
       'menuContent':{
-        templateUrl: "templates/oficinas.html"
+        templateUrl: "templates/oficinas.html",
+        controller: "MapCtrl"
       }
     }
   }) 

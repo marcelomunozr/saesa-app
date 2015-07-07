@@ -8038,6 +8038,13 @@ ul.pasos li.active:first-child:before {
       font-size: 18px;
       position: relative;
       top: 1px; }
+  .contenido .map-content {
+    height: 400px; }
+    .contenido .map-content #map {
+      height: 400px; }
+
+.angular-leaflet-map {
+  height: 400px; }
 
 .menu .list .item {
   padding: 5px; }
