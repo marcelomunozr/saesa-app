@@ -7,13 +7,45 @@
   </ion-header-bar>
   <ion-content>
 
-    <div class="contenido">
-       
-      <ion-content ng-controller="MapCtrl" ng-init="initialize()" class="map-content">
-        <div id="map" data-tap-disabled="true"></div>
-      </ion-content>
+    <form>
+        <div class="list list-inset">
 
-    </div>
+          <div class="oficinas add-account">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Selecionar zona
+              </div>
+              <select>
+                <option value="osorno">Osorno</option>
+                <option value="valdivia">Valdivia</option>
+                <option value="puertoMontt">Puerto Montt</option>
+                <option value="chiloe">Chiloe</option>
+              </select>
+            </label>
+            <label class="item item-input"><input type="text" placeholder="Buscar oficina" name="buscarOficina"></label>
+            <div class="clear-30"></div>
+            <div class="row no-padding la-oficina">
+              <div class="col no-padding text-center">
+                <span class="ticon ti-location-pin"></span>
+              </div>
+              <div class="col col-75 no-padding">
+                <h3>Av. Providencia 1860, Providencia, Santiago</h3>
+                <h6>Lunes a viernes 8:30 a 18:30 hrs. </h6>
+              </div>
+            </div>
+            <div class="row no-padding la-oficina">
+              <div class="col no-padding text-center">
+                <span class="ticon ti-location-pin"></span>
+              </div>
+              <div class="col col-75 no-padding">
+                <h3>Av. Providencia 1860, Providencia, Santiago</h3>
+                <h6>Lunes a viernes 8:30 a 18:30 hrs. </h6>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
 
   </ion-content>
 </ion-view>

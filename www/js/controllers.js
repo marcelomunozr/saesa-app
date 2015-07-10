@@ -125,7 +125,40 @@ angular.module('starter.controllers', [])
     chart.render();
 })
 
-.controller('AsociadosCtrl', function($scope){
+.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope){
+
+  $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
+    
+  $scope.slideChanged = function() {  
+    $ionicScrollDelegate.scrollTop(false);
+    $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
+
+    $timeout( function() {
+      $ionicScrollDelegate.resize();
+    }, 50);
+    
+  };
+  
+  function execute() {
+    
+    $rootScope.slideServicios = [
+      {servicio: "Mi casa", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: "vencida"},
+      {servicio: "Casa campo", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: ""},
+      {servicio: "Casa de verano", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: "por-vencer"}
+    ];
+  }
+  
+  $scope.nextSlide = function() {
+    console.log('hola hola ');
+    $ionicSlideBoxDelegate.next();
+  }
+  $scope.prevSlide = function() {
+    console.log('hola hola ');
+    $ionicSlideBoxDelegate.previous();
+  }
+
+  execute();
+
   $(".menu-asociados a").click(function(){
     $(".menu-asociados a").removeClass('active');
     $(this).addClass('active');

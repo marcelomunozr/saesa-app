@@ -83,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   }) 
   /*detalle servicio*/
-  .state('app.servicios-asociados.detalle', {
+/*  .state('app.servicios-asociados.detalle', {
     url: "/servicios-asociados/:id",
     cache: true,
     views: {
@@ -92,7 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: "AsociadosCtrl"
       }
     }
-  }) 
+  }) */
 
   //informar falla
   .state('app.informar-falla', {
