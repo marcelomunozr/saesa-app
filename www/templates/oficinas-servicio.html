@@ -7,12 +7,15 @@
   </ion-header-bar>
   <ion-content>
 
-    <div class="contenido">
+    <div class="contenido-mapa">
        
-      <ion-content ng-controller="MapCtrl" ng-init="initialize()" class="map-content">
+      <ion-content ng-controller="OficinaCtrl" ng-init="initialize()" class="map-content">
         <div id="map" data-tap-disabled="true"></div>
       </ion-content>
 
+    </div>
+    <div class="contenido">
+      <p class="myriad">{{oficina.direccion}} <br>{{oficina.horario}}</p>
     </div>
 
   </ion-content>

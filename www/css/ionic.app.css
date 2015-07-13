@@ -7920,6 +7920,31 @@ ul.pasos li.active:first-child:before {
     margin-left: 10px;
     position: relative;
     top: 3px; }
+.list-inset .oficinas h3 {
+  font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #454545;
+  margin: 0; }
+.list-inset .oficinas h6 {
+  color: #858585;
+  font-family: "Myriad Pro", Arial;
+  font-weight: normal;
+  margin: 0; }
+.list-inset .oficinas .ticon {
+  color: #858585;
+  display: inline-block;
+  font-size: 26px; }
+.list-inset .oficinas .row.no-padding.la-oficina {
+  padding: 15px 0;
+  border-bottom: 1px solid #cbcbcb;
+  margin-bottom: 0; }
+.list-inset .oficinas .item-complex {
+  border: none;
+  margin-top: 0;
+  margin-bottom: 0; }
+.list-inset .oficinas .item-content {
+  width: 100%;
+  padding: 0; }
 
 .pane {
   background: #fcfcfc; }
@@ -8047,10 +8072,20 @@ ul.pasos li.active:first-child:before {
       font-size: 18px;
       position: relative;
       top: 1px; }
-  .contenido .map-content {
+
+.contenido-mapa {
+  height: 400px;
+  margin-bottom: 10px;
+  font-family: "Myriad Pro", Arial; }
+  .contenido-mapa .map-content {
     height: 400px; }
-    .contenido .map-content #map {
+    .contenido-mapa .map-content #map {
       height: 400px; }
+  .contenido-mapa p {
+    font-family: "Myriad Pro", Arial; }
+
+.myriad {
+  font-family: "Myriad Pro", Arial; }
 
 .angular-leaflet-map {
   height: 400px; }
@@ -8217,20 +8252,37 @@ p {
   line-height: 15px;
   margin-bottom: 15px; }
 
-.oficinas h3 {
-  font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: #454545;
-  margin: 0; }
-.oficinas h6 {
-  color: #858585;
-  font-family: "Myriad Pro", Arial;
-  font-weight: normal;
-  margin: 0; }
-.oficinas .ticon {
-  color: #858585;
-  display: inline-block;
-  font-size: 28px; }
-.oficinas .la-oficina {
-  padding: 10px 0;
-  border-bottom: 1px solid #cbcbcb; }
+.notificacion {
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  white-space: normal;
+  border: none;
+  padding: 0;
+  margin-top: 15px; }
+  .notificacion .row {
+    padding: 15px 15px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -o-border-radius: 2px;
+    vertical-align: middle; }
+    .notificacion .row p {
+      font-size: 13px; }
+  .notificacion .row.media {
+    background: #ffffcc;
+    color: #cc6600; }
+    .notificacion .row.media p {
+      color: #cc6600; }
+  .notificacion .row.alta {
+    background: #fbdbdb;
+    color: #d03131; }
+    .notificacion .row.alta p {
+      color: #d03131; }
+  .notificacion p {
+    white-space: normal; }
+  .notificacion .ti-close {
+    vertical-align: middle;
+    position: relative;
+    display: inline-block; }
+
+.back-anteriores .bar.bar-header .button.button-clear {
+  display: inline-block; }

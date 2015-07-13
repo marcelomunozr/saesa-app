@@ -12,44 +12,90 @@ angular.module('starter.services', [])
 	};
 })
 
-angular.module('starter').factory('LocationsService', [ function() {
 
-  var locationsObj = {};
-  locationsObj.savedLocations = [
+.factory('Oficinas', function() {
+  var datos = [
     {
-      name : "Washington D.C., USA",
-      lat : 38.8951100,
-      lng : -77.0363700
+      id: 1,
+      zona: "osorno",
+      nombreZona: "OSORNO",
+      direccion: "Eleuterio Ramírez N° 705",
+      horario: "Lunes a viernes 8:00 a 16:00 hrs.",
+      latitud: "-40.5730256",
+      longitud: "-73.13853890000001"
     },
     {
-      name : "London, England",
-      lat : 51.500152,
-      lng : -0.126236
-    },
-    {
-      name : "Paris, France",
-      lat : 48.864716,
-      lng : 2.349014
-    },
-    {
-      name : "Moscow, Russia",
-      lat : 55.752121,
-      lng : 37.617664
-    },
-    {
-      name : "Rio de Janeiro, Brazil",
-      lat : -22.970722,
-      lng : -43.182365
-    },
-    {
-      name : "Sydney, Australia",
-      lat : -33.865143,
-      lng : 151.209900
+      id: 2,
+      zona: "osorno",
+      nombreZona: "OSORNO (Rahue)",
+      direccion: "Victoria N° 380",
+      horario: "Lunes a viernes 8:00 a 16:00 hrs.",
+      latitud: "-40.572501",
+      longitud: "-73.1579049"
     }
-
   ];
-  return locationsObj;
-}])
+  return {
+    all: function() {
+      return datos;
+    },
+    get: function(oficinaId) {
+      for (var i = 0; i < datos.length; i++) {
+        if (datos[i].id === parseInt(oficinaId)) {
+          console.log("datos",datos[i]);
+          return datos[i];
+        }
+      }
+      return null;
+    }
+  };
+})
 
-
+.factory('Notificaciones', function() {
+  var datos = [
+    {
+      id: 1,
+      prioridad: "media",//media y alta
+      estado: "nueva",
+      contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
+    },
+    {
+      id: 2,
+      prioridad: "alta",//media y alta
+      estado: "nueva",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    },
+    {
+      id: 3,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    },
+    {
+      id: 4,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
+    },
+    {
+      id: 5,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    }
+  ];
+  return {
+    all: function() {
+      return datos;
+    },
+    get: function(notificacionId) {
+      for (var i = 0; i < datos.length;) {
+        if (datos[i].id === parseInt(notificacionId)) {
+          console.log("datos",datos[i]);
+          return datos[i];
+        }
+      }
+      return null;
+    }
+  };
+})
 ;

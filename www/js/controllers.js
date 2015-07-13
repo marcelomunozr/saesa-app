@@ -14,6 +14,9 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  };
 
 
 
@@ -59,9 +62,12 @@ angular.module('starter.controllers', [])
 	}
 
 })
-.controller('ResumenCtrl', function($scope){
+.controller('ResumenCtrl', function($scope,$ionicHistory){
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
     CanvasJS.addColorSet("colorCol",
-      [//color
+      [
       "#d7e4ec",
       "#17c300"             
       ]
@@ -125,10 +131,13 @@ angular.module('starter.controllers', [])
     chart.render();
 })
 
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope){
+.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory){
 
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
     
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
   $scope.slideChanged = function() {  
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
@@ -149,11 +158,11 @@ angular.module('starter.controllers', [])
   }
   
   $scope.nextSlide = function() {
-    console.log('hola hola ');
+    console.log('next');
     $ionicSlideBoxDelegate.next();
   }
   $scope.prevSlide = function() {
-    console.log('hola hola ');
+    console.log('prev');
     $ionicSlideBoxDelegate.previous();
   }
 
@@ -171,13 +180,25 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('MapCtrl', function($scope) {
+
+.controller('OficinasCtrl', function($scope,$ionicHistory, Oficinas) {
+  $scope.oficinas = Oficinas.all();
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+})
+
+.controller('OficinaCtrl', function($scope, $stateParams,$ionicHistory , Oficinas) {
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+  $scope.oficina = Oficinas.get($stateParams.oficinaId);
   $scope.initialize = function() {
-    var myLatlng = new google.maps.LatLng(-40.5730256,-73.13853890000001);
+    var myLatlng = new google.maps.LatLng($scope.oficina.latitud,$scope.oficina.longitud);//-40.5730256 //-73.13853890000001
     
     var mapOptions = {
       center: myLatlng,
-      zoom: 16,
+      zoom: 18,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map"),
@@ -199,5 +220,14 @@ angular.module('starter.controllers', [])
   //google.maps.event.addDomListener(window, 'load', initialize);
 })
 
+.controller('NotificacionesCtrl', function($scope,$ionicHistory, Notificaciones) {
+  $scope.notificaciones = Notificaciones.all();
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
+})
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
+})
 
 ;

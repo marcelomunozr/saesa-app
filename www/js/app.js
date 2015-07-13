@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -113,20 +113,57 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent':{
         templateUrl: "templates/oficinas.html",
-        controller: "MapCtrl"
+        controller: "OficinasCtrl"
+      }
+    }
+  }) 
+  //la oficina
+  .state('app.oficina', {
+    url: "/oficinas/:oficinaId",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/oficinas-servicio.html",
+        controller: "OficinaCtrl"
       }
     }
   }) 
 
-  .state('app.search', {
-    url: "/search",
+
+  //notificaciones
+  .state('app.notificaciones', {
+    url: "/notificaciones",
+    cache: false,
     views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
+      'menuContent':{
+        templateUrl: "templates/notificaciones.html",
+        controller: "NotificacionesCtrl"
       }
     }
-  })
+  }) 
+  //notificaciones anteriores
+  .state('app.notificaciones-anteriores', {
+    url: "/notificaciones-anteriores",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/notificaciones-anteriores.html",
+        controller: "NotificacionesCtrl"
+      }
+    }
+  }) 
 
+  //contactenos
+  .state('app.contactenos', {
+    url: "/contactenos",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/contactenos.html",
+        controller: "NotificacionesCtrl"
+      }
+    }
+  }) 
 
   .state('login', {
     url: "/login",

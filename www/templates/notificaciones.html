@@ -1,0 +1,26 @@
+<ion-view view-title="notificaciones">
+  <ion-header-bar>
+    <h1 class="title">notificaciones</h1>
+  </ion-header-bar>
+  <ion-content>
+
+    <div class="contenido">
+      <ion-item ng-repeat="notificacion in notificaciones" ng-if="notificacion.estado=='nueva'" class="notificacion">
+      <div class="row no-padding {{notificacion.prioridad}}">
+        <div class="col col-75 no-padding">
+          <p>{{notificacion.contenido}}</p>
+        </div>
+        <div class="col no-padding text-right"><span class="ti-close"></span></div>
+      </div>
+      <div class="clearfix"></div>
+      </ion-item>
+      <div class="clear-20"></div>
+      <div class="text-right"><a ui-sref="app.notificaciones-anteriores">Notificaciones Anteriores</a></div>
+    </div>
+
+  </ion-content>
+</ion-view>
+
+
+
+

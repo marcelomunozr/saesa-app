@@ -23,25 +23,24 @@
               </select>
             </label>
             <label class="item item-input"><input type="text" placeholder="Buscar oficina" name="buscarOficina"></label>
-            <div class="clear-30"></div>
-            <div class="row no-padding la-oficina">
-              <div class="col no-padding text-center">
-                <span class="ticon ti-location-pin"></span>
-              </div>
-              <div class="col col-75 no-padding">
-                <h3>Av. Providencia 1860, Providencia, Santiago</h3>
-                <h6>Lunes a viernes 8:30 a 18:30 hrs. </h6>
-              </div>
+            <div class="clear-10"></div>
+
+            <div class="cargador-oficinas" name="cargadorOficinas">
+    
+              <ion-item class="" ng-repeat="oficina in oficinas" ui-sref="app.oficina({oficinaId: oficina.id })">
+                <div class="row no-padding la-oficina">
+                  <div class="col no-padding text-center">
+                    <span class="ticon ti-map-alt"></span>
+                  </div>
+                  <div class="col col-75 no-padding">
+                    <h3>{{oficina.direccion}}</h3>
+                    <h6>{{oficina.horario}}</h6>
+                  </div>
+                </div>
+              </ion-item>
+
             </div>
-            <div class="row no-padding la-oficina">
-              <div class="col no-padding text-center">
-                <span class="ticon ti-location-pin"></span>
-              </div>
-              <div class="col col-75 no-padding">
-                <h3>Av. Providencia 1860, Providencia, Santiago</h3>
-                <h6>Lunes a viernes 8:30 a 18:30 hrs. </h6>
-              </div>
-            </div>
+
           </div>
 
         </div>

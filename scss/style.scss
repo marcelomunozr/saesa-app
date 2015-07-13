@@ -271,6 +271,39 @@ ul.pasos {
 			}
 		}
 	}
+	.oficinas{
+		h3{
+			font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+			font-size: 14px;
+			color: #454545;
+			margin: 0;
+		}
+		h6{
+			color: #858585;
+			font-family: "Myriad Pro", Arial;
+			font-weight: normal;
+			margin: 0;
+		}
+		.ticon{
+			color: #858585;
+			display: inline-block;
+			font-size: 26px;
+		}
+		.row.no-padding.la-oficina{
+			padding: 15px 0;
+			border-bottom: 1px solid #cbcbcb;
+			margin-bottom: 0;
+		}
+		.item-complex{
+			border:none;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.item-content{
+			width: 100%;
+			padding: 0;
+		}
+	}
 }
 .pane{
 	background: #fcfcfc;
@@ -423,12 +456,23 @@ ul.pasos {
     		}
 		}
 	}
+}
+.contenido-mapa{
+	height: 400px;
+	margin-bottom: 10px;
+	font-family: "Myriad Pro", Arial;
 	.map-content{
 		height: 400px;
 		#map{
 			height: 400px;
 		}
 	}
+	p{
+		font-family: "Myriad Pro", Arial;
+	}
+}
+.myriad{
+	font-family: "Myriad Pro", Arial;
 }
 .angular-leaflet-map {
   height: 400px;
@@ -629,26 +673,47 @@ p{
 	line-height: 15px;
 	margin-bottom: 15px;
 }
-.oficinas{
-	h3{
-		font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-		font-size: 14px;
-		color: #454545;
-		margin: 0;
+.notificacion{
+	font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+	white-space: normal;
+	border: none;
+	padding: 0;
+	margin-top: 15px;
+	.row{
+		padding: 15px 15px;
+		border-radius: 2px;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		-o-border-radius: 2px;
+		vertical-align: middle;
+		p{
+			font-size: 13px;
+		}
 	}
-	h6{
-		color: #858585;
-		font-family: "Myriad Pro", Arial;
-		font-weight: normal;
-		margin: 0;
+	.row.media{
+		background: #ffffcc;
+		color: #cc6600;
+		p{
+			color: #cc6600;
+		}
 	}
-	.ticon{
-		color: #858585;
+	.row.alta{
+		background: #fbdbdb;
+		color: #d03131;
+		p{
+			color: #d03131;
+		}
+	}
+	p{
+		white-space: normal;
+	}
+	.ti-close{
+		
+		vertical-align: middle;
+		position: relative;
 		display: inline-block;
-		font-size: 28px;
 	}
-	.la-oficina{
-		padding: 10px 0;
-		border-bottom: 1px solid #cbcbcb;
-	}
+}
+.back-anteriores .bar.bar-header .button.button-clear{
+	display: inline-block;
 }
