@@ -7752,7 +7752,7 @@ a {
   /* IE6-9 */ }
   .load .logo-load {
     width: 220px;
-    height: 38px;
+    height: 45px;
     background: url(../img/logo.png) no-repeat;
     background-size: 100%;
     position: relative;
@@ -7776,7 +7776,7 @@ a {
 
 .logo-login {
   width: 180px;
-  height: 31px;
+  height: 37px;
   background: url(../img/logo.png) no-repeat;
   background-size: 100%;
   position: relative;
@@ -7825,9 +7825,6 @@ a {
 .button.button-block:hover {
   background: #f7be32; }
 
-.list-inset {
-  margin: 20px; }
-
 .back-header {
   left: 10px; }
 
@@ -7867,84 +7864,87 @@ ul.pasos li.active:first-child:before {
   border-bottom: 30px solid transparent;
   border-left: 15px solid #d4d4d4; }
 
-.list-inset .add-account .input-label {
-  font-size: 14px;
-  color: #b6b6b6; }
-.list-inset .add-account .item-select select {
-  padding: 0 48px 4px 16px;
-  color: #b6b6b6;
-  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-  font-size: 14px;
-  max-width: 50%;
-  position: relative;
-  top: 2px; }
-.list-inset .add-account textarea {
-  color: #b6b6b6;
-  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-  font-size: 14px;
-  min-height: 100px;
-  padding-top: 10px; }
-.list-inset .add-account input[type="file"] {
-  display: none; }
-.list-inset .add-account .row.no-padding {
-  margin-bottom: 15px; }
-.list-inset .add-account .row + .row {
-  margin-top: 0; }
-.list-inset .add-account .separate {
-  text-align: right;
-  margin: 15px 0;
-  padding: 15px 0 0 0;
-  border-top: 1px solid #ddd; }
-  .list-inset .add-account .separate .op-addAccount {
-    width: 24px;
-    height: 24px;
-    line-height: 20px;
-    display: inline-block;
-    margin: 0; }
-    .list-inset .add-account .separate .op-addAccount .ti-close {
-      font-size: 8px; }
-.list-inset .add-account .text-right a {
-  margin: 0 0 0 15px; }
-.list-inset .add-account .item.item-input input {
-  padding-right: 15px; }
-.list-inset .add-account .item.item-input.upload {
-  width: auto;
-  display: inline-block;
-  color: #00599b;
-  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-  padding: 0 16px 6px 16px;
-  font-size: 13px;
-  line-height: 13px; }
-  .list-inset .add-account .item.item-input.upload span {
-    font-size: 22px;
-    margin-left: 10px;
+.list-inset {
+  margin: 20px;
+  background: none; }
+  .list-inset .add-account .input-label {
+    font-size: 14px;
+    color: #b6b6b6; }
+  .list-inset .add-account .item-select select {
+    padding: 0 48px 4px 16px;
+    color: #b6b6b6;
+    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    max-width: 50%;
     position: relative;
-    top: 3px; }
-.list-inset .oficinas h3 {
-  font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: #454545;
-  margin: 0; }
-.list-inset .oficinas h6 {
-  color: #858585;
-  font-family: "Myriad Pro", Arial;
-  font-weight: normal;
-  margin: 0; }
-.list-inset .oficinas .ticon {
-  color: #858585;
-  display: inline-block;
-  font-size: 26px; }
-.list-inset .oficinas .row.no-padding.la-oficina {
-  padding: 15px 0;
-  border-bottom: 1px solid #cbcbcb;
-  margin-bottom: 0; }
-.list-inset .oficinas .item-complex {
-  border: none;
-  margin-top: 0;
-  margin-bottom: 0; }
-.list-inset .oficinas .item-content {
-  width: 100%;
-  padding: 0; }
+    top: 2px; }
+  .list-inset .add-account textarea {
+    color: #b6b6b6;
+    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    min-height: 100px;
+    padding-top: 10px; }
+  .list-inset .add-account input[type="file"] {
+    display: none; }
+  .list-inset .add-account .row.no-padding {
+    margin-bottom: 15px; }
+  .list-inset .add-account .row + .row {
+    margin-top: 0; }
+  .list-inset .add-account .separate {
+    text-align: right;
+    margin: 15px 0;
+    padding: 15px 0 0 0;
+    border-top: 1px solid #ddd; }
+    .list-inset .add-account .separate .op-addAccount {
+      width: 24px;
+      height: 24px;
+      line-height: 20px;
+      display: inline-block;
+      margin: 0; }
+      .list-inset .add-account .separate .op-addAccount .ti-close {
+        font-size: 8px; }
+  .list-inset .add-account .text-right a {
+    margin: 0 0 0 15px; }
+  .list-inset .add-account .item.item-input input {
+    padding-right: 15px; }
+  .list-inset .add-account .item.item-input.upload {
+    width: auto;
+    display: inline-block;
+    color: #00599b;
+    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    padding: 0 16px 6px 16px;
+    font-size: 13px;
+    line-height: 13px; }
+    .list-inset .add-account .item.item-input.upload span {
+      font-size: 22px;
+      margin-left: 10px;
+      position: relative;
+      top: 3px; }
+  .list-inset .oficinas h3 {
+    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: #454545;
+    margin: 0; }
+  .list-inset .oficinas h6 {
+    color: #858585;
+    font-family: "Myriad Pro", Arial;
+    font-weight: normal;
+    margin: 0; }
+  .list-inset .oficinas .ticon {
+    color: #858585;
+    display: inline-block;
+    font-size: 26px; }
+  .list-inset .oficinas .row.no-padding.la-oficina {
+    padding: 15px 0;
+    border-bottom: 1px solid #cbcbcb;
+    margin-bottom: 0; }
+  .list-inset .oficinas .item-complex {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0; }
+  .list-inset .oficinas .item-content {
+    width: 100%;
+    padding: 0; }
 
 .pane {
   background: #fcfcfc; }
@@ -7959,8 +7959,8 @@ ul.pasos li.active:first-child:before {
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
   .contenido .datos p {
     margin: 0;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 13px;
+    line-height: 15px;
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
   .contenido .ver-boleta {
     width: 64px;
@@ -7987,19 +7987,20 @@ ul.pasos li.active:first-child:before {
       margin: 0;
       font-size: 12px;
       color: #cc6600;
-      font-weight: normal; }
+      font-weight: normal;
+      font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
       .contenido .alert h6 .ti-share {
         float: right;
         color: #cc6600;
         font-size: 15px; }
   .contenido .box {
-    padding: 10px 20px;
+    padding: 10px;
     margin-bottom: 5px;
     border: 1px solid #ddd; }
     .contenido .box p {
       margin: 0;
       font-size: 12px;
-      line-height: 14px;
+      line-height: 16px;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
     .contenido .box p.total {
       font-weight: bold;
@@ -8016,7 +8017,7 @@ ul.pasos li.active:first-child:before {
     .contenido .box .chartTitle {
       text-align: center;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       position: relative;
       z-index: 1;
       margin-bottom: -20px; }
@@ -8049,6 +8050,26 @@ ul.pasos li.active:first-child:before {
     .contenido .box .canvasjs-chart-credit {
       display: none;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+  .contenido .box.impagos {
+    padding: 0; }
+    .contenido .box.impagos .row {
+      padding: 0; }
+    .contenido .box.impagos .col {
+      padding: 0; }
+    .contenido .box.impagos .ver-boleta {
+      margin: 0;
+      width: 100%;
+      height: auto;
+      border: none;
+      border-left: 1px solid #ddd;
+      padding: 18px 0; }
+      .contenido .box.impagos .ver-boleta .ti-file {
+        font-size: 31px; }
+    .contenido .box.impagos .contain {
+      padding: 10px; }
+      .contenido .box.impagos .contain p.total {
+        font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+        margin-top: 2px; }
   .contenido .box.resumen {
     padding: 10px 5px; }
   .contenido .btn-main .btn {
@@ -8286,3 +8307,9 @@ p {
 
 .back-anteriores .bar.bar-header .button.button-clear {
   display: inline-block; }
+
+/*RETINA*/
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+  .logo-login {
+    background: url(../img/logo@2x.png) no-repeat;
+    background-size: contain; } }

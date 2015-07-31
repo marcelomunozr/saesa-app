@@ -131,6 +131,13 @@ angular.module('starter.controllers', [])
     chart.render();
 })
 
+.controller('DocumentosImpagosCtrl', function($scope,$ionicHistory, DocumentosImpagos){
+  $scope.documentos = DocumentosImpagos.all();
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+})
+
 .controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory){
 
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
@@ -148,8 +155,7 @@ angular.module('starter.controllers', [])
     
   };
   
-  function execute() {
-    
+  function execute() {    
     $rootScope.slideServicios = [
       {servicio: "Mi casa", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: "vencida"},
       {servicio: "Casa campo", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: ""},

@@ -165,6 +165,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   }) 
 
+  //documentos impagos
+  .state('app.documentos-impagos', {
+    url: "/documentos-impagos",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/documentos-impagos.html",
+        controller: "DocumentosImpagosCtrl"
+      }
+    }
+  }) 
+
   .state('login', {
     url: "/login",
     templateUrl: "templates/login.html"

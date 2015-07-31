@@ -98,4 +98,54 @@ angular.module('starter.services', [])
     }
   };
 })
+
+.factory('DocumentosImpagos', function() {
+  var datos = [
+    {
+      id: 1,
+      prioridad: "media",//media y alta
+      estado: "nueva",
+      contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
+    },
+    {
+      id: 2,
+      prioridad: "alta",//media y alta
+      estado: "nueva",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    },
+    {
+      id: 3,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    },
+    {
+      id: 4,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
+    },
+    {
+      id: 5,
+      prioridad: "alta",//media y alta
+      estado: "leida",
+      contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
+    }
+  ];
+  return {
+    all: function() {
+      return datos;
+    },
+    get: function(documentoId) {
+      for (var i = 0; i < datos.length;) {
+        if (datos[i].id === parseInt(documentoId)) {
+          console.log("datos",datos[i]);
+          return datos[i];
+        }
+      }
+      return null;
+    }
+  };
+})
+
 ;

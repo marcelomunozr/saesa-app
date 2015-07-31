@@ -75,7 +75,7 @@ a{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadada', endColorstr='#e4d7d6',GradientType=0 ); /* IE6-9 */
 	.logo-load{
 		width: 220px;
-		height: 38px;
+		height: 45px;
 		background: url(../img/logo.png) no-repeat;
 		background-size: 100%;
 		position: relative;
@@ -102,7 +102,7 @@ a{
 }
 .logo-login{
 	width: 180px;
-	height: 31px;
+	height: 37px;
 	background: url(../img/logo.png) no-repeat;
 	background-size: 100%;
 	position: relative;
@@ -152,9 +152,6 @@ a{
 .button.button-block:hover{
 	background: #f7be32;
 }
-.list-inset{
-	margin: 20px;
-}
 .back-header{
 	left: 10px;
 }
@@ -201,6 +198,8 @@ ul.pasos {
 	}
 }
 .list-inset{
+	margin: 20px;
+	background: none;
 	.add-account{
 		.input-label{
 			font-size: 14px;
@@ -320,8 +319,8 @@ ul.pasos {
 		}
 		p{
 			margin: 0;
-			font-size: 12px;
-			line-height: 14px;
+			font-size: 13px;
+			line-height: 15px;
 			font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		}
 	}
@@ -353,6 +352,7 @@ ul.pasos {
 			font-size: 12px;
 			color: #cc6600;
 			font-weight: normal;
+			font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 			.ti-share{
 				float: right;
 				color: #cc6600;
@@ -361,13 +361,13 @@ ul.pasos {
 		}
 	}
 	.box{
-		padding: 10px 20px;
+		padding: 10px;
 		margin-bottom: 5px;
 		border: 1px solid #ddd;
 		p{
 		  margin: 0;
 		  font-size: 12px;
-		  line-height: 14px;
+		  line-height: 16px;
 			font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		}
 		p.total{
@@ -388,7 +388,7 @@ ul.pasos {
 		.chartTitle{
 			text-align: center;
 		    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-		    font-size: 11px;
+		    font-size: 13px;
     		position: relative;
     		z-index: 1;
     		margin-bottom: -20px;
@@ -426,6 +426,34 @@ ul.pasos {
 		.canvasjs-chart-credit{
 			display: none;
 		    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+		}
+	}
+	.box.impagos{
+		padding: 0;
+		margin-bottom: 10px;
+		.row{
+			padding: 0;
+		}
+		.col{
+			padding: 0;
+		}
+		.ver-boleta{
+			margin: 0;
+			width: 100%;
+			height: auto;
+			border: none;
+			border-left: 1px solid #ddd;
+			padding: 18px 0;
+			.ti-file{
+				font-size: 31px;
+			}
+		}
+		.contain{
+			padding: 10px;
+			p.total{
+	    		font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+	    		margin-top: 2px;
+			}
 		}
 	}
 	.box.resumen{
@@ -716,4 +744,15 @@ p{
 }
 .back-anteriores .bar.bar-header .button.button-clear{
 	display: inline-block;
+}
+/*RETINA*/
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+	.logo-login{
+		background: url(../img/logo@2x.png) no-repeat;
+		background-size: contain;
+	}
 }
