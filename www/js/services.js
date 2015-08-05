@@ -12,6 +12,75 @@ angular.module('starter.services', [])
 	};
 })
 
+.factory('Login', function() {
+  var user = [
+      {
+        id: "1",
+        RutContacto: "8-9", 
+        PasswordContacto: "multinet666"
+      },
+      {
+        id: "2",
+        RutContacto: "123-k", 
+        PasswordContacto: "multinet666"
+      }
+  ];
+  return {
+    all: function() {
+      return user;
+    },
+    get: function(loginId) {
+      for (var i = 0; i < user.length; i++) {
+        if (user[i].id === parseInt(loginId)) {
+          console.log("datos",user[i]);
+          return user[i];
+        }
+      }
+      return null;
+    }
+  };
+})
+
+.factory('MyFuckingLogin', function(){
+  console.log("MyFuckingLogin");
+})
+
+.factory('ServiciosAsociados', function() {
+  var datos = [
+      {
+        id: "1",
+        servicio: "Mi casa", 
+        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
+        estado: "vencida"
+      },
+      {
+        id: "2",
+        servicio: "Casa campo", 
+        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
+        estado: ""
+      },
+      {
+        id: "3",
+        servicio: "Casa de verano", 
+        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
+        estado: "por-vencer"
+      }
+  ];
+  return {
+    all: function() {
+      return datos;
+    },
+    get: function(servicioId) {
+      for (var i = 0; i < datos.length; i++) {
+        if (datos[i].id === parseInt(servicioId)) {
+          console.log("datos",datos[i]);
+          return datos[i];
+        }
+      }
+      return null;
+    }
+  };
+})
 
 .factory('Oficinas', function() {
   var datos = [

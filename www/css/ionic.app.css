@@ -7767,7 +7767,8 @@ a {
     color: #fff;
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     font-weight: normal;
-    font-size: 16px; }
+    font-size: 16px;
+    overflow: inherit; }
   .bar.bar-header .button.button-clear {
     color: #fff; }
 
@@ -8051,7 +8052,8 @@ ul.pasos li.active:first-child:before {
       display: none;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
   .contenido .box.impagos {
-    padding: 0; }
+    padding: 0;
+    margin-bottom: 10px; }
     .contenido .box.impagos .row {
       padding: 0; }
     .contenido .box.impagos .col {

@@ -1,35 +1,24 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile) {
-  // Form data for the login modal
-  $scope.loginData = {};
+.controller('LoginCtrl', function($scope, Login){
+  $scope.user = Login.all();
+})
 
-
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+.controller('RegisterCtrl', function($scope, $ionicHistory) {
+	$scope.regdata = {};
+	console.log('paso', $scope.regdata);
   $scope.goBack = function() {
     $ionicHistory.goBack();
   };
-
-
-
 })
-.controller('RegisterCtrl', function($scope) {
-	$scope.regdata = {};
-	console.log('paso', $scope.regdata);
-})
+
 
 .controller('RegisterFormCtrl', function($scope, $sce, $compile){
 	$scope.regdata.paso = 1;
 	console.log('paso', $scope.regdata);
 })
+
 
 .controller('RegisterAddAccountCtrl', function($scope, $sce, $compile){
 	console.log('paso', $scope.regdata);
@@ -62,6 +51,15 @@ angular.module('starter.controllers', [])
 	}
 
 })
+
+
+.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $timeout, $sce, $compile) {
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  };
+})
+
+
 .controller('ResumenCtrl', function($scope,$ionicHistory){
     $ionicHistory.nextViewOptions({
       disableBack: true
@@ -134,11 +132,11 @@ angular.module('starter.controllers', [])
 .controller('DocumentosImpagosCtrl', function($scope,$ionicHistory, DocumentosImpagos){
   $scope.documentos = DocumentosImpagos.all();
   $ionicHistory.nextViewOptions({
-    disableBack: true
+    disableBack: false
   });
 })
 
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory){
+.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory, ServiciosAsociados){
 
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
     
@@ -148,21 +146,13 @@ angular.module('starter.controllers', [])
   $scope.slideChanged = function() {  
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
-
     $timeout( function() {
       $ionicScrollDelegate.resize();
     }, 50);
-    
-  };
-  
+  };  
   function execute() {    
-    $rootScope.slideServicios = [
-      {servicio: "Mi casa", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: "vencida"},
-      {servicio: "Casa campo", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: ""},
-      {servicio: "Casa de verano", info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", estado: "por-vencer"}
-    ];
-  }
-  
+    $rootScope.slideServicios = ServiciosAsociados.all();
+  }  
   $scope.nextSlide = function() {
     console.log('next');
     $ionicSlideBoxDelegate.next();

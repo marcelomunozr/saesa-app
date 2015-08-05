@@ -15,6 +15,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  //login
+  .state('login', {
+    url: "/login",
+    controller: 'LoginCtrl',
+    templateUrl: "templates/login.html"
+  })
 
   //register content
   .state('register', {
@@ -176,11 +182,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   }) 
-
-  .state('login', {
-    url: "/login",
-    templateUrl: "templates/login.html"
-  })
 
   $urlRouterProvider.otherwise('/login');
 });
