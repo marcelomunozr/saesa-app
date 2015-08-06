@@ -7767,7 +7767,8 @@ a {
     color: #fff;
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     font-weight: normal;
-    font-size: 16px; }
+    font-size: 16px;
+    overflow: inherit; }
   .bar.bar-header .button.button-clear {
     color: #fff; }
 
