@@ -1,29 +1,29 @@
     <div class="registerForm1">
-      <form>
+      <form name="register" ng-controller="RegisterFormCtrl" ng-submit="registerUser()">
         <div class="list list-inset">
           <label class="item item-input">
-            <input type="text" placeholder="Nombre o razón social">
+            <input name="razonSocial" ng-model="formdata.razonSocial" type="text" placeholder="Nombre o razón social" required>
           </label>
           <label class="item item-input">
-            <input type="text" placeholder="RUT">
+            <input name="rutContacto" ng-model="formdata.rutContacto" type="text" placeholder="RUT" ng-rut required>
           </label>
           <label class="item item-input">
-            <input type="text" placeholder="Nombre de contacto">
+            <input name="nombreContacto" ng-model="formdata.nombreContacto" type="text" placeholder="Nombre de contacto" required>
           </label>
           <label class="item item-input">
-            <input type="email" placeholder="Email">
+            <input name="emailContacto" ng-model="formdata.emailContacto" type="email" placeholder="Email" required>
           </label>
           <label class="item item-input">
-            <input type="text" placeholder="Teléfono celular">
+            <input name="telefonoContacto" ng-model="formdata.telefonoContacto" type="tel" placeholder="Teléfono celular" required>
           </label>
           <label class="item item-input">
-            <input type="password" placeholder="Contraseña">
+            <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" required>
           </label>
           <label class="item item-input">
-            <input type="password" placeholder="Repetir contraseña">
+            <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" required>
           </label>
           <label>
-            <button class="button button-block" ui-sref="register.addaccount" type="submit">Continuar</button>
+            <button class="button button-block" type="submit" ng-disabled="register.$invalid || register.$pristine">Continuar</button>
           </label>
         </div>
       </form>

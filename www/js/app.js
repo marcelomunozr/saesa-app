@@ -1,7 +1,7 @@
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state, $rootScope) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -10,11 +10,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
+  $rootScope.$state = $state;
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
+.constant('laConfig', {
+    'backend' : 'http://api.multinet.cl/saesa/api/',
+    'debug' : true
+})/** LA CONFIG PO LOCOH **/
   //login
   .state('login', {
     url: "/login",
@@ -22,6 +24,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     templateUrl: "templates/login.html"
   })
 
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
   //register content
   .state('register', {
       url: "/register",
@@ -182,6 +186,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   }) 
-
+  .state('login', {
+    url: "/login",
+    templateUrl: "templates/login.html"
+  })
   $urlRouterProvider.otherwise('/login');
 });

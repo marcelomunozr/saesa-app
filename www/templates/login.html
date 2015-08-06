@@ -3,18 +3,17 @@
     <h1 class="title">iniciar sesión</h1>
   </ion-header-bar>
   <ion-content>
-
     <div ui-sref="app.resumen-cuenta" class="logo-login"></div>
-    <form ng-submit="doLogin()">
+    <form name="login" ng-controller="AppCtrl" ng-submit="doLogin()">
       <div class="list list-inset">
         <label class="item item-input">
-          <input type="text" placeholder="RUT">
+          <input type="text" placeholder="RUT" ng-model="formdata.rut" ng-rut required>
         </label>
         <label class="item item-input">
-          <input type="password" placeholder="Contraseña">
+          <input type="password" placeholder="Contraseña" ng-model="formdata.password" required>
         </label>
         <label>
-          <button class="button button-block" type="submit">Ingresar</button>
+          <button class="button button-block" type="submit" ng-disabled="login.$invalid || login.$pristine">Ingresar</button>
         </label>
         <a ui-sref="register.form" class="pull-left">Registrarme</a>
         <a ui-sref="forgot-password" class="pull-right">Olvidé mi contraseña</a>
