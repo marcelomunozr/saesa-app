@@ -122,8 +122,7 @@ angular.module('starter.controllers', [])
         { label: "NOV", y: 70 },
         { label: "DIC", y: 90 }*/
         ]
-      }
-        
+      }        
       ]
     });
     chart.render();

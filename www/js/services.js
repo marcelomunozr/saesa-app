@@ -16,7 +16,7 @@ angular.module('starter.services', [])
   var user = [
       {
         id: "1",
-        RutContacto: "8-9", 
+        RutContacto: "1-9", 
         PasswordContacto: "multinet666"
       },
       {
@@ -41,8 +41,8 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('MyFuckingLogin', function(){
-  console.log("MyFuckingLogin");
+.factory('ResumenCuenta', function(){
+  
 })
 
 .factory('ServiciosAsociados', function() {

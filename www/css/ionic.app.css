@@ -7735,7 +7735,6 @@ a {
   position: fixed;
   z-index: 100;
   background: #dadada;
-  /* Old browsers */
   background: -moz-linear-gradient(top, #dadada 0%, #f7f5f4 50%, #e4d7d6 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dadada), color-stop(50%, #f7f5f4), color-stop(100%, #e4d7d6));
