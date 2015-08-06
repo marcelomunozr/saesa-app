@@ -16,16 +16,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 .constant('laConfig', {
     'backend' : 'http://api.multinet.cl/saesa/api/',
     'debug' : true
-})/** LA CONFIG PO LOCOH **/
+})
+/** LA CONFIG PO LOCOH **/
   //login
-  .state('login', {
-    url: "/login",
-    controller: 'LoginCtrl',
-    templateUrl: "templates/login.html"
-  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+
+  .state('login', {
+    url: "/login",
+    templateUrl: "templates/login.html"
+  })
+
   //register content
   .state('register', {
       url: "/register",
@@ -186,9 +188,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   }) 
-  .state('login', {
-    url: "/login",
-    templateUrl: "templates/login.html"
-  })
+
   $urlRouterProvider.otherwise('/login');
 });

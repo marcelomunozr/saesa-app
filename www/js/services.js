@@ -12,7 +12,7 @@ angular.module('starter.services', [])
 	};
 })
 
-<<<<<<< HEAD
+
 .factory('User', function($http, $q, laConfig){
   var esto = this;
 
@@ -120,7 +120,7 @@ angular.module('starter.services', [])
 
 
 
-=======
+
 .factory('Login', function() {
   var user = [
       {
@@ -190,7 +190,7 @@ angular.module('starter.services', [])
     }
   };
 })
->>>>>>> c936ec63af8867c22ce8aa22e599fe2e40060f17
+
 
 .factory('Oficinas', function() {
   var datos = [
