@@ -12,6 +12,113 @@ angular.module('starter.services', [])
 	};
 })
 
+.factory('User', function($http, $q, laConfig){
+  var esto = this;
+
+  esto.login = function($data){
+    var res = $q.defer();
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'login.json',
+      data: $data
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'ingreso incorrecto.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      res.reject({
+        reason: 'error',
+        err: err
+      });
+    });
+    return res.promise;
+  }
+
+  esto.register = function($data){
+    var res = $q.defer();
+    var datos = {
+      RazonSocial : $data.razonSocial,
+      RutContacto :  $data.rutContacto,
+      NombreContacto : $data.nombreContacto,
+      EmailContacto : $data.emailContacto,
+      TelefonoContacto : $data.telefonoContacto,
+      PasswordContacto : $data.passwordContacto,
+      RepetirPassword : $data.passwordRepetir
+    };
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'register.json',
+      data: datos
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'registro incorrecto.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      res.reject({
+        reason: 'error',
+        err: err
+      });
+    });
+    return res.promise;
+  }
+  return esto;
+})
+
+.factory('Property', function($http, $q, laConfig) {
+  /**
+  * Reune las funciones de el servicio (detalle, agregar, etc)
+  */
+  var esto = this;
+  esto.addProperty = function($data){
+    var res = $q.defer();
+    var datos = {
+      idUsuario : $data.razonSocial,
+      numCliente :  $data.numCliente,
+      codEmpresa : $data.codEmpresa,
+      numBoleta : $data.numBoleta,
+      relPropiedad : $data.relPropiedad,
+      nomPropiedad : $data.nomPropiedad
+    };
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'addProperty.json',
+      data: datos
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      res.reject({
+        reason: 'error',
+        err: err
+      });
+    });
+    return res.promise;
+  }
+
+  return esto;
+})
+
+
+
 
 .factory('Oficinas', function() {
   var datos = [

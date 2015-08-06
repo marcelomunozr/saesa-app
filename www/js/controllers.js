@@ -1,65 +1,62 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile, User) {
   // Form data for the login modal
   $scope.loginData = {};
-
-
-
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-    $timeout(function() {
+    console.log('Doing login', $scope.formdata);
+    /*$timeout(function() {
       $scope.closeLogin();
-    }, 1000);
+    }, 1000);*/
   };
+
+
   $scope.goBack = function() {
     $ionicHistory.goBack();
   };
-
-
-
 })
 .controller('RegisterCtrl', function($scope) {
 	$scope.regdata = {};
+  $scope.idUsuario = '';
 	console.log('paso', $scope.regdata);
 })
 
-.controller('RegisterFormCtrl', function($scope, $sce, $compile){
+.controller('RegisterFormCtrl', function($scope, $sce, $compile, $state, User, localStorageService){
 	$scope.regdata.paso = 1;
-	console.log('paso', $scope.regdata);
+
+	$scope.registerUser = function(){
+    console.log('paso', $scope.formdata);
+    User.register($scope.formdata).then(function(response){
+      $scope.idUsuario = response.idUsuario;
+      localStorageService.set('user.id', response.idUsuario);
+      console.log('ID del Registro', $scope.idUsuario);
+      $state.go('register.addaccount');
+    }).catch(function(err){
+      console.log(err);
+    }).finally();
+  }
+  
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile){
+.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, localStorageService, Property){
 	console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
+  $scope.registerPropertyToUser = function(){
+    if(!angular.isUndefined(localStorageService.get('user.id'))){
+      $scope.formdata.userId = localStorageService.get('user.id');
+      console.log('Los datos', $scope.formdata);
+      /*Property.addProperty($scope.formdata).then(function(response){
 
-	$scope.cuentas = [{
-		'elinput' : $sce.trustAsHtml('<label class="item item-input"><input type="text" placeholder="Agregar Cuenta" name="account[]"></label>'),
-		'ayuda' : true
-	}];
-	$scope.numCuentas = $scope.cuentas.length;
-
-	var maxAccounts = 10;
-	var i = 1;
-
-	$scope.addAccount = function() {
-		if(i <= maxAccounts){
-			i++;
-			console.log(i);
-			$scope.cuentas.push({
-				'elinput' : $sce.trustAsHtml('<label class="item item-input"><input type="text" placeholder="Agregar Cuenta" name="account[]"></label>')
-			})
-		}
-	}
-	$scope.removeAccount = function(index){
-		i--;
-    $scope.cuentas.splice(index,1);
-		$scope.numCuentas = $scope.cuentas.length;
-
-		console.log(i);
-	}
+      }).catch(function(error){
+        console.log('Hasta el loly', error);
+      });*/
+    }else{
+      $state.go('register.form');
+    }
+    console.log('Los datos', $scope.formdata);
+  }
 
 })
 .controller('ResumenCtrl', function($scope,$ionicHistory){
