@@ -1,12 +1,17 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile, User) {
+.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, User, localStorageService) {
   $scope.loginData = {};
+  $scope.sesionUsuario = {};
+  $scope.propiedadPortada = {};
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
     User.login($scope.formdata).then(function(response){
-
+      if(response.idUsuario != null){
+        localStorageService.set('user.id', response.idUsuario);
+        $state.go('app.resumen-cuenta');
+      }
     }).catch(function(error){
       console.log('Error: ', error);
     });
@@ -14,9 +19,6 @@ angular.module('starter.controllers', [])
   $scope.goBack = function() {
     $ionicHistory.goBack();
   };
-
-
-
 })
 
 .controller('RegisterCtrl', function($scope,$ionicHistory) {
@@ -105,9 +107,9 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ResumenCtrl', function($scope, $ionicHistory, $ionicLoading, GraficoCuenta, User, Property, localStorageService){
-    $scope.sesionUsuario = {};
-    $scope.propiedadPortada = {};
+.controller('ResumenCtrl', function($scope, $ionicHistory, $ionicLoading, $state, GraficoCuenta, User, Property, localStorageService){
+    //$scope.sesionUsuario = {};
+    //$scope.propiedadPortada = {};
     $scope.cargando = true;
     var userId = localStorageService.get('user.id');
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -118,6 +120,7 @@ angular.module('starter.controllers', [])
     User.fetchMeTheUser(userId).then(function(response){
       var propiedadPortada = {};
       $scope.sesionUsuario = response.sesionUsuario;
+      console.log('El User', $scope.sesionUsuario);
       if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
         Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
           $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
@@ -151,6 +154,8 @@ angular.module('starter.controllers', [])
           $ionicLoading.hide();
           chart.render();
         });
+      }else{
+        $state.go('register.addaccount');
       }
     }).catch(function(err){
       console.log('Error en Usuario', err);

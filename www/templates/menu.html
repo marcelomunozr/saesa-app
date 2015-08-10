@@ -20,12 +20,11 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-      
         <ion-item nav-clear menu-close ui-sref="app.resumen-cuenta">
           <div class="row">
             <div class="col col-75">
               <h2>Edilia Sanchez</h2>
-              <h3>Titular: Lunamedia Corps</h3>
+              <h3>Titular: {{sesionUsuario.contact_name}}</h3>
             </div>
             <div class="col">
               <span class="ticon ti-settings pull-right"></span>
