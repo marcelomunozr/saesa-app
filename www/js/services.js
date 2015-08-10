@@ -15,13 +15,15 @@ angular.module('starter.services', [])
 
 .factory('User', function($http, $q, laConfig){
   var esto = this;
-
   esto.login = function($data){
     var res = $q.defer();
     $http({
       method: 'POST',
-      url: laConfig.backend + 'login.json',
-      data: $data
+      url: laConfig.backend + 'login',
+      data: {
+        RutContacto: $data.rut,
+        PasswordContacto: $data.password
+      }
     }).success(function(response){
       if(response === false){
         res.reject({
@@ -35,7 +37,7 @@ angular.module('starter.services', [])
     }).catch(function(err){
       res.reject({
         reason: 'error',
-        err: err
+        err: err.data.msg
       });
     });
     return res.promise;
@@ -54,7 +56,7 @@ angular.module('starter.services', [])
     };
     $http({
       method: 'POST',
-      url: laConfig.backend + 'register.json',
+      url: laConfig.backend + 'register',
       data: datos
     }).success(function(response){
       if(response === false){
@@ -69,7 +71,33 @@ angular.module('starter.services', [])
     }).catch(function(err){
       res.reject({
         reason: 'error',
-        err: err
+        err: err.data.msg
+      });
+    });
+    return res.promise;
+  }
+
+  esto.fetchMeTheUser = function($data){
+    var res = $q.defer();
+    var url = laConfig.backend + 'getUser/' + $data;
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'no info.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
       });
     });
     return res.promise;
@@ -82,20 +110,13 @@ angular.module('starter.services', [])
   * Reune las funciones de el servicio (detalle, agregar, etc)
   */
   var esto = this;
-  esto.addProperty = function($data){
+
+  esto.getDetails = function($data){
     var res = $q.defer();
-    var datos = {
-      idUsuario : $data.razonSocial,
-      numCliente :  $data.numCliente,
-      codEmpresa : $data.codEmpresa,
-      numBoleta : $data.numBoleta,
-      relPropiedad : $data.relPropiedad,
-      nomPropiedad : $data.nomPropiedad
-    };
-    $http({
-      method: 'POST',
-      url: laConfig.backend + 'addProperty.json',
-      data: datos
+    var url = laConfig.backend + 'getPropertyExtraData/' + $data; 
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
     }).success(function(response){
       if(response === false){
         res.reject({
@@ -107,9 +128,74 @@ angular.module('starter.services', [])
         res.resolve(response);
       }
     }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg; 
       res.reject({
         reason: 'error',
-        err: err
+        err: error
+      });
+    });
+    return res.promise;
+  }
+
+  esto.getDueDocuments = function($data){
+    var res = $q.defer();
+    var url = laConfig.backend + 'getDueDocuments/' + $data; 
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg; 
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
+
+  esto.addProperty = function($data){
+    var res = $q.defer();
+    var datos = {
+      idUsuario : $data.userId,
+      numCliente :  $data.numCliente,
+      codEmpresa : $data.codEmpresa,
+      numBoleta : $data.numBoleta,
+      relPropiedad : $data.relPropiedad,
+      nomPropiedad : $data.nomPropiedad
+    };
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'addProperty',
+      data: datos,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg; 
+      res.reject({
+        reason: 'error',
+        err: error
       });
     });
     return res.promise;
@@ -119,6 +205,20 @@ angular.module('starter.services', [])
 
 
 .factory('GraficoCuenta', function(){
+  var labels = [
+      "ENE",
+      "FEB",
+      "MAR",
+      "ABR",
+      "MAY",
+      "JUN", 
+      "JUL",
+      "AGO",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DIC"]
+
   var datos = [
     {        
       type: "column",
@@ -168,6 +268,32 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    transformDatos: function($data){
+      var graphData = [{
+        type: "column",
+        showInLegend: false,
+        dataPoints:[]
+      }, {
+        type: "line",
+        dataPoints: []
+      }];
+      angular.forEach($data, function(objeto, llave){
+        var mes = parseInt(objeto.mes) - 1;
+        var puntoA = {
+          label: labels[mes],
+          y: parseInt(objeto.anoAnterior)
+        };
+        var puntoB = {
+          label: labels[mes],
+          y: parseInt(objeto.anoActual)
+        }
+        graphData[0].dataPoints.push(puntoA);
+        graphData[1].dataPoints.push(puntoB);
+        
+      });
+      console.log('EL GRAFICO!!!', graphData);
+      return graphData;
     }
   };
 })

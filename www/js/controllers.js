@@ -5,10 +5,18 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
+    User.login($scope.formdata).then(function(response){
+
+    }).catch(function(error){
+      console.log('Error: ', error);
+    });
   };
   $scope.goBack = function() {
     $ionicHistory.goBack();
   };
+
+
+
 })
 
 .controller('RegisterCtrl', function($scope,$ionicHistory) {
@@ -22,9 +30,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RegisterFormCtrl', function($scope, $sce, $compile, $state, User, localStorageService){
-
 	$scope.regdata.paso = 1;
-
 	$scope.registerUser = function(){
     console.log('paso', $scope.formdata);
     User.register($scope.formdata).then(function(response){
@@ -39,17 +45,58 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, localStorageService, Property){
+.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicLoading, $ionicModal, localStorageService, Property){
 	console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
+
+  $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal = modal;
+  });
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
   $scope.registerPropertyToUser = function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
     if(!angular.isUndefined(localStorageService.get('user.id'))){
       $scope.formdata.userId = localStorageService.get('user.id');
       console.log('Los datos', $scope.formdata);
-      /*Property.addProperty($scope.formdata).then(function(response){
+      Property.addProperty($scope.formdata).then(function(response){
+        $state.go('app.resumen-cuenta');
+        /** Navegamos a resumen donde pediremos los datos **/
       }).catch(function(error){
-        console.log('Hasta el loly', error);
-      });*/
+        /** Levantamos modal con mensajes de error **/
+        var labelError = '';
+        $scope.tituloModal = 'Ha ocurrido un error';
+        switch(error.err){
+          case 'no-en-empresa':
+            labelError = 'Este numero de cliente no corresponde a esta empresa';
+            break;
+          case 'boleta-no-existe':
+            labelError = 'El número de boleta no existe';
+            break;
+          case 'ya-existe':
+            labelError = 'Esta propiedad ya se encuentra relacionada a este usuario';
+            break;
+          default:
+            labelError = 'Error al procesar la información';
+            break;
+        }
+        $scope.textoModal = labelError;
+        $scope.openModal();
+      }).finally(function(){
+        $ionicLoading.hide();
+      });
     }else{
       $state.go('register.form');
     }
@@ -58,52 +105,90 @@ angular.module('starter.controllers', [])
 
 })
 
-
-
-.controller('ResumenCtrl', function($scope,$ionicHistory, GraficoCuenta){
+.controller('ResumenCtrl', function($scope, $ionicHistory, $ionicLoading, GraficoCuenta, User, Property, localStorageService){
+    $scope.sesionUsuario = {};
+    $scope.propiedadPortada = {};
+    $scope.cargando = true;
+    var userId = localStorageService.get('user.id');
+    $scope.$on('$ionicView.beforeEnter', function(){
+      $ionicLoading.show({
+        template: 'Consultando Información...'
+      });
+    });
+    User.fetchMeTheUser(userId).then(function(response){
+      var propiedadPortada = {};
+      $scope.sesionUsuario = response.sesionUsuario;
+      if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
+        Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
+          $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
+          $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
+          $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
+          $scope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
+          console.log('Propiedad de Portada: ', respuesta);
+        }).catch(function(error){
+          console.log('Error en Propiedad', error);
+        }).finally(function(){
+          console.log('La Propiedad', $scope.propiedadPortada);
+          $scope.cargando = false;
+          CanvasJS.addColorSet("colorCol",
+            [
+            "#d7e4ec",
+            "#17c300"             
+            ]
+          );
+          var chart = new CanvasJS.Chart("chartContainer",{
+            animationEnabled: true,
+            interactivityEnabled: false,
+            backgroundColor: "#fcfcfc",
+            colorSet: "colorCol",
+            dataPointMaxWidth: 12,
+            height: 160,
+            axisY:{
+              maximum: 150
+            },
+            data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo)
+          });
+          $ionicLoading.hide();
+          chart.render();
+        });
+      }
+    }).catch(function(err){
+      console.log('Error en Usuario', err);
+    });
     $ionicHistory.nextViewOptions({
       disableBack: true
     });
-    CanvasJS.addColorSet("colorCol",
-      [
-      "#d7e4ec",
-      "#17c300"             
-      ]
-    );
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-      animationEnabled: true,
-      interactivityEnabled: false,
-      backgroundColor: "#fcfcfc",
-      colorSet: "colorCol",
-      /*title:{
-        text: "cuadro comparativo",
-        fontFamily: "Tahoma",
-        fontSize: 12,
-        fontWeight: "normal"
-      
-      },*/
-      dataPointMaxWidth: 12,
-      height: 160,
-      axisY:{
-        maximum: 150
-      },
-      data: GraficoCuenta.all()
-    });
-    chart.render();
+
 })
 
-.controller('DocumentosImpagosCtrl', function($scope,$ionicHistory, DocumentosImpagos){
+.controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $scope.documentos = DocumentosImpagos.all();
+  $scope.cuenta = {};
   $ionicHistory.nextViewOptions({
     disableBack: false
+  });
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+  });
+
+  Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
+    console.log('La Respuesta', respuesta);
+    $scope.cuenta.detalle = respuesta.detalle.details;
+    $scope.cuenta.documentos = respuesta.detalle.unpaid;
+  }).catch(function(err){
+    console.log('El Cagazo', err);
+  }).finally(function(){
+    console.log('El Detalle', $scope.cuenta.detalle);
+    console.log('Documentos', $scope.cuenta.documentos);
+    $ionicLoading.hide();
   });
 })
 
 .controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory, ServiciosAsociados){
-
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
-    
   $ionicHistory.nextViewOptions({
     disableBack: true
   });

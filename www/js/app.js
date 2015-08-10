@@ -178,7 +178,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   //documentos impagos
   .state('app.documentos-impagos', {
-    url: "/documentos-impagos",
+    url: "/documentos-impagos/:propertyId",
     cache: false,
     views: {
       'menuContent':{
