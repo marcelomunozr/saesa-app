@@ -114,44 +114,62 @@ angular.module('starter.services', [])
     });
     return res.promise;
   }
-
   return esto;
 })
 
 
-
-
-.factory('Login', function() {
-  var user = [
-      {
-        id: "1",
-        RutContacto: "1-9", 
-        PasswordContacto: "multinet666"
-      },
-      {
-        id: "2",
-        RutContacto: "123-k", 
-        PasswordContacto: "multinet666"
-      }
-  ];
+.factory('GraficoCuenta', function(){
+  var datos = [
+    {        
+      type: "column",
+      showInLegend: false,
+      dataPoints: [
+      { label: "ENE", y: 120 },
+      { label: "FEB", y: 60 },
+      { label: "MAR", y: 90 },
+      { label: "ABR", y: 70 },
+      { label: "MAY", y: 110 },
+      { label: "JUN", y: 100 },
+      { label: "JUL", y: 50 },
+      { label: "AGO", y: 70 },
+      { label: "SEP", y: 80 },
+      { label: "OCT", y: 60 },
+      { label: "NOV", y: 90 },
+      { label: "DIC", y: 110 }
+      ]
+    },
+    {        
+      type: "line",
+      dataPoints: [
+      { label: "ENE", y: 100 },
+      { label: "FEB", y: 80 },
+      { label: "MAR", y: 60 },
+      { label: "ABR", y: 90 },
+      { label: "MAY", y: 50 }/*,
+      { label: "JUN", y: 60 },
+      { label: "JUL", y: 90 },
+      { label: "AGO", y: 70 },
+      { label: "SEP", y: 110 },
+      { label: "OCT", y: 100 },
+      { label: "NOV", y: 70 },
+      { label: "DIC", y: 90 }*/
+      ]
+    }        
+    ];
   return {
     all: function() {
-      return user;
+      return datos;
     },
-    get: function(loginId) {
-      for (var i = 0; i < user.length; i++) {
-        if (user[i].id === parseInt(loginId)) {
-          console.log("datos",user[i]);
-          return user[i];
+    get: function(graficoId) {
+      for (var i = 0; i < datos.length; i++) {
+        if (datos[i].id === parseInt(graficoId)) {
+          console.log("datos",datos[i]);
+          return datos[i];
         }
       }
       return null;
     }
   };
-})
-
-.factory('ResumenCuenta', function(){
-  
 })
 
 .factory('ServiciosAsociados', function() {

@@ -19,7 +19,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 /** LA CONFIG PO LOCOH **/
   //login
-
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 

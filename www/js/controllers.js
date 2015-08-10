@@ -2,9 +2,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, $compile, User) {
-  // Form data for the login modal
   $scope.loginData = {};
-  // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
   };
@@ -13,16 +11,18 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('RegisterCtrl', function($scope) {
+.controller('RegisterCtrl', function($scope,$ionicHistory) {
 	$scope.regdata = {};
   $scope.idUsuario = '';
 	console.log('paso', $scope.regdata);
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  };
+
 })
 
 .controller('RegisterFormCtrl', function($scope, $sce, $compile, $state, User, localStorageService){
-/*.controller('LoginCtrl', function($scope, Login){
-  $scope.user = Login.all();
-})*/
+
 	$scope.regdata.paso = 1;
 
 	$scope.registerUser = function(){
@@ -47,7 +47,6 @@ angular.module('starter.controllers', [])
       $scope.formdata.userId = localStorageService.get('user.id');
       console.log('Los datos', $scope.formdata);
       /*Property.addProperty($scope.formdata).then(function(response){
-
       }).catch(function(error){
         console.log('Hasta el loly', error);
       });*/
@@ -60,14 +59,8 @@ angular.module('starter.controllers', [])
 })
 
 
-/*.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $timeout, $sce, $compile) {
-  $scope.goBack = function() {
-    $ionicHistory.goBack();
-  };
-})*/
 
-
-.controller('ResumenCtrl', function($scope,$ionicHistory){
+.controller('ResumenCtrl', function($scope,$ionicHistory, GraficoCuenta){
     $ionicHistory.nextViewOptions({
       disableBack: true
     });
@@ -95,42 +88,7 @@ angular.module('starter.controllers', [])
       axisY:{
         maximum: 150
       },
-      data: [{        
-        type: "column",
-        showInLegend: false,
-        dataPoints: [
-        { label: "ENE", y: 120 },
-        { label: "FEB", y: 60 },
-        { label: "MAR", y: 90 },
-        { label: "ABR", y: 70 },
-        { label: "MAY", y: 110 },
-        { label: "JUN", y: 100 },
-        { label: "JUL", y: 50 },
-        { label: "AGO", y: 70 },
-        { label: "SEP", y: 80 },
-        { label: "OCT", y: 60 },
-        { label: "NOV", y: 90 },
-        { label: "DIC", y: 110 }
-        ]
-      },
-      {        
-        type: "line",
-        dataPoints: [
-        { label: "ENE", y: 100 },
-        { label: "FEB", y: 80 },
-        { label: "MAR", y: 60 },
-        { label: "ABR", y: 90 },
-        { label: "MAY", y: 50 }/*,
-        { label: "JUN", y: 60 },
-        { label: "JUL", y: 90 },
-        { label: "AGO", y: 70 },
-        { label: "SEP", y: 110 },
-        { label: "OCT", y: 100 },
-        { label: "NOV", y: 70 },
-        { label: "DIC", y: 90 }*/
-        ]
-      }        
-      ]
+      data: GraficoCuenta.all()
     });
     chart.render();
 })
