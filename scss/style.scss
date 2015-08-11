@@ -96,6 +96,9 @@ a{
 	}
 	.button.button-clear{
 		color: #fff;
+		.icon.ion-close:before{
+		    font-size: 17px;
+		}
 	}
 }
 .modal{
@@ -145,10 +148,15 @@ a{
 	margin-bottom: 15px;
 	min-height: 50px;
 	cursor: pointer;
+    padding-top: 5px;
 	-webkit-transition: all 200ms ease-in-out;
 	-moz-transition: all 200ms ease-in-out;
 	-o-transition: all 200ms ease-in-out;
 	transition: all 200ms ease-in-out;
+}
+h3.modal-test{
+    font-size: 16px;
+    margin: 40px;
 }
 .button.button-block:hover{
 	background: #f7be32;
