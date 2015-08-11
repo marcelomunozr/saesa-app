@@ -5,6 +5,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $scope.sesionUsuario = {};
   $scope.propiedadPortada = {};
+
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
     User.login($scope.formdata).then(function(response){
@@ -72,7 +73,6 @@ angular.module('starter.controllers', [])
     });
     if(!angular.isUndefined(localStorageService.get('user.id'))){
       $scope.formdata.userId = localStorageService.get('user.id');
-      console.log('Los datos', $scope.formdata);
       Property.addProperty($scope.formdata).then(function(response){
         $state.go('app.resumen-cuenta');
         /** Navegamos a resumen donde pediremos los datos **/
