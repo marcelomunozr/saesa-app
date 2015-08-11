@@ -1,10 +1,25 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, User, localStorageService) {
+.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, User, localStorageService) {
   $scope.loginData = {};
   $scope.sesionUsuario = {};
   $scope.propiedadPortada = {};
+
+  $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal = modal;
+  });
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
 
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
@@ -15,6 +30,29 @@ angular.module('starter.controllers', [])
       }
     }).catch(function(error){
       console.log('Error: ', error);
+      /** Levantamos modal con mensajes de error **/
+        var labelError = '';
+        $scope.tituloModal = 'Ha ocurrido un error';
+        switch(error.err){
+          case 'password-incorrecto':
+            labelError = 'La contraseña es incorrecta';
+            break;
+          case 'no-registrado':
+            labelError = 'El rut no se encuentra registrado';
+            break;
+          case 'empty-password':
+            labelError = 'Debe ingresar su contraseña';
+            break;
+          case 'empty-rut':
+            labelError = 'Debe ingresar su rut para continuar';
+            break;
+          default:
+            labelError = 'Error al procesar la información';
+            break;
+        }
+        $scope.textoModal = labelError;
+        $scope.openModal();
+
     });
   };
   $scope.goBack = function() {
@@ -48,24 +86,11 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicLoading, $ionicModal, localStorageService, Property){
+.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicLoading, localStorageService, Property){
 	console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
 
-  $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal){
-    $scope.modal = modal;
-  });
-
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
+  
 
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
@@ -253,18 +278,14 @@ angular.module('starter.controllers', [])
     };
     var map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
-
-
     var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
       title: 'Grupo Saesa'
     });
-
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map,marker);
     });
-
     $scope.map = map;
   }
   //google.maps.event.addDomListener(window, 'load', initialize);
