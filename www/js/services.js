@@ -35,9 +35,10 @@ angular.module('starter.services', [])
         res.resolve(response);
       }
     }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
       res.reject({
         reason: 'error',
-        err: err.data.msg
+        err: error
       });
     });
     return res.promise;
@@ -69,9 +70,10 @@ angular.module('starter.services', [])
         res.resolve(response);
       }
     }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
       res.reject({
         reason: 'error',
-        err: err.data.msg
+        err: error
       });
     });
     return res.promise;

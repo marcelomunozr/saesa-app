@@ -1,11 +1,14 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, User, localStorageService) {
+.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
+  var userId = localStorageService.get('user.id');
+  if(angular.isDefined(userId) && userId != null){
+    $state.go('app.resumen-cuenta');
+  }
   $scope.loginData = {};
   $scope.sesionUsuario = {};
   $scope.propiedadPortada = {};
-
   $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -19,6 +22,25 @@ angular.module('starter.controllers', [])
 
   $scope.closeModal = function() {
     $scope.modal.hide();
+  };
+
+  $scope.abrirExterna = function($direccion){
+    var defaultOptions = {
+      location: 'no',
+      clearcache: 'no',
+      toolbar: 'no'
+    };
+    $cordovaInAppBrowser.open($direccion, '_system', defaultOptions)
+    .then(function(event) {
+      // success
+    })
+    .catch(function(event) {
+      // error
+    });
+  };
+
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
   };
 
   $scope.doLogin = function() {
@@ -52,12 +74,9 @@ angular.module('starter.controllers', [])
         }
         $scope.textoModal = labelError;
         $scope.openModal();
-
     });
   };
-  $scope.goBack = function() {
-    $ionicHistory.goBack();
-  };
+  
 })
 
 .controller('RegisterCtrl', function($scope,$ionicHistory) {
@@ -80,7 +99,22 @@ angular.module('starter.controllers', [])
       console.log('ID del Registro', $scope.idUsuario);
       $state.go('register.addaccount');
     }).catch(function(err){
-      console.log(err);
+      var labelError = '';
+        $scope.tituloModal = 'Ha ocurrido un error';
+        switch(error.err){
+          case 'error-registro':
+            labelError = 'Ha ocurrido un error con el registro';
+            break;
+          case 'faltan-campos':
+            labelError = 'Faltan campos por rellenar en el registro';
+            break;
+          default:
+            labelError = 'Error al procesar la información';
+            break;
+        }
+        $scope.textoModal = labelError;
+        $scope.openModal();
+
     }).finally();
   }
   
@@ -194,9 +228,9 @@ angular.module('starter.controllers', [])
 .controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
-  $ionicHistory.nextViewOptions({
+  /*$ionicHistory.nextViewOptions({
     disableBack: false
-  });
+  });*/
 
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
@@ -215,6 +249,8 @@ angular.module('starter.controllers', [])
     console.log('Documentos', $scope.cuenta.documentos);
     $ionicLoading.hide();
   });
+
+
 })
 
 .controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory, ServiciosAsociados){

@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova'])
 
 .run(function($ionicPlatform, $state, $rootScope) {
   $ionicPlatform.ready(function() {
@@ -19,7 +19,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 /** LA CONFIG PO LOCOH **/
   //login
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
   $stateProvider
 
   .state('login', {
@@ -187,6 +187,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   }) 
-
   $urlRouterProvider.otherwise('/login');
+
+  
+
 });
