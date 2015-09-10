@@ -1,13 +1,13 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
   var userId = localStorageService.get('user.id');
   if(angular.isDefined(userId) && userId != null){
     $state.go('app.resumen-cuenta');
   }
   $scope.loginData = {};
-  $scope.sesionUsuario = {};
+  $rootScope.sesionUsuario = {};
   $scope.propiedadPortada = {};
   $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
     scope: $scope,
@@ -124,8 +124,6 @@ angular.module('starter.controllers', [])
 	console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
 
-  
-
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -140,8 +138,8 @@ angular.module('starter.controllers', [])
         var labelError = '';
         $scope.tituloModal = 'Ha ocurrido un error';
         switch(error.err){
-          case 'no-en-empresa':
-            labelError = 'Este numero de cliente no corresponde a esta empresa';
+          case 'no-valido':
+            labelError = '';
             break;
           case 'boleta-no-existe':
             labelError = 'El número de boleta no existe';
@@ -166,7 +164,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ResumenCtrl', function($scope, $ionicHistory, $ionicLoading, $state, GraficoCuenta, User, Property, localStorageService){
+.controller('ResumenCtrl', function($rootScope, $scope, $ionicHistory, $ionicLoading, $state, GraficoCuenta, User, Property, localStorageService){
     //$scope.sesionUsuario = {};
     //$scope.propiedadPortada = {};
     $scope.cargando = true;
@@ -178,8 +176,8 @@ angular.module('starter.controllers', [])
     });
     User.fetchMeTheUser(userId).then(function(response){
       var propiedadPortada = {};
-      $scope.sesionUsuario = response.sesionUsuario;
-      console.log('El User', $scope.sesionUsuario);
+      $rootScope.sesionUsuario = response.sesionUsuario;
+      console.log('El User', $rootScope.sesionUsuario);
       if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
         Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
           $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
@@ -276,16 +274,16 @@ angular.module('starter.controllers', [])
     console.log('prev');
     $ionicSlideBoxDelegate.previous();
   }
-
   execute();
-
   $(".menu-asociados a").click(function(){
     $(".menu-asociados a").removeClass('active');
     $(this).addClass('active');
   });
 })
 
-.controller('FallaCtrl', function($scope){
+.controller('FallaCtrl', function($rootScope, $scope, Fallas){
+  $scope.fallas = Fallas.lasFallas();
+  $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $('#for-file-upload').on("tap",function(){
     $('#file-upload').click();
   });
@@ -293,9 +291,16 @@ angular.module('starter.controllers', [])
 
 
 .controller('OficinasCtrl', function($scope,$ionicHistory, Oficinas) {
-  $scope.oficinas = Oficinas.all();
+  $scope.oficinas = [];
+  Oficinas.all().then(function(response){
+    $scope.oficinas = response.oficinas;
+  }).catch(function(err){
+    console.log(err);
+  });
+
+
   $ionicHistory.nextViewOptions({
-    disableBack: true
+    disableBack: false
   });
 })
 
@@ -332,6 +337,7 @@ angular.module('starter.controllers', [])
   $ionicHistory.nextViewOptions({
     disableBack: false
   });
+  
 })
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');

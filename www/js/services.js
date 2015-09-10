@@ -294,7 +294,6 @@ angular.module('starter.services', [])
         graphData[1].dataPoints.push(puntoB);
         
       });
-      console.log('EL GRAFICO!!!', graphData);
       return graphData;
     }
   };
@@ -338,7 +337,7 @@ angular.module('starter.services', [])
 })
 
 
-.factory('Oficinas', function() {
+.factory('Oficinas', function($http, $q, laConfig) {
   var datos = [
     {
       id: 1,
@@ -360,9 +359,6 @@ angular.module('starter.services', [])
     }
   ];
   return {
-    all: function() {
-      return datos;
-    },
     get: function(oficinaId) {
       for (var i = 0; i < datos.length; i++) {
         if (datos[i].id === parseInt(oficinaId)) {
@@ -371,6 +367,32 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    all: function(){
+      var res = $q.defer();
+      var url = laConfig.backend + 'getOficinas'; 
+      $http.get(url, {
+        cache: true,
+        timeout: 30000
+      }).success(function(response){
+        if(response === false){
+          res.reject({
+            reason: 'no',
+            message: 'propiedad no agregada.'
+          });
+        } else {
+          console.log('Respuesta desde servidor:',response);
+          res.resolve(response);
+        }
+      }).catch(function(err){
+        console.log('El Error', err);
+        var error = (err.data == null) ? err : err.data.msg; 
+        res.reject({
+          reason: 'error',
+          err: error
+        });
+      });
+      return res.promise;
     }
   };
 })
@@ -422,6 +444,41 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.factory('Fallas', function(){
+  var esto = this;
+  var fallas = [
+      {
+          "descripcion": "Alza o baja de voltaje",
+          "id": 1
+      },
+      {
+          "descripcion": "Caída de Árbol o ramas en las líneas",
+          "id": 2
+      },
+      {
+          "descripcion": "Incendio",
+          "id": 3
+      },
+      {
+          "descripcion": "Líneas cortadas",
+          "id": 4
+      },
+      {
+          "descripcion": "Poste Chocado",
+          "id": 5
+      },
+      {
+          "descripcion": "Sin suministro",
+          "id": 6
+      }
+  ];
+  esto.lasFallas = function(){
+    return fallas;
+  }
+  return esto;
+
 })
 
 .factory('DocumentosImpagos', function() {

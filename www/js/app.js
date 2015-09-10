@@ -10,6 +10,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleDefault();
     }
   });
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    console.log('############ fromState.name:', fromState.name);
+    console.log('############ toState.name:' , toState.name);
+    $rootScope.$broadcast('clase', {clase: toState.name, params: toParams});
+    if(toState.name === 'map' && toParams.latitude != '-33.4651908'){
+      $rootScope.$broadcast('showPistas');
+    } else {
+      $rootScope.$broadcast('hidePistas');
+    }
+    if(toState.name === 'map' || toState.name === 'found'){
+      $rootScope.$broadcast('showEncontrados');
+    }
+  });
   $rootScope.$state = $state;
 })
 
@@ -17,6 +30,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     'backend' : 'http://api.multinet.cl/saesa/api/',
     'debug' : true
 })
+
+.filter('capitalize', function(){  
+  return function(input){
+    if(input.indexOf(' ') !== -1){
+      var inputPieces,
+          i;
+      input = input.toLowerCase();
+      inputPieces = input.split(' ');
+      for(i = 0; i < inputPieces.length; i++){
+        inputPieces[i] = capitalizeString(inputPieces[i]);
+      }
+
+      return inputPieces.toString().replace(/,/g, ' ');
+    }
+    else {
+      input = input.toLowerCase();
+      return capitalizeString(input);
+    }
+    function capitalizeString(inputString){
+      return inputString.substring(0,1).toUpperCase() + inputString.substring(1);
+    }
+  };
+})
+
 /** LA CONFIG PO LOCOH **/
   //login
 .config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {

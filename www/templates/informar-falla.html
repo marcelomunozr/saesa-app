@@ -6,19 +6,15 @@
     </div>
   </ion-header-bar>
   <ion-content>
-
-      <form>
+      <form name="InformaFalla" ng-submit="informaFalla()">
         <div class="list list-inset">
-
           <div class="add-account">
             <label class="item item-input item-select">
               <div class="input-label">
                 Selecionar servicio
               </div>
               <select>
-                <option value="miCasa">Mi casa</option>
-                <option value="casaCampo">Casa campo</option>
-                <option value="casaVacaciones">Casa de Vacaciones</option>
+                <option ng-repeat="propiedad in propiedades" value="{{propiedad.client_number}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
             <label class="item item-input item-select">
@@ -26,10 +22,7 @@
                 Tipo de eventualidad
               </div>
               <select>
-                <option value="01">Caso 1</option>
-                <option value="02">Caso 2</option>
-                <option value="03">Caso 3</option>
-                <option value="05">Caso 4</option>
+                <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
               </select>
             </label>
             <label class="item item-input">
@@ -43,13 +36,11 @@
             </div>
             <div class="clearfix"></div>
           </div>
-
           <label>
-            <button class="button button-block" type="submit">Continuar</button>
+            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine"Continuar</button>
           </label>
         </div>
       </form>
-
   </ion-content>
 </ion-view>
 
