@@ -6,7 +6,6 @@
     </div>
   </ion-header-bar>
   <ion-content>
-
     <form>
         <div class="list list-inset">
           <div class="oficinas add-account">
@@ -14,17 +13,20 @@
               <div class="input-label">
                 Selecionar zona
               </div>
-              <select>
+              <select ng-model="buscarOficina.oficina" name="buscarOficinaSelect">
+                <option value="">Seleccione una ciudad</option>
                 <option value="osorno">Osorno</option>
                 <option value="valdivia">Valdivia</option>
                 <option value="puertoMontt">Puerto Montt</option>
                 <option value="chiloe">Chiloe</option>
               </select>
             </label>
-            <label class="item item-input"><input type="text" placeholder="Buscar oficina" name="buscarOficina"></label>
+            <label class="item item-input">
+              <input type="text" placeholder="Buscar oficina" ng-model="buscarOficina.direccion" name="buscarOficinaInput">
+            </label>
             <div class="clear-10"></div>
             <div class="cargador-oficinas" name="cargadorOficinas">
-              <ion-item class="" ng-repeat="oficina in oficinas" ui-sref="app.oficina({oficinaId: oficina.id })">
+              <ion-item class="" ng-repeat="oficina in oficinas | filter:buscarOficina" ui-sref="app.oficina({oficinaId: oficina.id })">
                 <div class="row no-padding la-oficina">
                   <div class="col no-padding text-center">
                     <span class="ticon ti-map-alt"></span>

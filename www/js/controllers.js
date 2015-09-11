@@ -123,7 +123,6 @@ angular.module('starter.controllers', [])
 .controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicLoading, localStorageService, Property){
 	console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
-
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -164,9 +163,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ResumenCtrl', function($rootScope, $scope, $ionicHistory, $ionicLoading, $state, GraficoCuenta, User, Property, localStorageService){
-    //$scope.sesionUsuario = {};
-    //$scope.propiedadPortada = {};
+.controller('ResumenCtrl', function($rootScope, $scope, $ionicHistory, $ionicLoading, $state, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
     $scope.cargando = true;
     var userId = localStorageService.get('user.id');
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -177,7 +174,6 @@ angular.module('starter.controllers', [])
     User.fetchMeTheUser(userId).then(function(response){
       var propiedadPortada = {};
       $rootScope.sesionUsuario = response.sesionUsuario;
-      console.log('El User', $rootScope.sesionUsuario);
       if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
         Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
           $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
@@ -210,6 +206,7 @@ angular.module('starter.controllers', [])
           });
           $ionicLoading.hide();
           chart.render();
+          console.log('La sesion', $rootScope.sesionUsuario);
         });
       }else{
         $state.go('register.addaccount');
