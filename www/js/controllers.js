@@ -295,37 +295,48 @@ angular.module('starter.controllers', [])
     console.log(err);
   });
 
-
   $ionicHistory.nextViewOptions({
     disableBack: false
   });
 })
 
-.controller('OficinaCtrl', function($scope, $stateParams,$ionicHistory , Oficinas) {
+.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory , Oficinas) {
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
-  $scope.oficina = Oficinas.get($stateParams.oficinaId);
-  $scope.initialize = function() {
-    var myLatlng = new google.maps.LatLng($scope.oficina.latitud,$scope.oficina.longitud);//-40.5730256 //-73.13853890000001
+  
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+    Oficinas.get($stateParams.oficinaId).then(function(res){
+      $scope.oficina = res;  
+    }).finally(function(){
+      var myLatlng = new google.maps.LatLng($scope.oficina.x,$scope.oficina.y);//-40.5730256 //-73.13853890000001
+      var mapOptions = {
+        center: myLatlng,
+        zoom: 18,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"),
+          mapOptions);
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: $scope.oficina.direccion
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+      });
+      $scope.map = map;
+      $ionicLoading.hide();
+
+    });
+  });
+
+  /*$scope.initialize = function() {
     
-    var mapOptions = {
-      center: myLatlng,
-      zoom: 18,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map"),
-        mapOptions);
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Grupo Saesa'
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-    $scope.map = map;
-  }
+  }*/
   //google.maps.event.addDomListener(window, 'load', initialize);
 })
 

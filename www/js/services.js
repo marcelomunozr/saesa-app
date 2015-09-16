@@ -300,26 +300,6 @@ angular.module('starter.services', [])
 })
 
 .factory('ServiciosAsociados', function() {
-  var datos = [
-      {
-        id: "1",
-        servicio: "Mi casa", 
-        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
-        estado: "vencida"
-      },
-      {
-        id: "2",
-        servicio: "Casa campo", 
-        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
-        estado: ""
-      },
-      {
-        id: "3",
-        servicio: "Casa de verano", 
-        info: "La propiedad ubicada en Santos Dumont 190, comuna de Recoleta, se encuentra con corte desde el 17 de agosto por no pago.", 
-        estado: "por-vencer"
-      }
-  ];
   return {
     all: function() {
       return datos;
@@ -338,63 +318,71 @@ angular.module('starter.services', [])
 
 
 .factory('Oficinas', function($http, $q, laConfig) {
-  var datos = [
-    {
-      id: 1,
-      zona: "osorno",
-      nombreZona: "OSORNO",
-      direccion: "Eleuterio Ramírez N° 705",
-      horario: "Lunes a viernes 8:00 a 16:00 hrs.",
-      latitud: "-40.5730256",
-      longitud: "-73.13853890000001"
-    },
-    {
-      id: 2,
-      zona: "osorno",
-      nombreZona: "OSORNO (Rahue)",
-      direccion: "Victoria N° 380",
-      horario: "Lunes a viernes 8:00 a 16:00 hrs.",
-      latitud: "-40.572501",
-      longitud: "-73.1579049"
-    }
-  ];
-  return {
-    get: function(oficinaId) {
-      for (var i = 0; i < datos.length; i++) {
-        if (datos[i].id === parseInt(oficinaId)) {
-          console.log("datos",datos[i]);
-          return datos[i];
+  var datos = [];
+  var esto = this;
+  esto.get = function(oficinaId){
+    var resultado = [];
+    var res = $q.defer();
+    if(datos.length > 0){
+      angular.forEach(datos, function(value, key){
+        if(value.id === parseInt(oficinaId)) {
+          res.resolve(value);
         }
-      }
-      return null;
-    },
-    all: function(){
-      var res = $q.defer();
-      var url = laConfig.backend + 'getOficinas'; 
-      $http.get(url, {
-        cache: true,
-        timeout: 30000
-      }).success(function(response){
-        if(response === false){
+      });
+    }else{
+      esto.all().then(function(response){
+        if(response.length < 0){
           res.reject({
             reason: 'no',
             message: 'propiedad no agregada.'
           });
-        } else {
-          console.log('Respuesta desde servidor:',response);
-          res.resolve(response);
+        }else{
+          datos = response.oficinas;
         }
       }).catch(function(err){
-        console.log('El Error', err);
-        var error = (err.data == null) ? err : err.data.msg; 
         res.reject({
-          reason: 'error',
-          err: error
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      }).finally(function(){
+        angular.forEach(datos, function(value, key){
+          if(value.id === parseInt(oficinaId)) {
+            res.resolve(value);
+          }
         });
       });
-      return res.promise;
     }
-  };
+    return res.promise;
+  }
+
+  esto.all = function(){
+    var res = $q.defer();
+    var url = laConfig.backend + 'getOficinas'; 
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+        datos = response.oficinas;
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg; 
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
+  return esto;
 })
 
 .factory('Notificaciones', function() {

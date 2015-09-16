@@ -8,16 +8,16 @@
   <ion-content>
 
     <div class="contenido-mapa">
-       
-      <ion-content ng-controller="OficinaCtrl" ng-init="initialize()" class="map-content">
+       <ion-content class="map-content">
         <div id="map" data-tap-disabled="true"></div>
       </ion-content>
-
     </div>
     <div class="contenido">
-      <p class="myriad">{{oficina.direccion}} <br>{{oficina.horario}}</p>
+      <p class="myriad">
+        {{oficina.direccion | capitalize}} <br>
+        {{oficina.descripcion | capitalize}} <br> 
+        {{oficina.oficina | capitalize}}</p>
     </div>
-
   </ion-content>
 </ion-view>
 
