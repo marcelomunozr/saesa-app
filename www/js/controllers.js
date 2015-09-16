@@ -120,8 +120,11 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicLoading, localStorageService, Property){
-	console.log('paso', $scope.regdata);
+.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
+  console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
@@ -221,6 +224,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
   /*$ionicHistory.nextViewOptions({
@@ -248,7 +254,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope,$ionicHistory, ServiciosAsociados){
+.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope, $ionicHistory, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
   $ionicHistory.nextViewOptions({
     disableBack: true
@@ -278,7 +284,10 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FallaCtrl', function($rootScope, $scope, Fallas){
+.controller('FallaCtrl', function($rootScope, $ionicHistory, $scope, Fallas){
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $('#for-file-upload').on("tap",function(){
@@ -287,7 +296,10 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('OficinasCtrl', function($scope,$ionicHistory, Oficinas) {
+.controller('OficinasCtrl', function($scope, $ionicHistory, Oficinas) {
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
   $scope.oficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
@@ -295,14 +307,11 @@ angular.module('starter.controllers', [])
     console.log(err);
   });
 
-  $ionicHistory.nextViewOptions({
-    disableBack: false
-  });
 })
 
-.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory , Oficinas) {
+.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
   $ionicHistory.nextViewOptions({
-    disableBack: true
+    disableBack: false
   });
   
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -330,7 +339,6 @@ angular.module('starter.controllers', [])
       });
       $scope.map = map;
       $ionicLoading.hide();
-
     });
   });
 
@@ -340,7 +348,7 @@ angular.module('starter.controllers', [])
   //google.maps.event.addDomListener(window, 'load', initialize);
 })
 
-.controller('NotificacionesCtrl', function($scope,$ionicHistory, Notificaciones) {
+.controller('NotificacionesCtrl', function($scope, $ionicHistory, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
   $ionicHistory.nextViewOptions({
     disableBack: false
