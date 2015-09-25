@@ -122,7 +122,7 @@ angular.module('starter.controllers', [])
 
 .controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
@@ -225,12 +225,12 @@ angular.module('starter.controllers', [])
 
 .controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
   /*$ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });*/
 
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -286,19 +286,23 @@ angular.module('starter.controllers', [])
 
 .controller('FallaCtrl', function($rootScope, $ionicHistory, $scope, Fallas){
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $('#for-file-upload').on("tap",function(){
     $('#file-upload').click();
   });
+
+  $scope.informaFalla = function(){
+    console.log($scope.formdata);
+  }
 })
 
 
 .controller('OficinasCtrl', function($scope, $ionicHistory, Oficinas) {
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   $scope.oficinas = [];
   Oficinas.all().then(function(response){
@@ -311,7 +315,7 @@ angular.module('starter.controllers', [])
 
 .controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -351,7 +355,7 @@ angular.module('starter.controllers', [])
 .controller('NotificacionesCtrl', function($scope, $ionicHistory, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
   $ionicHistory.nextViewOptions({
-    disableBack: false
+    disableBack: true
   });
   
 })

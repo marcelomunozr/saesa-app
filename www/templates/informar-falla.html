@@ -6,14 +6,14 @@
     </div>
   </ion-header-bar>
   <ion-content>
-      <form name="InformaFalla" ng-submit="informaFalla()">
+      <form name="InformaFalla" ng-controller="FallaCtrl" ng-submit="informaFalla()">
         <div class="list list-inset">
           <div class="add-account">
             <label class="item item-input item-select">
               <div class="input-label">
                 Selecionar servicio
               </div>
-              <select>
+              <select ng-model="formdata.propiedad" >
                 <option ng-repeat="propiedad in propiedades" value="{{propiedad.client_number}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
@@ -21,18 +21,18 @@
               <div class="input-label">
                 Tipo de eventualidad
               </div>
-              <select>
+              <select ng-model="formdata.tipofalla" name="tipoFalla">
                 <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
               </select>
             </label>
             <label class="item item-input">
-              <textarea placeholder="Comentarios"></textarea>
+              <textarea ng-model="formdata.comentarios" placeholder="Comentarios"></textarea>
             </label>
             <div class="text-center">
               <label id="for-file-upload" class="item item-input upload">
                 Adjuntar imagen <span class="ti-camera"></span>
-              </label>
-              <input type="file" id="file-upload">
+              </label> 
+              <input type="file" id="file-upload" ng-model="formdata.archivo" >
             </div>
             <div class="clearfix"></div>
           </div>
