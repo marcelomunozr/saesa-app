@@ -9,19 +9,19 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
   $scope.propiedadPortada = {};
-  $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
-    scope: $scope,
+  $rootScope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
+    scope: $rootScope,
     animation: 'slide-in-up'
   }).then(function(modal){
-    $scope.modal = modal;
+    $rootScope.modal = modal;
   });
 
-  $scope.openModal = function() {
-    $scope.modal.show();
+  $rootScope.openModal = function() {
+    $rootScope.modal.show();
   };
 
-  $scope.closeModal = function() {
-    $scope.modal.hide();
+  $rootScope.closeModal = function() {
+    $rootScope.modal.hide();
   };
 
   $scope.abrirExterna = function($direccion){
@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
       console.log('Error: ', error);
       /** Levantamos modal con mensajes de error **/
         var labelError = '';
-        $scope.tituloModal = 'Ha ocurrido un error';
+        $rootScope.tituloModal = 'Ha ocurrido un error';
         switch(error.err){
           case 'password-incorrecto':
             labelError = 'La contraseña es incorrecta';
@@ -72,8 +72,8 @@ angular.module('starter.controllers', [])
             labelError = 'Error al procesar la información';
             break;
         }
-        $scope.textoModal = labelError;
-        $scope.openModal();
+        $rootScope.textoModal = labelError;
+        $rootScope.openModal();
     });
   };
   
@@ -100,7 +100,7 @@ angular.module('starter.controllers', [])
       $state.go('register.addaccount');
     }).catch(function(err){
       var labelError = '';
-        $scope.tituloModal = 'Ha ocurrido un error';
+        $rootScope.tituloModal = 'Ha ocurrido un error';
         switch(error.err){
           case 'error-registro':
             labelError = 'Ha ocurrido un error con el registro';
@@ -112,8 +112,8 @@ angular.module('starter.controllers', [])
             labelError = 'Error al procesar la información';
             break;
         }
-        $scope.textoModal = labelError;
-        $scope.openModal();
+        $rootScope.textoModal = labelError;
+        $rootScope.openModal();
 
     }).finally();
   }
@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
       }).catch(function(error){
         /** Levantamos modal con mensajes de error **/
         var labelError = '';
-        $scope.tituloModal = 'Ha ocurrido un error';
+        $rootScope.tituloModal = 'Ha ocurrido un error';
         switch(error.err){
           case 'no-valido':
             labelError = '';
@@ -153,8 +153,8 @@ angular.module('starter.controllers', [])
             labelError = 'Error al procesar la información';
             break;
         }
-        $scope.textoModal = labelError;
-        $scope.openModal();
+        $rootScope.textoModal = labelError;
+        $rootScope.openModal();
       }).finally(function(){
         $ionicLoading.hide();
       });
@@ -352,13 +352,55 @@ angular.module('starter.controllers', [])
   //google.maps.event.addDomListener(window, 'load', initialize);
 })
 
+.controller('ForgotPswdCtrl', function($scope, $rootScope, $ionicHistory, $state, User) {
+  $ionicHistory.nextViewOptions({
+    disableBack: false
+  });
+  $scope.rememberThePassword = function(){
+    User.forgotPassword($scope.formdata.rut).then(function(response){
+      if(response.exito == 1){
+        console.log(response.exito);
+
+        $state.go('login');
+        $rootScope.tituloModal = 'Recuperación Exitosa';
+        $rootScope.textoModal = response.vb;
+        $rootScope.openModal();
+      }
+    }).catch(function(error){
+      console.log('Error: ', error);
+      /** Levantamos modal con mensajes de error **/
+        var labelError = '';
+        $rootScope.tituloModal = 'Ha ocurrido un error';
+        switch(error.err){
+          case 'error-api':
+            labelError = 'Hubo un error al conectar al servidor';
+            break;
+          case 'empty-password':
+            labelError = 'Debe ingresar su contraseña';
+            break;
+          case 'empty-rut':
+            labelError = 'Debe ingresar su rut para continuar';
+            break;
+          case 'sin-datos':
+            labelError = 'No se recibieron datos';
+            break;
+          default:
+            labelError = 'Error al procesar la información';
+            break;
+        }
+        $rootScope.textoModal = labelError;
+        $rootScope.openModal();
+    });
+  }
+})
+
 .controller('NotificacionesCtrl', function($scope, $ionicHistory, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
-  
 })
+
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
 })

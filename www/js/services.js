@@ -104,6 +104,34 @@ angular.module('starter.services', [])
     });
     return res.promise;
   }
+
+  esto.forgotPassword = function($data){
+    var res = $q.defer();
+    var url = laConfig.backend + 'recuperarPassword';
+    var datos = {
+      rut: $data
+    }
+    $http.post(url, datos, {
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'no info.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
   return esto;
 })
 
