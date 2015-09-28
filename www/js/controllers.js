@@ -1,7 +1,7 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
   var userId = localStorageService.get('user.id');
   if(angular.isDefined(userId) && userId != null){
     $state.go('app.resumen-cuenta');
@@ -166,7 +166,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ResumenCtrl', function($rootScope, $scope, $ionicHistory, $ionicLoading, $state, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
+.controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
     $scope.cargando = true;
     var userId = localStorageService.get('user.id');
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -217,16 +217,11 @@ angular.module('starter.controllers', [])
     }).catch(function(err){
       console.log('Error en Usuario', err);
     });
-    $ionicHistory.nextViewOptions({
-      disableBack: true
-    });
 
 })
 
-.controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+.controller('DocumentosImpagosCtrl', function($scope, $ionicLoading, $stateParams, Property, DocumentosImpagos){
+
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
   /*$ionicHistory.nextViewOptions({
@@ -254,11 +249,9 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope, $ionicHistory, ServiciosAsociados){
+.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+
   $scope.slideChanged = function() {  
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
@@ -284,10 +277,8 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FallaCtrl', function($rootScope, $ionicHistory, $scope, Fallas){
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+.controller('FallaCtrl', function($rootScope, $scope, Fallas){
+
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $('#for-file-upload').on("tap",function(){
@@ -300,10 +291,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('OficinasCtrl', function($scope, $ionicHistory, Oficinas) {
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+.controller('OficinasCtrl', function($scope, Oficinas) {
   $scope.oficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
@@ -313,10 +301,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, Oficinas) {
   
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
@@ -352,10 +337,8 @@ angular.module('starter.controllers', [])
   //google.maps.event.addDomListener(window, 'load', initialize);
 })
 
-.controller('ForgotPswdCtrl', function($scope, $rootScope, $ionicHistory, $state, User) {
-  $ionicHistory.nextViewOptions({
-    disableBack: false
-  });
+.controller('ForgotPswdCtrl', function($scope, $rootScope, $state, User) {
+  
   $scope.rememberThePassword = function(){
     User.forgotPassword($scope.formdata.rut).then(function(response){
       if(response.exito == 1){
@@ -394,15 +377,12 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('NotificacionesCtrl', function($scope, $ionicHistory, Notificaciones) {
+.controller('NotificacionesCtrl', function($scope, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
 })
 
 .config(function($ionicConfigProvider) {
-    $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
+    $ionicConfigProvider.backButton.text('').icon('ti-back-left');
 })
 
 ;
