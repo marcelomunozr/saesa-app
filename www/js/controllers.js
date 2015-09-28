@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RegisterCtrl', function($scope,$ionicHistory) {
+.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory) {
 	$scope.regdata = {};
   $scope.idUsuario = '';
 	console.log('paso', $scope.regdata);
@@ -89,7 +89,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RegisterFormCtrl', function($scope, $sce, $compile, $state, User, localStorageService){
+.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, User, localStorageService){
 	$scope.regdata.paso = 1;
 	$scope.registerUser = function(){
     console.log('paso', $scope.formdata);
@@ -120,7 +120,7 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
+.controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
@@ -223,7 +223,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('DocumentosImpagosCtrl', function($scope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
+.controller('DocumentosImpagosCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
@@ -254,7 +254,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope, $ionicHistory, ServiciosAsociados){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
   $ionicHistory.nextViewOptions({
     disableBack: true
@@ -300,7 +300,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('OficinasCtrl', function($scope, $ionicHistory, Oficinas) {
+.controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, Oficinas) {
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
@@ -313,7 +313,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
+.controller('OficinaCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
@@ -394,7 +394,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('NotificacionesCtrl', function($scope, $ionicHistory, Notificaciones) {
+.controller('NotificacionesCtrl', function($scope, $rootScope, $ionicHistory, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
   $ionicHistory.nextViewOptions({
     disableBack: true
