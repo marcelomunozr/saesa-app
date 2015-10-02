@@ -7701,6 +7701,14 @@ a {
   font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
   text-decoration: underline; }
 
+a.pull-right.button.button-clear.button-positive {
+  cursor: pointer;
+  color: #00599b;
+  margin-top: 5px;
+  font-size: 13px;
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+  text-decoration: underline; }
+
 .clear {
   clear: both; }
 
@@ -7767,7 +7775,13 @@ a {
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     font-weight: normal;
     font-size: 16px;
-    overflow: inherit; }
+    overflow: inherit;
+    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 0 29px;
+    margin: 0;
+    text-align: center; }
   .bar.bar-header .button.button-clear {
     color: #fff; }
     .bar.bar-header .button.button-clear .icon.ion-close:before {
