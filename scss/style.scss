@@ -32,13 +32,22 @@ a{
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     text-decoration: underline;
 }
-a.pull-right.button.button-clear.button-positive{
+a.pull-right.button.button-clear.button-positive,
+a.button.button-positive.button-clear{
 	cursor: pointer;
 	color: #00599b;
 	margin-top: 5px;
 	font-size: 13px;
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     text-decoration: underline;
+}
+input,
+textarea,
+.card .item.item-input{
+	box-shadow: none!important;
+}
+.button .icon{
+
 }
 .clear{
 	clear: both;
@@ -102,8 +111,8 @@ a.pull-right.button.button-clear.button-positive{
 	    font-size: 16px;
 	    overflow: inherit;
 	    width: 100%;
-	    left: 0;
-	    right: 0;
+	    left: 0!important;
+	    right: 0!important;
 	    padding: 0 29px;
 	    margin: 0;
 	    text-align: center;
@@ -768,8 +777,16 @@ p{
 .back-anteriores .bar.bar-header .button.button-clear{
 	display: inline-block;
 }
+.back-anteriores .bar.bar-header .button.button-clear i{
+	transform: scale(0.5);
+   -moz-transform: scale(0.5);
+   -o-transform: scale(0.5);
+   zoom:0.5;
+}
+span.back-text{
+	display: none!important;
+}
 /*RETINA*/
-
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
