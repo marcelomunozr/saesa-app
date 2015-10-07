@@ -289,14 +289,16 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FallaCtrl', function($rootScope, $scope, Fallas){
+.controller('FallaCtrl', function($rootScope, $scope, Fallas, FileUploader){
+  $scope.uploader = new FileUploader();
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
-  $('#for-file-upload').on("tap",function(){
+  $scope.formdata = [];
+  $scope.abrirDialogoSubida = function(){
     $('#file-upload').click();
-  });
+  }
 
-  $scope.informaFalla = function(){
+  $scope.informarLaFalla = function(){
     console.log($scope.formdata);
   }
 })
@@ -309,7 +311,6 @@ angular.module('starter.controllers', [])
   }).catch(function(err){
     console.log(err);
   });
-
 })
 
 .controller('OficinaCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {

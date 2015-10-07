@@ -6,14 +6,14 @@
     </div>
   </ion-header-bar>
   <ion-content>
-      <form name="InformaFalla" ng-submit="informaFalla()">
+      <form name="InformaFalla" ng-submit="informarLaFalla()">
         <div class="list list-inset">
           <div class="add-account">
             <label class="item item-input item-select">
               <div class="input-label">
                 Selecionar servicio
               </div>
-              <select ng-model="formdata.propiedad" >
+              <select ng-model="formdata.propiedad" name="propiedad" >
                 <option ng-repeat="propiedad in propiedades" value="{{propiedad.client_number}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
@@ -29,23 +29,18 @@
               <textarea ng-model="formdata.comentarios" placeholder="Comentarios"></textarea>
             </label>
             <div class="text-center">
-              <label id="for-file-upload" class="item item-input upload">
+              <label id="for-file-upload" class="item item-input upload" ng-click="abrirDialogoSubida()">
                 Adjuntar imagen <span class="ti-camera"></span>
               </label>
-              <input type="file" id="file-upload" ng-model="formdata.archivo" accept="image/*" image="imagenfalla"
-                resize-max-height="800"
-                resize-max-width="600"
-                resize-quality="0.9" />
-              <img ng-show="imagenfalla" ng-src="{{imagenfalla.resized.dataURL}}" class="img-responsive"/>
+              <span ng-bind="item.file.name"></span><br/>
+              <input type="file" id="file-upload" name="file-upload" nv-file-select uploader="uploader" />
             </div>
             <div class="clearfix"></div>
           </div>
           <label>
-            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine"Continuar</button>
+            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine">Continuar</button>
           </label>
         </div>
       </form>
   </ion-content>
 </ion-view>
-
-

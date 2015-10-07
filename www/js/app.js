@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'imageupload'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'angularFileUpload'])
 
 .run(function($ionicPlatform, $state, $rootScope) {
   $ionicPlatform.ready(function() {
