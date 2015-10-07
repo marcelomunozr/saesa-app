@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-      <form name="InformaFalla" ng-controller="FallaCtrl" ng-submit="informaFalla()">
+      <form name="InformaFalla" ng-submit="informaFalla()">
         <div class="list list-inset">
           <div class="add-account">
             <label class="item item-input item-select">
@@ -31,8 +31,12 @@
             <div class="text-center">
               <label id="for-file-upload" class="item item-input upload">
                 Adjuntar imagen <span class="ti-camera"></span>
-              </label> 
-              <input type="file" id="file-upload" ng-model="formdata.archivo" >
+              </label>
+              <input type="file" id="file-upload" ng-model="formdata.archivo" accept="image/*" image="imagenfalla"
+                resize-max-height="800"
+                resize-max-width="600"
+                resize-quality="0.9" />
+              <img ng-show="imagenfalla" ng-src="{{imagenfalla.resized.dataURL}}" class="img-responsive"/>
             </div>
             <div class="clearfix"></div>
           </div>

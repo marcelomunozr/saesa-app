@@ -140,7 +140,6 @@ angular.module('starter.services', [])
   * Reune las funciones de el servicio (detalle, agregar, etc)
   */
   var esto = this;
-
   esto.getDetails = function($data){
     var res = $q.defer();
     var url = laConfig.backend + 'getPropertyExtraData/' + $data; 
@@ -300,6 +299,9 @@ angular.module('starter.services', [])
       return null;
     },
     transformDatos: function($data){
+      var actualFecha = new Date();
+      var actualMes = actualFecha.getMonth();
+      
       var graphData = [{
         type: "column",
         showInLegend: false,
@@ -309,18 +311,31 @@ angular.module('starter.services', [])
         dataPoints: []
       }];
       angular.forEach($data, function(objeto, llave){
-        var mes = parseInt(objeto.mes) - 1;
+        var mes = parseInt(objeto.mes);
         var puntoA = {
           label: labels[mes],
           y: parseInt(objeto.anoAnterior)
         };
-        var puntoB = {
-          label: labels[mes],
-          y: parseInt(objeto.anoActual)
+        if(actualMes > llave){
+          var puntoB = {
+            label: labels[mes],
+            y: parseInt(objeto.anoActual)
+          }
+        }else{
+          if(objeto.anoActual > 0){
+            var puntoB = {
+              label: labels[mes],
+              y: parseInt(objeto.anoActual)
+            }
+          }else{
+            var puntoB = {
+              label: labels[mes],
+              y: null
+            }
+          }
         }
         graphData[0].dataPoints.push(puntoA);
         graphData[1].dataPoints.push(puntoB);
-        
       });
       return graphData;
     }

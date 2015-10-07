@@ -2,25 +2,25 @@
       <form name="register" ng-controller="RegisterFormCtrl" ng-submit="registerUser()">
         <div class="list list-inset">
           <label class="item item-input">
-            <input name="razonSocial" ng-model="formdata.razonSocial" type="text" placeholder="Nombre o razón social" required>
+            <input name="razonSocial" ng-model="formdata.razonSocial" type="text" placeholder="Nombre o razón social" ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="rutContacto" ng-model="formdata.rutContacto" type="text" placeholder="RUT" ng-rut required>
+            <input name="rutContacto" ng-model="formdata.rutContacto" type="text" placeholder="RUT" ng-minlength="7" ng-rut ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="nombreContacto" ng-model="formdata.nombreContacto" type="text" placeholder="Nombre de contacto" required>
+            <input name="nombreContacto" ng-model="formdata.nombreContacto" type="text" placeholder="Nombre de contacto" ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="emailContacto" ng-model="formdata.emailContacto" type="email" placeholder="Email" required>
+            <input name="emailContacto" ng-model="formdata.emailContacto" type="email" placeholder="Email" ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="telefonoContacto" ng-model="formdata.telefonoContacto" type="tel" placeholder="Teléfono celular" required>
+            <input name="telefonoContacto" ng-model="formdata.telefonoContacto" type="tel" placeholder="Teléfono celular" ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" required>
+            <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" ng-required="true">
           </label>
           <label class="item item-input">
-            <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" required>
+            <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" ng-required="true">
           </label>
           <label>
             <button class="button button-block" type="submit" ng-disabled="register.$invalid || register.$pristine">Continuar</button>

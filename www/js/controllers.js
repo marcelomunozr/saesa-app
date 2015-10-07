@@ -195,6 +195,23 @@ angular.module('starter.controllers', [])
             "#17c300"             
             ]
           );
+          var maximoGrafico = 0;
+          var maxAnterior = 0;
+          var maxActual = 0;
+          angular.forEach($scope.propiedadPortada.consumo, function(objeto, llave){
+              if(parseInt(objeto.anoActual) > maxActual){
+                maxActual = parseInt(objeto.anoActual);
+              }
+              if(parseInt(objeto.anoAnterior) > maxAnterior){
+                maxAnterior = parseInt(objeto.anoAnterior);
+              }
+          });
+          if(maxAnterior > maxActual){
+            maximoGrafico = parseInt(maxAnterior);
+          }else{
+            maximoGrafico = parseInt(maxActual);
+          }
+          console.log("Valor maximo del grafico", maximoGrafico);
           var chart = new CanvasJS.Chart("chartContainer",{
             animationEnabled: true,
             interactivityEnabled: false,
@@ -203,7 +220,7 @@ angular.module('starter.controllers', [])
             dataPointMaxWidth: 12,
             height: 160,
             axisY:{
-              maximum: 150
+              maximum: maximoGrafico
             },
             data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo)
           });
@@ -223,10 +240,6 @@ angular.module('starter.controllers', [])
 .controller('DocumentosImpagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
-  /*$ionicHistory.nextViewOptions({
-    disableBack: true
-  });*/
-
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -248,11 +261,7 @@ angular.module('starter.controllers', [])
 
 })
 
-<<<<<<< HEAD
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, ServiciosAsociados){
-=======
-.controller('AsociadosCtrl', function($scope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $rootScope, ServiciosAsociados){
->>>>>>> 374f6ac7a61933ef7affefd965e03d5b9cba0489
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $$ionicHistory, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
 
   $scope.slideChanged = function() {  
@@ -281,7 +290,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FallaCtrl', function($rootScope, $scope, Fallas){
-
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $('#for-file-upload').on("tap",function(){
@@ -294,15 +302,8 @@ angular.module('starter.controllers', [])
 })
 
 
-<<<<<<< HEAD
 .controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, Oficinas) {
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
-=======
-.controller('OficinasCtrl', function($scope, Oficinas) {
->>>>>>> 374f6ac7a61933ef7affefd965e03d5b9cba0489
-  $scope.oficinas = [];
+ $scope.oficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
   }).catch(function(err){
@@ -311,15 +312,7 @@ angular.module('starter.controllers', [])
 
 })
 
-<<<<<<< HEAD
 .controller('OficinaCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
-=======
-.controller('OficinaCtrl', function($scope, $stateParams, $ionicLoading, Oficinas) {
->>>>>>> 374f6ac7a61933ef7affefd965e03d5b9cba0489
-  
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -394,11 +387,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-<<<<<<< HEAD
 .controller('NotificacionesCtrl', function($scope, $rootScope, $ionicHistory, Notificaciones) {
-=======
-.controller('NotificacionesCtrl', function($scope, Notificaciones) {
->>>>>>> 374f6ac7a61933ef7affefd965e03d5b9cba0489
   $scope.notificaciones = Notificaciones.all();
 })
 
