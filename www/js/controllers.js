@@ -285,7 +285,7 @@ angular.module('starter.controllers', [])
 
 .controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
-
+  console.log($rootScope.sesionUsuario.Propiedades);
   $scope.slideChanged = function() {  
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
@@ -294,7 +294,7 @@ angular.module('starter.controllers', [])
     }, 50);
   };  
   function execute() {
-    $rootScope.slideServicios = ServiciosAsociados.all();
+    $rootScope.slideServicios = $rootScope.sesionUsuario.Propiedades;
   }  
   $scope.nextSlide = function() {
     console.log('next');
@@ -417,7 +417,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ForgotPswdCtrl', function($scope, $rootScope, $state, User) {
-  
   $scope.rememberThePassword = function(){
     User.forgotPassword($scope.formdata.rut).then(function(response){
       if(response.exito == 1){
