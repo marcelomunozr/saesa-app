@@ -8218,6 +8218,14 @@ ul.pasos li.active:first-child:before {
       .contenido .group-box.pro .img-center {
         margin: 0 auto 15px; }
 
+.list.notificacion .item h2 {
+  white-space: normal;
+  font-size: 14px;
+  color: #666; }
+
+.list.notificacion .item-toggle .toggle {
+  margin-top: 2px; }
+
 .contenido-mapa {
   height: 400px;
   margin-bottom: 10px;
