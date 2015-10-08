@@ -3,7 +3,7 @@
     <div class="list list-inset">
 	    <div class="add-account">
 			<label class="item item-input item-select">
-				<div class="input-label">
+				<div class="input-label" ng-show="formdata.codEmpresa == -1">
 					Empresa
 				</div>
 				<select name="codEmpresa" class="servicios" ng-model="formdata.codEmpresa" required>
@@ -30,7 +30,7 @@
 			    <div class="col no-padding"><div class="op-addAccount" id="numBoleta" ><span class="ti-help"></span></div></div>
 		    </div>
 			<label class="item item-input item-select">
-				<div class="input-label">
+				<div class="input-label" ng-show="formdata.relPropiedad == -1">
 					Relación
 				</div>
 				<select name="relPropiedad" ng-model="formdata.relPropiedad" required>
