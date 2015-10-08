@@ -9,21 +9,21 @@
     <div class="contenido">
       <div class="row">
         <div class="col col-75 datos">
-          <h3>PAPE LUIS{{cuenta.detalle.nombreTitular}}</h3>
-          <p>Rut: 666-k{{cuenta.detalle.rutCliente}}</p>
-          <p>Número de cliente: 12345{{cuenta.detalle.numeroServicio}}</p>
+          <h3>{{detalles.nombreTitular}}</h3>
+          <p>Rut: {{detalles.rutCliente}}</p>
+          <p>Número de cliente: {{detalles.numeroServicio}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <div class="box impagos" >
+          <div class="box impagos" ng-repeat="pago in pagados">
             <div class="row">
               <div class="col">
                 <div class="contain">
-                  <p>Numero de documento 66666666</p>
-                  <p>Fecha de pago {{documento.fechaVcto}}</p>  
-                  <p>Medio de pago {{documento.saldo | currency:"$":0}}</p>
-                  <p class="total">MONTO PAGADO {{documento.saldo | currency:"$":0}}</p>
+                  <p>Numero de documento: {{pago.nroDcto}}</p>
+                  <p>Fecha de pago: {{pago.fechaPago}}</p>  
+                  <p>Medio de pago: {{pago.medioPago}}</p>
+                  <p class="total">MONTO PAGADO {{pago.montoPago | currency:"$":0}}</p>
                 </div>
               </div>
             </div>

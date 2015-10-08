@@ -232,7 +232,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent':{
         templateUrl: "templates/documentos-pagados.html",
-        controller: "DocumentosImpagosCtrl"
+        controller: "DocumentosPagosCtrl"
       }
     }
   }) 

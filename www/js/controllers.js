@@ -461,6 +461,28 @@ angular.module('starter.controllers', [])
   $scope.notificaciones = Notificaciones.all();
 })
 
+.controller('DocumentosPagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property){
+  $scope.pagados = [];
+  $scope.detalles = [];
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+  });
+  console.log("Estate Params", $stateParams);
+  Property.getUltimosPagos($stateParams.propertyId).then(function(respuesta){
+    console.log('La Respuesta', respuesta);
+    $scope.pagados = respuesta.pagos;
+    $scope.detalles = respuesta.detalles;
+  }).catch(function(err){
+    console.log('El Cagazo', err);
+  }).finally(function(){
+    $ionicLoading.hide();
+  });
+
+
+})
+
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.backButton.text('').icon('ti-back-left');
 })
