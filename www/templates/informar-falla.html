@@ -10,20 +10,18 @@
         <div class="list list-inset">
           <div class="add-account">
             <label class="item item-input item-select">
-              <div class="input-label">
+              <div class="input-label" ng-show="formdata.propiedad == -1">
                 Selecionar servicio
               </div>
               <select ng-model="formdata.propiedad" name="propiedad" >
-                <option>Seleccione propiedad</option>
                 <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
             <label class="item item-input item-select">
-              <div class="input-label">
+              <div class="input-label" ng-show="formdata.tipofalla == -1">
                 Tipo de eventualidad
               </div>
               <select ng-model="formdata.tipofalla" name="tipoFalla">
-                <option>Seleccione tipo de falla</option>
                 <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
               </select>
             </label>

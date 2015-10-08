@@ -315,6 +315,8 @@ angular.module('starter.controllers', [])
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $scope.formdata = [];
+  $scope.formdata.propiedad = -1;
+  $scope.formdata.tipofalla = -1;
   console.log("Las Propiedades", $scope.propiedades);
   $scope.abrirDialogoSubida = function(){
     $ionicPlatform.ready(function(){

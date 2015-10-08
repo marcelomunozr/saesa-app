@@ -7978,8 +7978,7 @@ ul.pasos li.active:first-child:before {
 .contenido {
   padding: 10px;
   margin-bottom: 20px; }
-  .contenido:after,
-  .contenido:before {
+  .contenido:after, .contenido:before {
     display: block;
     content: "";
     clear: both; }
@@ -8145,8 +8144,7 @@ ul.pasos li.active:first-child:before {
   .contenido .group-box {
     border-top: 1px solid #ddd;
     padding: 10px 0; }
-    .contenido .group-box:after,
-    .contenido .group-box:before {
+    .contenido .group-box:after, .contenido .group-box:before {
       display: block;
       content: "";
       clear: both; }
