@@ -237,6 +237,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
+  //configuracion 
+  .state('app.pantalla-configuracion', {
+    url: "/pantalla-configuracion/",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/pantalla-configuracion.html"
+      }
+    }
+  }) 
+
   $urlRouterProvider.otherwise('/login');
 
   
