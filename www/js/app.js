@@ -225,6 +225,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
+  //documentos pagados
+  .state('app.documentos-pagados', {
+    url: "/documentos-pagados/:propertyId",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/documentos-pagados.html",
+        controller: "DocumentosImpagosCtrl"
+      }
+    }
+  }) 
+
   $urlRouterProvider.otherwise('/login');
 
   

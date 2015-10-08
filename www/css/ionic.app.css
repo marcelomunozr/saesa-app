@@ -9636,7 +9636,7 @@ ul.pasos li.active:first-child:before {
       font-size: 11px;
       font-style: italic; }
     .contenido .box .chartStyle {
-      height: 160px;
+      height: 175px;
       width: 100%;
       margin-top: 20px; }
     .contenido .box .chartTitle {
@@ -9719,6 +9719,17 @@ ul.pasos li.active:first-child:before {
       font-size: 18px;
       position: relative;
       top: 1px; }
+  .contenido .btn-main.center {
+    display: block;
+    width: 100%;
+    text-align: center; }
+    .contenido .btn-main.center .btn {
+      margin: 0 auto 5px;
+      display: inline-block;
+      width: auto;
+      padding: 0 15px; }
+      .contenido .btn-main.center .btn span {
+        font-size: 14px; }
   .contenido .group-box {
     border-top: 1px solid #ddd;
     padding: 10px 0; }
