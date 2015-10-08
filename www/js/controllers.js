@@ -261,7 +261,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $$ionicHistory, ServiciosAsociados){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, ServiciosAsociados){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
 
   $scope.slideChanged = function() {  
@@ -289,13 +289,32 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FallaCtrl', function($rootScope, $scope, Fallas, FileUploader){
-  $scope.uploader = new FileUploader();
+.controller('FallaCtrl', function($rootScope, $scope, $cordovaCamera, $ionicPlatform, Fallas){
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $scope.formdata = [];
+  
+
   $scope.abrirDialogoSubida = function(){
-    $('#file-upload').click();
+    $ionicPlatform.ready(function(){
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation:true
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.formdata.imagen = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
+        // error
+      });
+    });
   }
 
   $scope.informarLaFalla = function(){

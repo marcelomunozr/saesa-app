@@ -32,8 +32,9 @@
               <label id="for-file-upload" class="item item-input upload" ng-click="abrirDialogoSubida()">
                 Adjuntar imagen <span class="ti-camera"></span>
               </label>
-              <span ng-bind="item.file.name"></span><br/>
-              <input type="file" id="file-upload" name="file-upload" nv-file-select uploader="uploader" />
+              <img src="{{formdata.imagen}}" class="img-responsive" />
+              <!--<input type="file" id="file-upload" name="file-upload" nv-file-select uploader="uploader" />
+              -->
             </div>
             <div class="clearfix"></div>
           </div>
