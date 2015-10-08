@@ -9553,6 +9553,11 @@ ul.pasos li.active:first-child:before {
 .contenido {
   padding: 10px;
   margin-bottom: 20px; }
+  .contenido:after,
+  .contenido:before {
+    display: block;
+    content: "";
+    clear: both; }
   .contenido .datos h3 {
     font-size: 16px;
     line-height: 18px;
@@ -9630,7 +9635,8 @@ ul.pasos li.active:first-child:before {
       font-style: italic; }
     .contenido .box .chartStyle {
       height: 160px;
-      width: 100%; }
+      width: 100%;
+      margin-top: 20px; }
     .contenido .box .chartTitle {
       text-align: center;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
@@ -9711,6 +9717,70 @@ ul.pasos li.active:first-child:before {
       font-size: 18px;
       position: relative;
       top: 1px; }
+  .contenido .group-box {
+    border-top: 1px solid #ddd;
+    padding: 10px 0; }
+    .contenido .group-box:after,
+    .contenido .group-box:before {
+      display: block;
+      content: "";
+      clear: both; }
+    .contenido .group-box .col-55 {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 55%;
+      -moz-box-flex: 0;
+      -moz-flex: 0 0 55%;
+      -ms-flex: 0 0 55%;
+      flex: 0 0 55%;
+      max-width: 55%; }
+      .contenido .group-box .col-55 .row {
+        padding: 0; }
+        .contenido .group-box .col-55 .row .col {
+          padding: 0;
+          width: 40px; }
+    .contenido .group-box .col-45 {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 45%;
+      -moz-box-flex: 0;
+      -moz-flex: 0 0 45%;
+      -ms-flex: 0 0 45%;
+      flex: 0 0 45%;
+      max-width: 45%; }
+    .contenido .group-box .btn {
+      background: #edf3f6;
+      color: #00599b;
+      border-radius: 2px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      -o-border-radius: 2px;
+      display: inline-block;
+      border-bottom: 2px solid #cde1eb;
+      font-size: 13px;
+      text-align: center;
+      width: 93%;
+      height: 32px;
+      line-height: 34px;
+      font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+      margin: 0 0; }
+      .contenido .group-box .btn span {
+        font-size: 20px;
+        position: relative;
+        top: 1px;
+        margin-right: 2px; }
+    .contenido .group-box:first-child {
+      border: none; }
+    .contenido .group-box.pro {
+      border: 1px solid #ddd;
+      margin-top: 10px; }
+      .contenido .group-box.pro .btn {
+        line-height: 42px;
+        height: 38px;
+        margin-bottom: 0; }
+        .contenido .group-box.pro .btn.rrss {
+          width: 50px;
+          line-height: 46px; }
+      .contenido .group-box.pro .img-center {
+        margin: 0 auto 15px; }
 
 .contenido-mapa {
   height: 400px;
@@ -9787,6 +9857,9 @@ ul.pasos li.active:first-child:before {
   .menu .list .item .ttl a.agregar-servicio {
     float: right;
     font-size: 12px; }
+
+.preview-foto img {
+  max-width: 100%; }
 
 /*servicios asociados*/
 .wide-as-needed {
