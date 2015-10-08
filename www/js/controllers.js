@@ -223,6 +223,7 @@ angular.module('starter.controllers', [])
           }else{
             maximoGrafico = parseInt(maxActual);
           }
+          topeGrafico = maximoGrafico + 10;
           console.log("Valor maximo del grafico", maximoGrafico);
           var chart = new CanvasJS.Chart("chartContainer",{
             animationEnabled: true,
@@ -230,11 +231,20 @@ angular.module('starter.controllers', [])
             backgroundColor: "#fcfcfc",
             colorSet: "colorCol",
             dataPointMaxWidth: 12,
-            height: 160,
+            height: 180,
             axisY:{
-              maximum: maximoGrafico
+              interval: 20,
+              maximum: topeGrafico,
+              stripLines:[{                
+                  value: maximoGrafico,
+                  labelFontSize:10,
+                  thickness: 1,
+                  labelBackgroundColor: "white",
+                  color: "#00599b",
+                  showOnTop: true
+              }]
             },
-            data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo)
+            data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo, maximoGrafico)
           });
           $ionicLoading.hide();
           chart.render();
@@ -301,12 +311,11 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FallaCtrl', function($rootScope, $scope, $cordovaCamera, $ionicPlatform, Fallas){
+.controller('FallaCtrl', function($rootScope, $scope, $cordovaCamera, $ionicPlatform, $state, $ionicLoading, Fallas){
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $scope.formdata = [];
-  
-
+  console.log("Las Propiedades", $scope.propiedades);
   $scope.abrirDialogoSubida = function(){
     $ionicPlatform.ready(function(){
       var options = {
@@ -315,8 +324,6 @@ angular.module('starter.controllers', [])
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true,
         encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 100,
-        targetHeight: 100,
         popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: false,
         correctOrientation:true
@@ -330,7 +337,35 @@ angular.module('starter.controllers', [])
   }
 
   $scope.informarLaFalla = function(){
+    $ionicLoading.show({
+      template: 'Enviando formulario...'
+    });
     console.log($scope.formdata);
+    var falla = {
+      rut: $rootScope.sesionUsuario.rut,
+      idEmpresa: $scope.propiedades[$scope.formdata.propiedad].related_enterprise,
+      idServicio: $scope.propiedades[$scope.formdata.propiedad].client_number,
+      idMotivo: $scope.formdata.tipofalla,
+      comentarios: $scope.formdata.comentarios,
+      base64img: $scope.formdata.imagen
+    };
+    Fallas.reportarFalla(falla).then(function(res){
+      console.log(res);
+      $ionicLoading.hide();
+      $state.go('app.resumen-cuenta');
+      $rootScope.tituloModal = 'Formulario enviado';
+      $rootScope.textoModal = 'Se ha enviado su informe de falla';
+      $rootScope.openModal();
+    }).catch(function(err){
+      console.log(err);
+      $ionicLoading.hide();
+      $state.go('app.resumen-cuenta');
+      $rootScope.tituloModal = 'Error';
+      $rootScope.textoModal = 'Ha ocurrido un error al enviar el informe';
+      $rootScope.openModal();
+    }).finally(function(ble){
+      console.log(ble);
+    });
   }
 })
 
@@ -385,7 +420,6 @@ angular.module('starter.controllers', [])
     User.forgotPassword($scope.formdata.rut).then(function(response){
       if(response.exito == 1){
         console.log(response.exito);
-
         $state.go('login');
         $rootScope.tituloModal = 'Recuperación Exitosa';
         $rootScope.textoModal = response.vb;

@@ -14,7 +14,8 @@
                 Selecionar servicio
               </div>
               <select ng-model="formdata.propiedad" name="propiedad" >
-                <option ng-repeat="propiedad in propiedades" value="{{propiedad.client_number}}">{{propiedad.property_nickname}}</option>
+                <option>Seleccione propiedad</option>
+                <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
             <label class="item item-input item-select">
@@ -22,6 +23,7 @@
                 Tipo de eventualidad
               </div>
               <select ng-model="formdata.tipofalla" name="tipoFalla">
+                <option>Seleccione tipo de falla</option>
                 <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
               </select>
             </label>
@@ -32,9 +34,9 @@
               <label id="for-file-upload" class="item item-input upload" ng-click="abrirDialogoSubida()">
                 Adjuntar imagen <span class="ti-camera"></span>
               </label>
-              <img src="{{formdata.imagen}}" class="img-responsive" />
-              <!--<input type="file" id="file-upload" name="file-upload" nv-file-select uploader="uploader" />
-              -->
+              <div class="preview-foto">
+                <img src="{{formdata.imagen}}"/>
+              </div>
             </div>
             <div class="clearfix"></div>
           </div>

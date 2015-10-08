@@ -298,10 +298,9 @@ angular.module('starter.services', [])
       }
       return null;
     },
-    transformDatos: function($data){
+    transformDatos: function($data, $maximo){
       var actualFecha = new Date();
       var actualMes = actualFecha.getMonth();
-      
       var graphData = [{
         type: "column",
         showInLegend: false,
@@ -311,7 +310,7 @@ angular.module('starter.services', [])
         dataPoints: []
       }];
       angular.forEach($data, function(objeto, llave){
-        var mes = parseInt(objeto.mes);
+        var mes = parseInt(objeto.mes) - 1;
         var puntoA = {
           label: labels[mes],
           y: parseInt(objeto.anoAnterior)
@@ -333,6 +332,13 @@ angular.module('starter.services', [])
               y: null
             }
           }
+        }
+        if(parseInt(objeto.anoAnterior) == $maximo){
+          puntoA.indexLabel = objeto.anoAnterior + "";
+          puntoA.markerColor = "red";
+        }else if(parseInt(objeto.anoActual) == $maximo){
+          puntoB.indexLabel = objeto.anoActual + "";
+          puntoB.markerColor = "red";
         }
         graphData[0].dataPoints.push(puntoA);
         graphData[1].dataPoints.push(puntoB);
@@ -477,7 +483,7 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Fallas', function(){
+.factory('Fallas', function($http, $q, laConfig){
   var esto = this;
   var fallas = [
       {
@@ -507,7 +513,33 @@ angular.module('starter.services', [])
   ];
   esto.lasFallas = function(){
     return fallas;
+  };
+  esto.reportarFalla = function($data){
+    var res = $q.defer();
+    var url = laConfig.backend + 'informaFalla';
+    var datos = $data;
+    $http.post(url, datos, {
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'no info.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
   }
+
   return esto;
 
 })
