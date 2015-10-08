@@ -122,7 +122,19 @@ angular.module('starter.controllers', [])
 
 .controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
   $ionicHistory.nextViewOptions({
-    disableBack: true
+    disableBack: false
+  });
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  };
+  $('#numCliente').click(function() {
+    $('#showNumCliente').fadeIn(300);
+  });
+  $('#numBoleta').click(function() {
+    $('#showNumBoleta').fadeIn(300);
+  });
+  $('.showsBoleta').click(function() {
+    $(this).fadeOut(300);
   });
   console.log('paso', $scope.regdata);
 	$scope.regdata.paso = 2;
@@ -271,7 +283,7 @@ angular.module('starter.controllers', [])
       $ionicScrollDelegate.resize();
     }, 50);
   };  
-  function execute() {    
+  function execute() {
     $rootScope.slideServicios = ServiciosAsociados.all();
   }  
   $scope.nextSlide = function() {
