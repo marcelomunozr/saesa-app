@@ -315,7 +315,7 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $state, $q, localStorageService, ServiciosAsociados, $ionicLoading, Property){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $state, $q, $ionicLoading, localStorageService, ServiciosAsociados, Property){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
   $scope.PropiedadesUsuario = [];
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -332,13 +332,12 @@ angular.module('starter.controllers', [])
       $ionicLoading.hide();
       console.log("LA WEA DE LA WEA", $rootScope.slideServicios);
     });
-
   });
   
   $scope.marcarComoPortada = function(idPortada){
     $rootScope.propiedadActiva = idPortada;
     localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
-    $state.go('app.resumen-cuenta', {fetch : true});
+    $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
   }
 
   $scope.poblarPropiedad = function(){

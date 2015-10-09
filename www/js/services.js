@@ -343,7 +343,7 @@ angular.module('starter.services', [])
           label: labels[mes],
           y: parseInt(objeto.anoAnterior)
         };
-        if(actualMes > llave){
+        if(actualMes > mes){
           var puntoB = {
             label: labels[mes],
             y: parseInt(objeto.anoActual)
