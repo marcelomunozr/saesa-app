@@ -20,7 +20,7 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ui-sref="app.resumen-cuenta">
+        <ion-item nav-clear menu-close ui-sref="app.pantalla-configuracion">
           <div class="row">
             <div class="col col-75">
               <h2>{{sesionUsuario.contact_name}}</h2>
@@ -28,6 +28,14 @@
             </div>
             <div class="col">
               <span class="ticon ti-settings pull-right"></span>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="app.resumen-cuenta">
+          <div class="row">
+            <div class="col ttl">
+              <span class="ticon ti-layout-accordion-separated pull-left"></span>
+              <h4>Resumen Cuenta</h4>
             </div>
           </div>
         </ion-item>

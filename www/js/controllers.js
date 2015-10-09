@@ -175,6 +175,9 @@ angular.module('starter.controllers', [])
     }
     console.log('Los datos', $scope.formdata);
   }
+  $scope.formdata = [];
+  $scope.formdata.codEmpresa = -1;
+  $scope.formdata.relPropiedad = -1;
 
 })
 

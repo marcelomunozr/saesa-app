@@ -236,15 +236,17 @@ ul.pasos {
 		.input-label{
 			font-size: 14px;
 			color: #b6b6b6;
+		    padding: 4px 10px 2px 4px;
 		}
 		.item-select select{
-			padding: 0 5px 4px 5px;
+			padding: 1px 5px 3px 0;
 			color: #b6b6b6;
 			font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 			font-size: 14px;
-			max-width: 70%;
+			max-width: 100%;
 			position: relative;
 			top: 2px;
+			direction: inherit;
 		}
 		textarea{
 			color: #b6b6b6;
@@ -440,7 +442,7 @@ ul.pasos {
 			font-style: italic;
 		}
 		.chartStyle{
-			height: 160px;
+			height: 175px;
 			width: 100%;
 		    margin-top: 20px;
 		}
@@ -541,6 +543,20 @@ ul.pasos {
     			position: relative;
     			top: 1px;
     		}
+		}
+	}
+	.btn-main.center{
+		display: block;
+		width: 100%;
+		text-align: center;
+		.btn{
+			margin: 0 auto 5px;
+			display: inline-block;
+			width: auto;
+			padding: 0 15px;
+			span{
+				font-size: 14px;
+			}
 		}
 	}
 	.group-box{

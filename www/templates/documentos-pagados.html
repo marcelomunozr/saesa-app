@@ -1,0 +1,36 @@
+<ion-view view-title="registro de pagos">
+  <ion-header-bar>
+    <h1 class="title">registro de pagos</h1>
+    <div>
+      <button class="button button-clear back-header" ng-click="goBack()"><span class="ti-back-left"></span></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="contenido">
+      <div class="row">
+        <div class="col col-75 datos">
+          <h3>PAPE LUIS{{cuenta.detalle.nombreTitular}}</h3>
+          <p>Rut: 666-k{{cuenta.detalle.rutCliente}}</p>
+          <p>Número de cliente: 12345{{cuenta.detalle.numeroServicio}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="box impagos" >
+            <div class="row">
+              <div class="col">
+                <div class="contain">
+                  <p>Numero de documento 66666666</p>
+                  <p>Fecha de pago {{documento.fechaVcto}}</p>  
+                  <p>Medio de pago {{documento.saldo | currency:"$":0}}</p>
+                  <p class="total">MONTO PAGADO {{documento.saldo | currency:"$":0}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+
