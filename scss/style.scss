@@ -638,6 +638,20 @@ ul.pasos {
 	}
 
 }
+.list.notificacion{
+	.item{
+		h2{
+		    white-space: normal;
+		    font-size: 14px;
+		    color: #666;
+		}
+	}
+	.item-toggle{
+		.toggle{
+			margin-top: 2px;
+		}
+	}
+}
 .contenido-mapa{
 	height: 400px;
 	margin-bottom: 10px;

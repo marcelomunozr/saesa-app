@@ -231,7 +231,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent':{
         templateUrl: "templates/documentos-pagados.html",
-        controller: "DocumentosImpagosCtrl"
+        controller: "DocumentosPagosCtrl"
+      }
+    }
+  }) 
+
+  //configuracion 
+  .state('app.pantalla-configuracion', {
+    url: "/pantalla-configuracion/",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/pantalla-configuracion.html"
       }
     }
   }) 
