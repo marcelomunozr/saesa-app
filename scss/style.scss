@@ -560,7 +560,7 @@ ul.pasos {
 		}
 	}
 	.group-box{
-		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
 		padding: 10px 0;
 		&:after,
 		&:before{
@@ -570,12 +570,12 @@ ul.pasos {
 		}
 		.col-55{
 		    -webkit-box-flex: 0;
-		    -webkit-flex: 0 0 55%;
+		    -webkit-flex: 0 0 45%;
 		    -moz-box-flex: 0;
-		    -moz-flex: 0 0 55%;
-		    -ms-flex: 0 0 55%;
-		    flex: 0 0 55%;
-		    max-width: 55%;
+		    -moz-flex: 0 0 45%;
+		    -ms-flex: 0 0 45%;
+		    flex: 0 0 45%;
+		    max-width: 45%;
 		    .row{
 		    	padding: 0;
 		    	.col{
@@ -586,12 +586,20 @@ ul.pasos {
 		}
 		.col-45{
 		    -webkit-box-flex: 0;
-		    -webkit-flex: 0 0 45%;
+		    -webkit-flex: 0 0 55%;
 		    -moz-box-flex: 0;
-		    -moz-flex: 0 0 45%;
-		    -ms-flex: 0 0 45%;
-		    flex: 0 0 45%;
-		    max-width: 45%;
+		    -moz-flex: 0 0 55%;
+		    -ms-flex: 0 0 55%;
+		    flex: 0 0 55%;
+		    max-width: 55%;
+		    padding-left: 15px;
+		}
+		img{
+			max-width: 100%;
+			vertical-align: middle;
+		}
+		a{
+			text-decoration: none;
 		}
 		.btn {
 		    background: #edf3f6;
@@ -602,22 +610,30 @@ ul.pasos {
 		    -o-border-radius: 2px;
 		    display: inline-block;
 		    border-bottom: 2px solid #cde1eb;
-		    font-size: 13px;
+		    font-size: 12px;
 		    text-align: center;
-		    width: 93%;
+		    width: auto;
 		    height: 32px;
 		    line-height: 34px;
 		    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		    margin: 0 0;
+		    padding: 0 5px;
 		    span{
 		    	font-size: 20px;
 		    	position: relative;
 		    	top: 1px;
-		    	margin-right: 2px;
+		    }
+		    .ion-ios-telephone-outline{
+		    	margin-right: 3px;
+		    }
+		    .ti-twitter-alt{
+		    	font-size: 14px;
+				line-height: 31px;
+				padding: 0 5px;
 		    }
 		}
 		&:first-child{
-			border: none;
+			/*border: none;*/
 		}
 		&.pro{
 			border: 1px solid #ddd;
@@ -637,6 +653,46 @@ ul.pasos {
 		}
 	}
 
+}
+.asociados-service{
+	padding: 10px 0;
+	p{
+		margin-bottom: 0;
+		strong{
+			font-weight: bold;
+		}
+	}
+	.button-positive{
+	    background: #00599b;
+	    color: #edf3f6;
+	    border-radius: 2px;
+	    -moz-border-radius: 2px;
+	    -webkit-border-radius: 2px;
+	    -o-border-radius: 2px;
+	    display: inline-block;
+	    border: none;
+	    border-bottom: 2px solid #1d4e66;
+	    font-size: 14px;
+	    text-align: center;
+	    width: auto;
+	    height: 32px;
+	    line-height: 38px;
+	    min-height: 42px;
+	    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+	    margin: 15px 0;	    
+	}
+	.button-positive:active,    
+	.button-positive:focus,    
+	.button-positive:hover{
+	    background: #0566ad;
+	    color: #edf3f6;
+    }
+	.button.disabled, .button[disabled]{
+		background: #edf3f6;
+		color: #00599b;
+	    border-bottom: 2px solid #cde1eb;
+	    opacity: .7;
+	}
 }
 .list.notificacion{
 	.item{

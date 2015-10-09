@@ -20,33 +20,22 @@
             <div ng-if="servicio.estado=='vencida' || servicio.estado=='por-vencer'" class="alert {{servicio.estado}}">
               <div ng-if="servicio.estado=='vencida'"><span class="ti-announcement"></span>Propiedad con suministro cortado</div>
               <div ng-if="servicio.estado=='por-vencer'"><span class="ti-announcement"></span>Propiedad a punto de vencer</div>
-            </div>          
-            <ul>
-              <li>Alias propiedad: {{servicio.propiedad.property_nickname  | capitalize}}</li>
-              <li>Nombre Titular: {{servicio.detalles.details.nombreTitular  | capitalize}}</li>
-              <li>Fecha de corte: {{servicio.detalles.financial.fechaCorte }}</li>
-              <li>Propiedad de portada: 
-                <button class="button button-positive" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
-                  <span ng-show="servicio.esPortada">Propiedad de Portada</span>
-                  <span ng-hide="servicio.esPortada">Mostrar en portada</span>
-                </button>
-            </li>
-            </ul>
+            </div>
+
+            <div class="asociados-service">       
+              <p>Alias propiedad: <strong>{{servicio.propiedad.property_nickname  | capitalize}}</strong></p>
+              <p>Nombre Titular: <strong>{{servicio.detalles.details.nombreTitular  | capitalize}}</strong></p>
+              <p>Fecha de corte: <strong>{{servicio.detalles.financial.fechaCorte }}</strong></p>
+              <button class="button button-positive" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
+                <span ng-show="servicio.esPortada">Propiedad de Portada</span>
+                <span ng-hide="servicio.esPortada">Mostrar en portada</span>
+              </button>
+            </div>
             <!--<p ng-if="servicio.estado=='vencida'">Para regularizar dirijasé nuestras oficinas lo más pronto posible para evitar más cargos de reposición de servicio.</p>-->
           </div>
         </ion-slide>
       </ion-slide-box>
 
-      <div class="btn-main">
-        <div class="btn">
-          <span class="ti-mobile" ui-sref="app.contactenos"></span>
-          Fonoservicio
-        </div>
-        <div class="btn pull-right" ui-sref="app.oficinas">
-          <span class="ti-location-pin"></span>
-          Oficinas
-        </div>
-      </div>
 
 
     </div>

@@ -42,11 +42,13 @@
         <ion-item nav-clear>
           <div class="row">
             <div class="col ttl">
-              <span class="ticon ti-layers-alt pull-left"></span>
-              <h4>Servicios Asociados</h4>
-              <ul>
-                <li menu-close ui-sref="app.servicios-asociados" ng-repeat="propiedad in sesionUsuario.Propiedades" >{{propiedad.property_nickname}}</li>
-              </ul>
+              <div nav-clear menu-close ui-sref="app.servicios-asociados">
+                <span class="ticon ti-layers-alt pull-left"></span>
+                <h4>Servicios Asociados</h4>
+                <ul>
+                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" >{{propiedad.property_nickname}}</li>
+                </ul>
+                </div>
               <a href="#" class="agregar-servicio" menu-close ui-sref="register.addaccount">Agregar Servicio</a>
             </div>
           </div>
