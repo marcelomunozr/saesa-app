@@ -109,10 +109,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   //resumen cuenta
   .state('app.resumen-cuenta', {
-    url: "/resumen-cuenta",
-    cache: false,
+    url: "/resumen-cuenta?fetch",
     views: {
-      'menuContent':{
+      'menuContent':{      
         templateUrl: "templates/resumen-cuenta.html",
         controller: "ResumenCtrl"
       }
