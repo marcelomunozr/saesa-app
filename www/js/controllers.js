@@ -3,12 +3,17 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
   var userId = localStorageService.get('user.id');
+  var laActiva = localStorageService.get('user.propiedadActiva');
   if(angular.isDefined(userId) && userId != null){
     $state.go('app.resumen-cuenta');
   }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
-  $rootScope.propiedadActiva = 0;
+  if(angular.isDefined(laActiva) && laActiva != null){
+    $rootScope.propiedadActiva = laActiva;
+  }else{
+    $rootScope.propiedadActiva = 0;
+  }
   $scope.propiedadPortada = {};
   $rootScope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
     scope: $rootScope,
@@ -146,6 +151,8 @@ angular.module('starter.controllers', [])
     if(!angular.isUndefined(localStorageService.get('user.id'))){
       $scope.formdata.userId = localStorageService.get('user.id');
       Property.addProperty($scope.formdata).then(function(response){
+        $rootScope.propiedadActiva = response.propertyId;
+        localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
         $state.go('app.resumen-cuenta', {fetch : true});
         /** Navegamos a resumen donde pediremos los datos **/
       }).catch(function(error){
@@ -185,27 +192,32 @@ angular.module('starter.controllers', [])
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
     $scope.cargando = true;
     console.log('## Los stateParams ##', $stateParams);
-    
     var userId = localStorageService.get('user.id');
+    var eltimer = $timeout(function(){
+      $ionicLoading.hide();     
+      console.log('timeout');
+    }, 3000);
     $scope.$on('$ionicView.beforeEnter', function(){
 	    if($stateParams.fetch){
-				$scope.fetchUser();
+				$scope.fetchUser(true);
 	    }
       $ionicLoading.show({
         template: 'Consultando Información...'
-      });
-	    var eltimer = $timeout(function(){
-				$ionicLoading.hide();	    
-				console.log('timeout');
-	    }, 3000);      
+      });      
     });
 
-    $scope.fetchUser = function(){
-			User.fetchMeTheUser(userId).then(function(response){
+    $scope.fetchUser = function($cache){
+			User.fetchMeTheUser(userId, $cache).then(function(response){
 			  var propiedadPortada = {};
 			  $rootScope.sesionUsuario = response.sesionUsuario;
 			  if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
-			    Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
+          var idPropiedadPortada = 0;
+          if($rootScope.propiedadActiva == 0){
+            idPropiedadPortada = response.sesionUsuario.Propiedades[0].id;
+          }else{
+            idPropiedadPortada = $rootScope.propiedadActiva;
+          }
+          Property.getDetails(idPropiedadPortada).then(function(respuesta){
 			      $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
 			      $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
 			      $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
@@ -261,10 +273,10 @@ angular.module('starter.controllers', [])
 			        },
 			        data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo, maximoGrafico)
 			      });
+            console.log('La sesion', $rootScope.sesionUsuario);
+            chart.render();
 			      $ionicLoading.hide();
-			      $timeout.cancel(eltimer);
-			      chart.render();
-			      console.log('La sesion', $rootScope.sesionUsuario);
+			      $timeout.cancel(eltimer);			      
 			    });
 			  }else{
 			    $state.go('register.addaccount');
@@ -299,13 +311,51 @@ angular.module('starter.controllers', [])
     console.log('Documentos', $scope.cuenta.documentos);
     $ionicLoading.hide();
   });
-
-
 })
 
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, ServiciosAsociados){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $q, ServiciosAsociados, $ionicLoading, Property){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
-  console.log($rootScope.sesionUsuario.Propiedades);
+  $scope.PropiedadesUsuario = [];
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+    $scope.poblarPropiedad().then(function(res){
+      console.log('Termino de cargar las propiedades');
+      execute();
+    }).catch(function(err){
+      $ionicLoading.hide();
+    }).finally(function(){
+      $ionicSlideBoxDelegate.update();
+      $ionicLoading.hide();
+      console.log("LA WEA DE LA WEA", $rootScope.slideServicios);
+    });
+
+  });
+  $scope.poblarPropiedad = function(){
+    var res = $q.defer();
+    var purasPromesas = [];
+
+    function obtieneDetalle(laPropiedad, llave){
+      var prom = $q.defer();
+      Property.getDetails(laPropiedad.id).then(function(response){
+        $scope.PropiedadesUsuario[llave]  = {propiedad: laPropiedad, detalles: response.detalle.Property};
+        prom.resolve();
+      }).catch(function(err){
+        console.log("ERROR EN SERVICIO", err);
+        prom.reject({
+          reason: 'no',
+          message: 'ingreso incorrecto.'
+        });
+      });
+      return prom.promise;
+    }
+    angular.forEach($rootScope.sesionUsuario.Propiedades, function(objeto, llave){
+      purasPromesas.push(obtieneDetalle(objeto, llave));
+    });
+    $q.all(purasPromesas).then(res.resolve);
+    return res.promise;
+  }
   $scope.slideChanged = function() {  
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
@@ -314,7 +364,8 @@ angular.module('starter.controllers', [])
     }, 50);
   };  
   function execute() {
-    $rootScope.slideServicios = $rootScope.sesionUsuario.Propiedades;
+    console.log($scope.PropiedadesUsuario);
+    $rootScope.slideServicios = $scope.PropiedadesUsuario;
   }  
   $scope.nextSlide = function() {
     console.log('next');
@@ -324,7 +375,7 @@ angular.module('starter.controllers', [])
     console.log('prev');
     $ionicSlideBoxDelegate.previous();
   }
-  execute();
+  
   $(".menu-asociados a").click(function(){
     $(".menu-asociados a").removeClass('active');
     $(this).addClass('active');
@@ -496,12 +547,9 @@ angular.module('starter.controllers', [])
   }).finally(function(){
     $ionicLoading.hide();
   });
-
-
 })
 
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.backButton.text('').icon('ti-back-left');
 })
-
 ;

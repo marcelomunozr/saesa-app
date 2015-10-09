@@ -7,34 +7,38 @@
   </ion-header-bar>
   <ion-content>
     <div class="contenido">
-      
       <div class="gradient-left"></div>
       <div class="gradient-right"></div>
       
-      <ion-slide-box on-slide-changed="slideChanged()" active-slide="activeSlide" show-pager="false">
+
+      <ion-slide-box on-slide-changed="slideChanged()" active-slide="activeSlide" show-pager="false" ng-if="slideServicios">
         <ion-slide ng-repeat="servicio in slideServicios" class="ion-slide menu-asociados">
           <span class="ti-angle-left" ng-click="prevSlide()"></span>
           <span class="ti-angle-right" ng-click="nextSlide()"></span>
-          <a class="{{servicio.estado}}">{{servicio.servicio}}</a><!-- app.servicios-asociados.detalle({id:1}) -->
+          <a class="{{servicio.detalles.details.estadoServicio}}">{{servicio.detalles.details.estadoServicio | capitalize}}</a><!-- app.servicios-asociados.detalle({id:1}) -->
         </ion-slide>
       </ion-slide-box>
 
       <ion-slide-box on-slide-changed="slideChanged()" active-slide="activeSlide" show-pager="false" delegate-handle="slider-asociados">
         <ion-slide ng-repeat="servicio in slideServicios" class="ion-slide contenedor-asociados">
           <div class="box-container">
-            <div ng-if="servicio.estado=='vencida' || servicio.estado=='por-vencer'" class="alert {{servicio.estado}}">              
+            <div ng-if="servicio.estado=='vencida' || servicio.estado=='por-vencer'" class="alert {{servicio.estado}}">
               <div ng-if="servicio.estado=='vencida'"><span class="ti-announcement"></span>Propiedad con suministro cortado</div>
               <div ng-if="servicio.estado=='por-vencer'"><span class="ti-announcement"></span>Propiedad a punto de vencer</div>
             </div>          
-            <p>{{servicio.info}}</p>
-            <p ng-if="servicio.estado=='vencida'">Para regularizar dirijasé nuestras oficinas lo más pronto posible para evitar más cargos de reposición de servicio.</p>
+            <ul>
+              <li>Alias propiedad: {{servicio.propiedad.property_nickname  | capitalize}}</li>
+              <li>Nombre Titular: {{servicio.detalles.details.nombreTitular  | capitalize}}</li>
+              <li>Fecha de corte: {{servicio.detalles.financial.fechaCorte }}</li>
+            </ul>
+            <!--<p ng-if="servicio.estado=='vencida'">Para regularizar dirijasé nuestras oficinas lo más pronto posible para evitar más cargos de reposición de servicio.</p>-->
           </div>
         </ion-slide>
       </ion-slide-box>
 
       <div class="btn-main">
         <div class="btn">
-          <span class="ti-mobile"></span>
+          <span class="ti-mobile" ui-sref="app.contactenos"></span>
           Fonoservicio
         </div>
         <div class="btn pull-right" ui-sref="app.oficinas">

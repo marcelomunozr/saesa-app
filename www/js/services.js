@@ -79,11 +79,11 @@ angular.module('starter.services', [])
     return res.promise;
   }
 
-  esto.fetchMeTheUser = function($data){
+  esto.fetchMeTheUser = function($data, $cache){
     var res = $q.defer();
     var url = laConfig.backend + 'getUser/' + $data;
     $http.get(url, {
-      cache: true,
+      cache: $cache,
       timeout: 30000
     }).success(function(response){
       if(response === false){
