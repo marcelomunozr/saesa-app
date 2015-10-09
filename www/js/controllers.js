@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
     $rootScope.modal.hide();
   };
 
-  $scope.abrirExterna = function($direccion){
+  $rootScope.abrirExterna = function($direccion){
     var defaultOptions = {
       location: 'no',
       clearcache: 'no',
@@ -127,12 +127,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
-  $ionicHistory.nextViewOptions({
-    disableBack: false
-  });
-  $scope.goBack = function() {
-    $ionicHistory.goBack();
-  };
   $('#numCliente').click(function() {
     $('#showNumCliente').fadeIn(300);
   });
@@ -142,8 +136,7 @@ angular.module('starter.controllers', [])
   $('.showsBoleta').click(function() {
     $(this).fadeOut(300);
   });
-  console.log('paso', $scope.regdata);
-	$scope.regdata.paso = 2;
+  $scope.regdata.paso = 2;
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
       template: 'Consultando Información...'

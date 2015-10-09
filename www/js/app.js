@@ -56,9 +56,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 /** LA CONFIG PO LOCOH **/
   //login
-.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider, $compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|http|ftp|mailto|tel|sms):/);
   $stateProvider
-
   .state('login', {
     url: "/login",
     templateUrl: "templates/login.html"
