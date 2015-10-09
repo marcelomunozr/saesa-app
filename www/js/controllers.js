@@ -217,6 +217,8 @@ angular.module('starter.controllers', [])
           }else{
             idPropiedadPortada = $rootScope.propiedadActiva;
           }
+          $rootScope.propiedadActiva = idPropiedadPortada;
+          localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
           Property.getDetails(idPropiedadPortada).then(function(respuesta){
 			      $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
 			      $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
@@ -313,7 +315,7 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $q, ServiciosAsociados, $ionicLoading, Property){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $state, $q, localStorageService, ServiciosAsociados, $ionicLoading, Property){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
   $scope.PropiedadesUsuario = [];
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -332,14 +334,25 @@ angular.module('starter.controllers', [])
     });
 
   });
+  
+  $scope.marcarComoPortada = function(idPortada){
+    $rootScope.propiedadActiva = idPortada;
+    localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
+    $state.go('app.resumen-cuenta', {fetch : true});
+  }
+
   $scope.poblarPropiedad = function(){
     var res = $q.defer();
     var purasPromesas = [];
-
     function obtieneDetalle(laPropiedad, llave){
       var prom = $q.defer();
       Property.getDetails(laPropiedad.id).then(function(response){
-        $scope.PropiedadesUsuario[llave]  = {propiedad: laPropiedad, detalles: response.detalle.Property};
+        var portada = false;
+        console.log($rootScope.propiedadActiva);
+        if($rootScope.propiedadActiva == laPropiedad.id){
+          portada = true;
+        }
+        $scope.PropiedadesUsuario[llave]  = {esPortada:portada, propiedad: laPropiedad, detalles: response.detalle.Property};
         prom.resolve();
       }).catch(function(err){
         console.log("ERROR EN SERVICIO", err);

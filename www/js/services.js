@@ -171,7 +171,7 @@ angular.module('starter.services', [])
     var res = $q.defer();
     var url = laConfig.backend + 'getPagos/' + $data; 
     $http.get(url, {
-      cache: true,
+      cache: false,
       timeout: 30000
     }).success(function(response){
       if(response === false){
