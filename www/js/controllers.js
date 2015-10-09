@@ -8,6 +8,7 @@ angular.module('starter.controllers', [])
   }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
+  $rootScope.propiedadActiva = 0;
   $scope.propiedadPortada = {};
   $rootScope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
     scope: $rootScope,
@@ -193,7 +194,13 @@ angular.module('starter.controllers', [])
       var propiedadPortada = {};
       $rootScope.sesionUsuario = response.sesionUsuario;
       if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
-        Property.getDetails(response.sesionUsuario.Propiedades[0].id).then(function(respuesta){
+        var idPropiedadPortada = 0;
+        if($rootScope.propiedadActiva == 0){
+          idPropiedadPortada = response.sesionUsuario.Propiedades[0].id;
+        }else{
+          idPropiedadPortada = $rootScope.propiedadActiva;
+        }
+        Property.getDetails(idPropiedadPortada).then(function(respuesta){
           $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
           $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
           $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
