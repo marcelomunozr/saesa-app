@@ -9,18 +9,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+    if(window.cordova && window.analytics) {
+			window.analytics.startTrackerWithId('UA-68788191-1');
+    }
   });
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     console.log('############ fromState.name:', fromState.name);
     console.log('############ toState.name:' , toState.name);
     $rootScope.$broadcast('clase', {clase: toState.name, params: toParams});
-    if(toState.name === 'map' && toParams.latitude != '-33.4651908'){
-      $rootScope.$broadcast('showPistas');
-    } else {
-      $rootScope.$broadcast('hidePistas');
-    }
-    if(toState.name === 'map' || toState.name === 'found'){
-      $rootScope.$broadcast('showEncontrados');
+    if(window.cordova && window.analytics){
+			window.analytics.trackView(toState.name);
     }
   });
   $rootScope.$state = $state;
