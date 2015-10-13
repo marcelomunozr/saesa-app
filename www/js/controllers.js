@@ -95,7 +95,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, User, localStorageService){
+.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, User, localStorageService){
 	$scope.regdata.paso = 1;
 	$scope.registerUser = function(){
     console.log('paso', $scope.formdata);
