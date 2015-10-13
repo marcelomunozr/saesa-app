@@ -4,6 +4,7 @@
   "description": "App: An Ionic project",
   "dependencies": {
     "clean": "^4.0.1",
+    "cordova-plugin-googleplayservices": "^19.0.3",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",

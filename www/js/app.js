@@ -1,7 +1,7 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'angularFileUpload'])
 
-.run(function($ionicPlatform, $state, $rootScope) {
+.run(function($ionicPlatform, $state, $rootScope, $log) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -19,6 +19,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $rootScope.$broadcast('clase', {clase: toState.name, params: toParams});
     if(window.cordova && window.analytics){
 			window.analytics.trackView(toState.name);
+	    $log.debug('yep');			
+    } else {
+	    $log.debug('nope');
     }
   });
   $rootScope.$state = $state;
