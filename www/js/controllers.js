@@ -189,7 +189,7 @@ angular.module('starter.controllers', [])
     var eltimer = $timeout(function(){
       $ionicLoading.hide();     
       console.log('timeout');
-    }, 3000);
+    }, 10000);
     $scope.$on('$ionicView.beforeEnter', function(){
 	    if($stateParams.fetch){
 				$scope.fetchUser(true);
