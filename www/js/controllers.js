@@ -217,6 +217,7 @@ angular.module('starter.controllers', [])
 			      $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
 			      $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
 			      $scope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
+            $scope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
 			      console.log('Propiedad de Portada: ', respuesta);
 			    }).catch(function(error){
 			      console.log('Error en Propiedad', error);
