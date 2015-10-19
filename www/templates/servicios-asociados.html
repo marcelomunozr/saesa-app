@@ -9,7 +9,7 @@
         <ion-slide ng-repeat="servicio in slideServicios" class="ion-slide menu-asociados">
           <span class="ti-angle-left" ng-click="prevSlide()"></span>
           <span class="ti-angle-right" ng-click="nextSlide()"></span>
-          <a class="{{servicio.detalles.details.estadoServicio}}">{{servicio.detalles.details.estadoServicio | capitalize}}</a><!-- app.servicios-asociados.detalle({id:1}) -->
+          <a class="{{servicio.detalles.details.estadoServicio}}">{{servicio.propiedad.property_nickname  | capitalize}}</a><!-- app.servicios-asociados.detalle({id:1}) -->
         </ion-slide>
       </ion-slide-box>
 
@@ -22,8 +22,8 @@
             </div>
 
             <div class="asociados-service">       
-              <p>Alias propiedad: <strong>{{servicio.propiedad.property_nickname  | capitalize}}</strong></p>
               <p>Nombre Titular: <strong>{{servicio.detalles.details.nombreTitular  | capitalize}}</strong></p>
+              <p>Estado del servicio: <strong>{{servicio.detalles.details.estadoServicio  | capitalize}}</strong></p>
               <p>Fecha de corte: <strong>{{servicio.detalles.financial.fechaCorte }}</strong></p>
               <button class="button button-positive" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
                 <span ng-show="servicio.esPortada">Propiedad de Portada</span>
