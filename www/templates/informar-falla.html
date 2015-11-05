@@ -1,6 +1,6 @@
-<ion-view view-title="informar falla">
+<ion-view view-title="Informar Falla">
   <ion-header-bar>
-    <h1 class="title">informar falla</h1>
+    <h1 class="title">Informar Falla</h1>
     <div>
       <button class="button button-clear back-header" ui-sref="login"><span class="ti-back-left"></span></button>
     </div>
@@ -39,9 +39,22 @@
             <div class="clearfix"></div>
           </div>
           <label>
-            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine">Continuar</button>
+            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine">Enviar Requerimiento</button>
           </label>
+          <h6>si informa una falla por no suministro y solo tenía su interruptor abajo, se le traspasa un costo al cliente. </h6>
         </div>
       </form>
+      <div class="contenido">
+        <div class="row">
+          <div class="col">
+            <div class="btn-main center">
+              <div class="btn" ng-click="abrirExterna('tel:6004012020')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012020
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </ion-content>
 </ion-view>

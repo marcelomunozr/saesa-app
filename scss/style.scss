@@ -254,6 +254,10 @@ ul.pasos {
 			font-size: 14px;
 			min-height: 100px;
 			padding-top: 10px;
+			padding-right: 15px;
+		}
+		textarea.max-text{
+
 		}
 		input[type="file"]{
 			display: none;
@@ -296,6 +300,7 @@ ul.pasos {
 			padding:0 16px 6px 16px;
 			font-size: 13px;
 			line-height: 13px;
+			margin-bottom: 0;
 			span{
 				font-size: 22px;
 				margin-left: 10px;
@@ -303,6 +308,14 @@ ul.pasos {
 				top: 3px;
 			}
 		}
+		h6{
+			margin-bottom: 0;
+			color: #00599b;
+		}
+	}
+	h6{
+		margin-bottom: 0;
+		color: #00599b;
 	}
 	.oficinas{
 		h3{
@@ -310,6 +323,7 @@ ul.pasos {
 			font-size: 14px;
 			color: #454545;
 			margin: 0;
+			text-transform: capitalize;
 		}
 		h6{
 			color: #858585;
@@ -551,7 +565,7 @@ ul.pasos {
 		text-align: center;
 		.btn{
 			margin: 0 auto 5px;
-			display: inline-block;
+			display: block;
 			width: auto;
 			padding: 0 15px;
 			span{
@@ -617,7 +631,7 @@ ul.pasos {
 		    line-height: 34px;
 		    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		    margin: 0 0;
-		    padding: 0 5px;
+		    padding: 0 10px;
 		    span{
 		    	font-size: 20px;
 		    	position: relative;

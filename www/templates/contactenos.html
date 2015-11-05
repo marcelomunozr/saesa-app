@@ -1,56 +1,37 @@
-<ion-view view-title="contáctenos">
+<ion-view view-title="Contáctenos">
   <ion-header-bar>
-    <h1 class="title">contáctenos</h1>
+    <h1 class="title">Contáctenos</h1>
     <div>
       <button class="button button-clear back-header"><span class="ti-back-left"></span></button>
     </div>
   </ion-header-bar>
   <ion-content>
-      <div class="contenido">
-        <div class="group-box">
-          <div class="row">
-            <div class="col col-55">
-              <img src="img/frontel.png" alt="Frontel" class="img-responsive">
-            </div>
-            <div class="col col-45">
-              <a class="btn rrss" ng-click="abrirExterna('https://twitter.com/Frontel_')">
-                <span class="ti-twitter-alt"></span>
-              </a>
-              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
-                <span class="ion-ios-telephone-outline"></span>
-                600 4012021
-              </a>
-            </div>
+      <form>
+        <div class="list list-inset">
+
+          <div class="add-account">
+            <label class="item item-input">
+              <textarea placeholder="Comentarios" class="max-text" maxlength="800"></textarea>
+            </label>
+            <h6 class="max-chars">Máximo de caracteres:  <span id="charNum">800</span></h6>
+            <div class="clearfix"></div>
           </div>
+
+          <label>
+            <button class="button button-block" type="submit">Enviar</button>
+          </label>
         </div>
+      </form>
+      <div class="contenido">
         <div class="group-box">
           <div class="row">
             <div class="col col-55">
               <img src="img/saesa.png" alt="Saesa" class="img-responsive">
             </div>
             <div class="col col-45">
-              <a class="btn rrss" ng-click="abrirExterna('https://twitter.com/Saesa_')" target="_blank">
-                <span class="ti-twitter-alt"></span>
-              </a>
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012020')">
                 <span class="ion-ios-telephone-outline"></span>
                 600 4012020
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="group-box">
-          <div class="row">
-            <div class="col col-55">
-              <img src="img/edelaysen.png" alt="Edelaysen" class="img-responsive">
-            </div>
-            <div class="col col-45">
-              <a class="btn rrss" ng-click="abrirExterna('https://twitter.com/Edelaysen')" target="_blank">
-                <span class="ti-twitter-alt"></span>
-              </a>
-              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012022')">
-                <span class="ion-ios-telephone-outline"></span>
-                600 4012022
               </a>
             </div>
           </div>
@@ -64,6 +45,32 @@
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
                 <span class="ion-ios-telephone-outline"></span>
                 600 4012020
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <img src="img/frontel.png" alt="Frontel" class="img-responsive">
+            </div>
+            <div class="col col-45">              
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012021
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <img src="img/edelaysen.png" alt="Edelaysen" class="img-responsive">
+            </div>
+            <div class="col col-45">
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012022')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012022
               </a>
             </div>
           </div>

@@ -533,6 +533,14 @@ angular.module('starter.controllers', [])
 
 .controller('NotificacionesCtrl', function($scope, $rootScope, $ionicHistory, Notificaciones) {
   $scope.notificaciones = Notificaciones.all();
+  $(".max-text").keyup(function(){
+      el = $(this);
+      if(el.val().length >= 800){
+          el.val( el.val().substr(0, 800) );
+      } else {
+          $("#charNum").text(800-el.val().length);
+      }
+  });
 })
 
 .controller('DocumentosPagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property){

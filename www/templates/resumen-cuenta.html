@@ -1,6 +1,6 @@
-<ion-view view-title="resumen cuenta" enable-menu-with-back-views="true">
+<ion-view view-title="Resumen de la cuenta" enable-menu-with-back-views="true">
   <ion-header-bar>
-    <h1 class="title">resumen cuenta</h1>
+    <h1 class="title">Resumen de la cuenta</h1>
   </ion-header-bar>
   <ion-content>
     <div class="contenido">
@@ -15,17 +15,15 @@
           <p>Tipo Tarifa: {{propiedadPortada.detalles.tarifa}}</p>
         </div>
         <div class="col">
-          <a ng-click="abrirExterna(propiedadPortada.last_voucher)">
-            <div class="ver-boleta">
+          <div class="ver-boleta">
             <div class="ti-file"></div>
-              Ver boleta
-            </div>
-          </a>
+            Ver boleta
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <div class="alert" ui-sref="app.documentos-impagos({ propertyId : propiedadActiva})">
+          <div class="alert" ui-sref="app.documentos-impagos({ propertyId : propiedadPortada.datos.id })">
             <h6>({{propiedadPortada.financieros.numeroDocumentosImpagos}}) documentos impagos <span class="ti-share"></span></h6>
           </div>
         </div>
@@ -47,7 +45,7 @@
                   <p>{{propiedadPortada.financieros.deudaVencida | currency:"$":0}}</p>
                   <p>{{propiedadPortada.financieros.fechaVencDocMasAntiguo}}</p>
                   <p>{{propiedadPortada.financieros.montoUltimoPago | currency:"$":0}}</p>
-                  <p>{{propiedadPortada.financieros.fechaUltimoPago}}</p>
+                  <p>{{propiedadPortada.financieros.fechaUltimoPago}} <br></p>
                   <p class="total">{{propiedadPortada.financieros.deudaTotal | currency:"$":0}}</p>
               </div>
             </div>
