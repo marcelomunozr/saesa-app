@@ -257,6 +257,39 @@ angular.module('starter.services', [])
     });
     return res.promise;
   }
+
+  esto.removeProperty = function($data){
+    var res = $q.defer();
+    var datos = {
+      idUsuario : $data.idUsuario,
+      idPropiedad : $data.idPropiedad
+    };
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'eliminarPropiedad',
+      data: datos,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad Eliminada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg; 
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
+  
   return esto;
 })
 
@@ -361,13 +394,13 @@ angular.module('starter.services', [])
             }
           }
         }
-        if(parseInt(objeto.anoAnterior) == $maximo){
+        /*if(parseInt(objeto.anoAnterior) == $maximo){
           puntoA.indexLabel = objeto.anoAnterior + "";
           puntoA.markerColor = "red";
         }else if(parseInt(objeto.anoActual) == $maximo){
           puntoB.indexLabel = objeto.anoActual + "";
           puntoB.markerColor = "red";
-        }
+        }*/
         graphData[0].dataPoints.push(puntoA);
         graphData[1].dataPoints.push(puntoB);
       });

@@ -15,10 +15,12 @@
           <p>Tipo Tarifa: {{propiedadPortada.detalles.tarifa}}</p>
         </div>
         <div class="col">
-          <div class="ver-boleta">
-            <div class="ti-file"></div>
-            Ver boleta
-          </div>
+          <a href="#" class="la-boleta" ng-click="abrirExterna(propiedadPortada.last_voucher)">
+            <div class="ver-boleta">
+              <div class="ti-file"></div>
+                  Ver boleta
+            </div>
+          </a>
         </div>
       </div>
       <div class="row">

@@ -185,6 +185,7 @@ angular.module('starter.controllers', [])
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
     $scope.cargando = true;
     console.log('## Los stateParams ##', $stateParams);
+    console.log("LS Propiedad: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
     var eltimer = $timeout(function(){
       $ionicLoading.hide();     
@@ -233,6 +234,7 @@ angular.module('starter.controllers', [])
 			      var maximoGrafico = 0;
 			      var maxAnterior = 0;
 			      var maxActual = 0;
+            var intervalo = 20;
 			      angular.forEach($scope.propiedadPortada.consumo, function(objeto, llave){
 			          if(parseInt(objeto.anoActual) > maxActual){
 			            maxActual = parseInt(objeto.anoActual);
@@ -247,6 +249,7 @@ angular.module('starter.controllers', [])
 			        maximoGrafico = parseInt(maxActual);
 			      }
 			      topeGrafico = maximoGrafico + 10;
+            intervalo = Math.ceil(maximoGrafico / 6)
 			      console.log("Valor maximo del grafico", maximoGrafico);
 			      var chart = new CanvasJS.Chart("chartContainer",{
 			        animationEnabled: true,
@@ -256,16 +259,8 @@ angular.module('starter.controllers', [])
 			        dataPointMaxWidth: 12,
 			        height: 180,
 			        axisY:{
-			          interval: 20,
-			          maximum: topeGrafico,
-			          stripLines:[{                
-			              value: maximoGrafico,
-			              labelFontSize:10,
-			              thickness: 1,
-			              labelBackgroundColor: "white",
-			              color: "#00599b",
-			              showOnTop: true
-			          }]
+			          interval: intervalo,
+			          maximum: topeGrafico
 			        },
 			        data: GraficoCuenta.transformDatos($scope.propiedadPortada.consumo, maximoGrafico)
 			      });
@@ -307,9 +302,10 @@ angular.module('starter.controllers', [])
     console.log('Documentos', $scope.cuenta.documentos);
     $ionicLoading.hide();
   });
+
 })
 
-.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $state, $q, $ionicLoading, localStorageService, ServiciosAsociados, Property){
+.controller('AsociadosCtrl', function($scope, $rootScope, $timeout, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicHistory, $state, $q, $ionicLoading, localStorageService, ServiciosAsociados, Property){
   $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
   $scope.PropiedadesUsuario = [];
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -332,6 +328,37 @@ angular.module('starter.controllers', [])
     $rootScope.propiedadActiva = idPortada;
     localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
     $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+  }
+
+  $scope.modalConfirmacionEliminar = function(laPropiedad) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Eliminar Propiedad',
+      template: 'Seguro que desea eliminar la propiedad ' + laPropiedad.property_nickname,
+      cancelText: 'Cancelar',
+      okText: 'Aceptar'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        localStorageService.set('user.propiedadActiva', 0);
+        $rootScope.propiedadActiva = 0;
+        $scope.eliminarServicio(laPropiedad);
+      }
+    });
+  };
+
+  $scope.eliminarServicio = function(laPropiedad){
+    var propiedades = $scope.PropiedadesUsuario.length;
+    console.log('Eliminar Servicio');
+    console.log("Propiedades: ", laPropiedad);
+    Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
+      console.log("LLEGO LA RESPUESTA!", res);
+      
+      console.log("hasta aca se deberia haber ejecutado");
+    }).catch(function(err){
+      console.log(err);
+    }).finally(function(){
+      $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+    });
   }
 
   $scope.poblarPropiedad = function(){
@@ -466,22 +493,28 @@ angular.module('starter.controllers', [])
     Oficinas.get($stateParams.oficinaId).then(function(res){
       $scope.oficina = res;  
     }).finally(function(){
-      var myLatlng = new google.maps.LatLng($scope.oficina.x,$scope.oficina.y);//-40.5730256 //-73.13853890000001
-      var mapOptions = {
-        center: myLatlng,
-        zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("map"),
-          mapOptions);
-      var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: $scope.oficina.direccion
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
-      });
+      $scope.oficina.grafico = true;
+      if($scope.oficina.x == null && $scope.oficina.y == null){
+        $scope.oficina.grafico = false;
+      }else{
+        var myLatlng = new google.maps.LatLng($scope.oficina.x,$scope.oficina.y);//-40.5730256 //-73.13853890000001
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"),
+            mapOptions);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: $scope.oficina.direccion
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+      }
+      console.log($scope.oficina.grafico);
       $scope.map = map;
       $ionicLoading.hide();
     });

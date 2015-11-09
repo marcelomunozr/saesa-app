@@ -6,17 +6,19 @@
     </div>
   </ion-header-bar>
   <ion-content>
-
-    <div class="contenido-mapa">
-       <ion-content class="map-content">
+    <div class="contenido-mapa" ng-hide="!oficina.grafico">
+       <ion-content class="map-content" >
         <div id="map" data-tap-disabled="true"></div>
       </ion-content>
     </div>
+    <div class="no-mapa" ng-hide="oficina.grafico">
+      <h3 class="text-center">Información geográfica en desarrollo</h3>
+    </div>
     <div class="contenido">
       <p class="myriad">
-        {{oficina.direccion | capitalize}} <br>
-        {{oficina.descripcion | capitalize}} <br> 
-        {{oficina.oficina | capitalize}}</p>
+        {{oficina.direccion}} <br>
+        {{oficina.descripcion}} <br> 
+        {{oficina.oficin}}</p>
     </div>
   </ion-content>
 </ion-view>

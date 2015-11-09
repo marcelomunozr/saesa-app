@@ -398,6 +398,14 @@ ul.pasos {
 			font-size: 18px;
 		}
 	}
+
+	.la-boleta{
+		font-size:12px;
+		text-decoration:none;
+		&:visited, &:hover{
+			text-decoration:none;
+		}
+	}
 	.alert{
 		background: #ffffcc;
 		padding: 8px 15px;
@@ -695,6 +703,16 @@ ul.pasos {
 	    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 	    margin: 15px 0;	    
 	}
+	.button-assertive{
+		font-size: 14px;
+		text-align: center;
+		width: auto;
+		height: 32px;
+		line-height: 38px;
+		min-height: 42px;
+		font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
+		margin: 15px 0;
+	}
 	.button-positive:active,    
 	.button-positive:focus,    
 	.button-positive:hover{
@@ -735,6 +753,9 @@ ul.pasos {
 	p{
 		font-family: "Myriad Pro", Arial;
 	}
+}
+.no-mapa{
+	padding: 30px;
 }
 .myriad{
 	font-family: "Myriad Pro", Arial;

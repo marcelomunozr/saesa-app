@@ -22,6 +22,12 @@
           <label class="item item-input">
             <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" ng-required="true">
           </label>
+          <div class="item item-checkbox">
+            <label class="checkbox">
+              <input name="terminosCondiciones" ng-model="formdata.terms" type="checkbox" required>
+            </label>
+            Acepto los términos y condiciones
+          </div>
           <label>
             <button class="button button-block" type="submit" ng-disabled="register.$invalid || register.$pristine">Continuar</button>
           </label>
