@@ -82,7 +82,7 @@ angular.module('starter.controllers', [])
         $rootScope.openModal();
     });
   };
-  
+
 })
 
 .controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory) {
@@ -123,7 +123,7 @@ angular.module('starter.controllers', [])
 
     }).finally();
   }
-  
+
 })
 
 .controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
@@ -188,7 +188,7 @@ angular.module('starter.controllers', [])
     console.log("LS Propiedad: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
     var eltimer = $timeout(function(){
-      $ionicLoading.hide();     
+      $ionicLoading.hide();
       console.log('timeout');
     }, 10000);
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -197,7 +197,7 @@ angular.module('starter.controllers', [])
 	    }
       $ionicLoading.show({
         template: 'Consultando Información...'
-      });      
+      });
     });
 
     $scope.fetchUser = function($cache){
@@ -228,7 +228,7 @@ angular.module('starter.controllers', [])
 			      CanvasJS.addColorSet("colorCol",
 			        [
 			        "#d7e4ec",
-			        "#17c300"             
+			        "#17c300"
 			        ]
 			      );
 			      var maximoGrafico = 0;
@@ -267,14 +267,14 @@ angular.module('starter.controllers', [])
             console.log('La sesion', $rootScope.sesionUsuario);
             chart.render();
 			      $ionicLoading.hide();
-			      $timeout.cancel(eltimer);			      
+			      $timeout.cancel(eltimer);
 			    });
 			  }else{
 			    $state.go('register.addaccount');
 			  }
 			}).catch(function(err){
 			  console.log('Error en Usuario', err);
-			});	    
+			});
     }
     $scope.fetchUser();
 		$scope.$on('$destroy', function(event){
@@ -323,7 +323,7 @@ angular.module('starter.controllers', [])
       console.log("LA WEA DE LA WEA", $rootScope.slideServicios);
     });
   });
-  
+
   $scope.marcarComoPortada = function(idPortada){
     $rootScope.propiedadActiva = idPortada;
     localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
     console.log("Propiedades: ", laPropiedad);
     Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
       console.log("LLEGO LA RESPUESTA!", res);
-      
+
       console.log("hasta aca se deberia haber ejecutado");
     }).catch(function(err){
       console.log(err);
@@ -389,17 +389,17 @@ angular.module('starter.controllers', [])
     $q.all(purasPromesas).then(res.resolve);
     return res.promise;
   }
-  $scope.slideChanged = function() {  
+  $scope.slideChanged = function() {
     $ionicScrollDelegate.scrollTop(false);
     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
     $timeout( function() {
       $ionicScrollDelegate.resize();
     }, 50);
-  };  
+  };
   function execute() {
     console.log($scope.PropiedadesUsuario);
     $rootScope.slideServicios = $scope.PropiedadesUsuario;
-  }  
+  }
   $scope.nextSlide = function() {
     console.log('next');
     $ionicSlideBoxDelegate.next();
@@ -408,7 +408,7 @@ angular.module('starter.controllers', [])
     console.log('prev');
     $ionicSlideBoxDelegate.previous();
   }
-  
+
   $(".menu-asociados a").click(function(){
     $(".menu-asociados a").removeClass('active');
     $(this).addClass('active');
@@ -477,9 +477,15 @@ angular.module('starter.controllers', [])
 
 
 .controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, Oficinas) {
- $scope.oficinas = [];
+  $scope.oficinas = [];
+  $scope.filtrosOficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
+  }).catch(function(err){
+    console.log(err);
+  });
+  Oficinas.getFiltros().then(function(res){
+    $scope.filtrosOficinas = res.filtros;
   }).catch(function(err){
     console.log(err);
   });
@@ -491,7 +497,7 @@ angular.module('starter.controllers', [])
       template: 'Consultando Información...'
     });
     Oficinas.get($stateParams.oficinaId).then(function(res){
-      $scope.oficina = res;  
+      $scope.oficina = res;
     }).finally(function(){
       $scope.oficina.grafico = true;
       if($scope.oficina.x == null && $scope.oficina.y == null){
@@ -521,7 +527,7 @@ angular.module('starter.controllers', [])
   });
 
   /*$scope.initialize = function() {
-    
+
   }*/
   //google.maps.event.addDomListener(window, 'load', initialize);
 })

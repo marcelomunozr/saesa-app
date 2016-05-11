@@ -142,7 +142,7 @@ angular.module('starter.services', [])
   var esto = this;
   esto.getDetails = function($data){
     var res = $q.defer();
-    var url = laConfig.backend + 'getPropertyExtraData/' + $data; 
+    var url = laConfig.backend + 'getPropertyExtraData/' + $data;
     $http.get(url, {
       cache: true,
       timeout: 30000
@@ -158,7 +158,7 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
@@ -169,7 +169,7 @@ angular.module('starter.services', [])
 
   esto.getUltimosPagos = function($data){
     var res = $q.defer();
-    var url = laConfig.backend + 'getPagos/' + $data; 
+    var url = laConfig.backend + 'getPagos/' + $data;
     $http.get(url, {
       cache: false,
       timeout: 30000
@@ -185,7 +185,7 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
@@ -197,7 +197,7 @@ angular.module('starter.services', [])
 
   esto.getDueDocuments = function($data){
     var res = $q.defer();
-    var url = laConfig.backend + 'getDueDocuments/' + $data; 
+    var url = laConfig.backend + 'getDueDocuments/' + $data;
     $http.get(url, {
       cache: true,
       timeout: 30000
@@ -213,7 +213,7 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
@@ -249,7 +249,7 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
@@ -281,7 +281,7 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
@@ -289,7 +289,7 @@ angular.module('starter.services', [])
     });
     return res.promise;
   }
-  
+
   return esto;
 })
 
@@ -301,7 +301,7 @@ angular.module('starter.services', [])
       "MAR",
       "ABR",
       "MAY",
-      "JUN", 
+      "JUN",
       "JUL",
       "AGO",
       "SEP",
@@ -310,7 +310,7 @@ angular.module('starter.services', [])
       "DIC"]
 
   var datos = [
-    {        
+    {
       type: "column",
       showInLegend: false,
       dataPoints: [
@@ -328,7 +328,7 @@ angular.module('starter.services', [])
       { label: "DIC", y: 110 }
       ]
     },
-    {        
+    {
       type: "line",
       dataPoints: [
       { label: "ENE", y: 100 },
@@ -344,7 +344,7 @@ angular.module('starter.services', [])
       { label: "NOV", y: 70 },
       { label: "DIC", y: 90 }*/
       ]
-    }        
+    }
     ];
   return {
     all: function() {
@@ -467,7 +467,7 @@ angular.module('starter.services', [])
 
   esto.all = function(){
     var res = $q.defer();
-    var url = laConfig.backend + 'getOficinas'; 
+    var url = laConfig.backend + 'getOficinas';
     $http.get(url, {
       cache: true,
       timeout: 30000
@@ -484,7 +484,34 @@ angular.module('starter.services', [])
       }
     }).catch(function(err){
       console.log('El Error', err);
-      var error = (err.data == null) ? err : err.data.msg; 
+      var error = (err.data == null) ? err : err.data.msg;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
+
+	esto.getFiltros = function(){
+    var res = $q.defer();
+    var url = laConfig.backend + 'getFiltroOficinas';
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
         err: error
