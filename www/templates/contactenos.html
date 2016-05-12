@@ -6,19 +6,18 @@
     </div>
   </ion-header-bar>
   <ion-content>
-      <form>
+      <form name="FormContact" ng-controller="ContactCtrl" ng-submit="enviarConsulta()">
         <div class="list list-inset">
-
-          <div class="add-account">
+          <div class="send-contact">
             <label class="item item-input">
-              <textarea placeholder="Comentarios" class="max-text" maxlength="800"></textarea>
+              <textarea placeholder="Comentarios" class="max-text" maxlength="800" ng-model="formdata.comentarios" required></textarea>
             </label>
             <h6 class="max-chars">Máximo de caracteres:  <span id="charNum">800</span></h6>
             <div class="clearfix"></div>
           </div>
 
           <label>
-            <button class="button button-block" type="submit">Enviar</button>
+            <button class="button button-block" type="submit" ng-disabled="FormContact.$invalid || FormContact.$pristine">Enviar</button>
           </label>
         </div>
       </form>
@@ -54,7 +53,7 @@
             <div class="col col-55">
               <img src="img/frontel.png" alt="Frontel" class="img-responsive">
             </div>
-            <div class="col col-45">              
+            <div class="col col-45">
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
                 <span class="ion-ios-telephone-outline"></span>
                 600 4012021
@@ -79,5 +78,3 @@
 
   </ion-content>
 </ion-view>
-
-

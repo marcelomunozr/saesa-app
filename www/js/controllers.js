@@ -285,6 +285,7 @@ angular.module('starter.controllers', [])
 .controller('DocumentosImpagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property, DocumentosImpagos){
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
+  $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -580,6 +581,38 @@ angular.module('starter.controllers', [])
           $("#charNum").text(800-el.val().length);
       }
   });
+})
+.controller('ContactCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, $state, Contacto) {
+  $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
+  $scope.enviarConsulta = function(){
+    $ionicLoading.show({
+      template: 'Enviando consulta...'
+    });
+    console.log($scope.formdata);
+    var cntacto = {
+      rut: $rootScope.sesionUsuario.rut,
+      idEmpresa: $scope.propiedades[0].related_enterprise,
+      idServicio: $scope.propiedades[0].client_number,
+      comentarios: $scope.formdata.comentarios
+    };
+    Contacto.enviaContacto(cntacto).then(function(res){
+      console.log(res);
+      $ionicLoading.hide();
+      $state.go('app.resumen-cuenta');
+      $rootScope.tituloModal = 'Contacto Enviado';
+      $rootScope.textoModal = 'Se ha enviado su consulta';
+      $rootScope.openModal();
+    }).catch(function(err){
+      console.log(err);
+      $ionicLoading.hide();
+      $state.go('app.resumen-cuenta');
+      $rootScope.tituloModal = 'Error';
+      $rootScope.textoModal = 'Ha ocurrido un error al enviar su consulta';
+      $rootScope.openModal();
+    }).finally(function(ble){
+      console.log(ble);
+    });
+  }
 })
 
 .controller('DocumentosPagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property){

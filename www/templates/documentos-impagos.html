@@ -25,11 +25,18 @@
       </div>
       <div class="row">
         <div class="col">
+          <button class="button button-block button-positive" ng-click="abrirExterna(linkPago)">
+            Pagar saldo pendiente
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="box impagos" ng-repeat="documento in cuenta.documentos">
             <div class="row">
               <div class="col-75">
                 <div class="contain">
-                  <p>Fecha de vencimiento {{documento.fechaVcto}}</p>  
+                  <p>Fecha de vencimiento {{documento.fechaVcto}}</p>
                   <p>Deuda total {{documento.saldo | currency:"$":0}}</p>
                   <p>Deuda vencida $0</p>
                   <p class="total">TOTAL A PAGAR {{documento.saldo | currency:"$":0}}</p>
@@ -47,5 +54,3 @@
     </div>
   </ion-content>
 </ion-view>
-
-
