@@ -85,19 +85,26 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory) {
+.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $state) {
 	$scope.regdata = {};
   $scope.idUsuario = '';
 	console.log('paso', $scope.regdata);
   $scope.goBack = function() {
-    $ionicHistory.goBack();
+    if($rootScope.originTrack != 'register.form'){
+      if($rootScope.originTrack == ''){
+        $state.go('app.resumen-cuenta');
+      }else{
+        $state.go($rootScope.originTrack);
+      }
+    }else{
+      $ionicHistory.goBack();
+    }
   };
-
 })
 
-.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, User, localStorageService){
+.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $stateParams, $ionicHistory, User, localStorageService){
 	$scope.regdata.paso = 1;
-	$scope.registerUser = function(){
+  $scope.registerUser = function(){
     console.log('paso', $scope.formdata);
     User.register($scope.formdata).then(function(response){
       $scope.idUsuario = response.idUsuario;
@@ -126,7 +133,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $ionicHistory, $ionicLoading, localStorageService, Property){
+.controller('RegisterAddAccountCtrl', function($scope, $rootScope, $sce, $compile, $state, $stateParams, $ionicHistory, $ionicLoading, localStorageService, Property){
   $('#numCliente').click(function() {
     $('#showNumCliente').fadeIn(300);
   });
@@ -184,6 +191,7 @@ angular.module('starter.controllers', [])
 
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
     $scope.cargando = true;
+    $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
     console.log('## Los stateParams ##', $stateParams);
     console.log("LS Propiedad: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
@@ -423,6 +431,7 @@ angular.module('starter.controllers', [])
   $scope.formdata.propiedad = -1;
   $scope.formdata.tipofalla = -1;
   console.log("Las Propiedades", $scope.propiedades);
+  console.log("Propiedad Activa", $rootScope.propiedadActiva);
   $scope.abrirDialogoSubida = function(){
     $ionicPlatform.ready(function(){
       var options = {
@@ -477,11 +486,21 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, Oficinas) {
+.controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, $log, Oficinas) {
   $scope.oficinas = [];
+  $scope.regiones = [];
+  $scope.comunas = [];
   $scope.filtrosOficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
+    angular.forEach(response.oficinas, function(value, key){
+      if($scope.regiones.indexOf(value.nombreRegion) == -1){
+        $scope.regiones.push(value.nombreRegion);
+      }
+      if($scope.comunas.indexOf(value.nombreComuna) == -1){
+        $scope.comunas.push(value.nombreComuna);
+      }
+    });
   }).catch(function(err){
     console.log(err);
   });

@@ -5,17 +5,24 @@
           <div class="oficinas">
             <label class="item item-input item-select">
               <div class="input-label">
-                Ubicación
+                Región
               </div>
-              <select ng-model="buscarOficina.oficina" name="buscarOficinaSelect">
-                <option value="">Seleccione una zona</option>
-                <option value="concepcion">Concepción</option>
-                <option value="temuco">Temuco</option>
-                <option value="valdivia">Valdivia</option>
-                <option value="osorno">Osorno</option>
-                <option value="puertomontt">Puerto Montt</option>
-                <option value="chiloe">Chiloé</option>
-                <option value="coyhaique">Coyhaique</option>
+              <select ng-model="buscarOficina.nombreRegion" name="buscarOficinaSelectRegion">
+                <option value="">Seleccione una región</option>
+                <option value="{{region}}" ng-repeat="region in regiones">
+                  {{region | capitalize}}
+                </option>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Comuna
+              </div>
+              <select ng-model="buscarOficina.nombreComuna" name="buscarOficinaSelectComuna">
+                <option value="">Seleccione una comuna</option>
+                <option value="{{comuna}}" ng-repeat="comuna in comunas | orderBy">
+                  {{comuna | capitalize}}
+                </option>
               </select>
             </label>
             <label class="item item-input item-select">
@@ -23,6 +30,7 @@
                 Tipo de oficina
               </div>
               <select name="filtrarOficinaSelect" ng-model="buscarOficina.idTipoOficina" >
+                <option value="">Seleccione un tipo</option>
                 <option value="{{filtro.idTipoOficina}}" ng-repeat="filtro in filtrosOficinas">
                   {{filtro.descripcion}}
                 </option>

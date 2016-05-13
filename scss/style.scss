@@ -49,6 +49,9 @@ textarea,
 .button .icon{
 
 }
+.text-justify{
+  text-align: justify;
+}
 .clear{
 	clear: both;
 }
@@ -282,7 +285,7 @@ ul.pasos {
 				.ti-close{
 					font-size: 8px;
 				}
-			}	
+			}
 		}
 		.text-right{
 			a{
@@ -701,7 +704,7 @@ ul.pasos {
 	    line-height: 38px;
 	    min-height: 42px;
 	    font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
-	    margin: 15px 0;	    
+	    margin: 15px 0;
 	}
 	.button-assertive{
 		font-size: 14px;
@@ -713,8 +716,8 @@ ul.pasos {
 		font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		margin: 15px 0;
 	}
-	.button-positive:active,    
-	.button-positive:focus,    
+	.button-positive:active,
+	.button-positive:focus,
 	.button-positive:hover{
 	    background: #0566ad;
 	    color: #edf3f6;
@@ -847,7 +850,7 @@ ul.pasos {
 .wide-as-needed {
   white-space: nowrap;
 }
-.scroll { 
+.scroll {
   min-width: 100%;
 }
 
@@ -998,7 +1001,7 @@ p{
 		white-space: normal;
 	}
 	.ti-close{
-		
+
 		vertical-align: middle;
 		position: relative;
 		display: inline-block;

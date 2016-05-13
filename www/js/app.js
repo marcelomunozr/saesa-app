@@ -19,12 +19,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $rootScope.$broadcast('clase', {clase: toState.name, params: toParams});
     if(window.cordova && window.analytics){
 			window.analytics.trackView(toState.name);
-	    $log.debug('yep');			
+	    $log.debug('yep');
     } else {
 	    $log.debug('nope');
     }
+    $rootScope.originTrack = fromState.name;
   });
   $rootScope.$state = $state;
+
 })
 
 .constant('laConfig', {
@@ -32,7 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     'debug' : true
 })
 
-.filter('capitalize', function(){  
+.filter('capitalize', function(){
   return function(input){
     if(input.indexOf(' ') !== -1){
       var inputPieces,
@@ -113,7 +115,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: "/resumen-cuenta?fetch",
     cache: false,
     views: {
-      'menuContent':{      
+      'menuContent':{
         templateUrl: "templates/resumen-cuenta.html",
         controller: "ResumenCtrl"
       }
@@ -130,7 +132,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "AsociadosCtrl"
       }
     }
-  }) 
+  })
   /*detalle servicio*/
 /*  .state('app.servicios-asociados.detalle', {
     url: "/servicios-asociados/:id",
@@ -153,7 +155,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "FallaCtrl"
       }
     }
-  }) 
+  })
 
   //oficinas
   .state('app.oficinas', {
@@ -165,7 +167,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "OficinasCtrl"
       }
     }
-  }) 
+  })
   //la oficina
   .state('app.oficina', {
     url: "/oficinas/:oficinaId",
@@ -176,7 +178,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "OficinaCtrl"
       }
     }
-  }) 
+  })
 
 
   //notificaciones
@@ -189,7 +191,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "NotificacionesCtrl"
       }
     }
-  }) 
+  })
   //notificaciones anteriores
   .state('app.notificaciones-anteriores', {
     url: "/notificaciones-anteriores",
@@ -200,7 +202,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "NotificacionesCtrl"
       }
     }
-  }) 
+  })
 
   //contactenos
   .state('app.contactenos', {
@@ -212,7 +214,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "NotificacionesCtrl"
       }
     }
-  }) 
+  })
 
   //documentos impagos
   .state('app.documentos-impagos', {
@@ -224,7 +226,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "DocumentosImpagosCtrl"
       }
     }
-  }) 
+  })
 
   //documentos pagados
   .state('app.documentos-pagados', {
@@ -236,9 +238,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: "DocumentosPagosCtrl"
       }
     }
-  }) 
+  })
 
-  //configuracion 
+  //configuracion
   .state('app.pantalla-configuracion', {
     url: "/pantalla-configuracion/",
     cache: false,
@@ -247,8 +249,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: "templates/pantalla-configuracion.html"
       }
     }
-  }) 
+  })
 
   $urlRouterProvider.otherwise('/login');
- 
+
 });
