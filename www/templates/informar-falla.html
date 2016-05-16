@@ -13,7 +13,7 @@
               <div class="input-label" ng-show="formdata.propiedad == -1">
                 Selecionar servicio
               </div>
-              <select ng-model="formdata.propiedad" name="propiedad" >
+              <select ng-model="formdata.propiedad" name="propiedad" ng-change="cuandoCambia()" >
                 <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
@@ -48,9 +48,9 @@
         <div class="row">
           <div class="col">
             <div class="btn-main center">
-              <div class="btn" ng-click="abrirExterna('tel:6004012020')">
+              <div class="btn" ng-click="abrirExterna('tel:activa.clickeable')">
                 <span class="ion-ios-telephone-outline"></span>
-                600 4012020
+                {{activa.empresa}} - {{activa.numeroTelefono}}
               </div>
             </div>
           </div>

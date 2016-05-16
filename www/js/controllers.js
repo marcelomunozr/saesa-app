@@ -427,11 +427,44 @@ angular.module('starter.controllers', [])
 .controller('FallaCtrl', function($rootScope, $scope, $cordovaCamera, $ionicPlatform, $state, $ionicLoading, Fallas){
   $scope.fallas = Fallas.lasFallas();
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
+  $scope.empresas = [];
+  $scope.empresas[22] = {
+      "idEmpresa" : 22,
+      "numeroTelefono" : "600 4012020",
+      "clickeable" : "6004012020",
+      "empresa" : "Frontel"
+  };
+  $scope.empresas[39] = {
+      "idEmpresa" : 39,
+      "numeroTelefono" : "600 4012020",
+      "clickeable" : "6004012020",
+      "empresa" : "Luz Osorno"
+  };
+  $scope.empresas[23] = {
+      "idEmpresa" : 23,
+      "numeroTelefono" : "600 4012020",
+      "clickeable" : "6004012020",
+      "empresa" : "Saesa"
+  };
+  $scope.empresas[24] = {
+      "idEmpresa" : 24,
+      "numeroTelefono" : "600 4012022",
+      "clickeable" : "6004012022",
+      "empresa" : "Edelaysen"
+  };
   $scope.formdata = [];
+  $scope.activa = $scope.empresas[23];
   $scope.formdata.propiedad = -1;
   $scope.formdata.tipofalla = -1;
-  console.log("Las Propiedades", $scope.propiedades);
-  console.log("Propiedad Activa", $rootScope.propiedadActiva);
+  $scope.cuandoCambia = function(){
+    console.log($scope.propiedades[$scope.formdata.propiedad]);
+    var indiceActivo = parseInt($scope.propiedades[$scope.formdata.propiedad].related_enterprise);
+    if(angular.isNumber(indiceActivo)){
+      $scope.activa = $scope.empresas[indiceActivo];
+    }
+    console.log("Cambia activa", $scope.activa);
+  }
+  console.log("La Activa", $scope.activa);
   $scope.abrirDialogoSubida = function(){
     $ionicPlatform.ready(function(){
       var options = {
