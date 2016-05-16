@@ -9087,6 +9087,9 @@ textarea,
 .card .item.item-input {
   box-shadow: none !important; }
 
+.text-justify {
+  text-align: justify; }
+
 .clear {
   clear: both; }
 

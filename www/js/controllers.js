@@ -194,6 +194,7 @@ angular.module('starter.controllers', [])
     $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
     console.log('## Los stateParams ##', $stateParams);
     console.log("LS Propiedad: ", $rootScope.propiedadActiva);
+    console.log("Propeidad Portada: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
     var eltimer = $timeout(function(){
       $ionicLoading.hide();
@@ -219,10 +220,11 @@ angular.module('starter.controllers', [])
           }else{
             idPropiedadPortada = $rootScope.propiedadActiva;
           }
+          console.log("LA propiedad activa", $rootScope.propiedadActiva);
           $rootScope.propiedadActiva = idPropiedadPortada;
           localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
           Property.getDetails(idPropiedadPortada).then(function(respuesta){
-			      $scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
+			      //$scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
 			      $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
 			      $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
 			      $scope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
@@ -231,7 +233,7 @@ angular.module('starter.controllers', [])
 			    }).catch(function(error){
 			      console.log('Error en Propiedad', error);
 			    }).finally(function(){
-			      console.log('La Propiedad', $scope.propiedadPortada);
+			      console.log('La Propiedad portada', $scope.propiedadPortada);
 			      $scope.cargando = false;
 			      CanvasJS.addColorSet("colorCol",
 			        [
@@ -523,6 +525,7 @@ angular.module('starter.controllers', [])
   $scope.oficinas = [];
   $scope.regiones = [];
   $scope.comunas = [];
+  $scope.validaComunas = [];
   $scope.filtrosOficinas = [];
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
@@ -530,8 +533,12 @@ angular.module('starter.controllers', [])
       if($scope.regiones.indexOf(value.nombreRegion) == -1){
         $scope.regiones.push(value.nombreRegion);
       }
-      if($scope.comunas.indexOf(value.nombreComuna) == -1){
-        $scope.comunas.push(value.nombreComuna);
+      if($scope.validaComunas.indexOf(value.nombreComuna) == -1){
+        $scope.validaComunas.push(value.nombreComuna);
+        $scope.comunas.push({
+          "labelComuna" : value.nombreComuna,
+          "nombreRegion" : value.nombreRegion
+        });
       }
     });
   }).catch(function(err){
@@ -542,6 +549,9 @@ angular.module('starter.controllers', [])
   }).catch(function(err){
     console.log(err);
   });
+  $scope.reseteaComunas = function(){
+    buscarOficina.nombreComuna = "";
+  }
 })
 
 .controller('OficinaCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {
