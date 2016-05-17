@@ -432,7 +432,7 @@ angular.module('starter.controllers', [])
   $scope.empresas = [];
   $scope.empresas[22] = {
       "idEmpresa" : 22,
-      "numeroTelefono" : "600 4012020",
+      "numeroTelefono" : "600 4012021",
       "clickeable" : "6004012020",
       "empresa" : "Frontel"
   };
@@ -520,13 +520,15 @@ angular.module('starter.controllers', [])
   }
 })
 
-
 .controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, $log, Oficinas) {
   $scope.oficinas = [];
   $scope.regiones = [];
   $scope.comunas = [];
   $scope.validaComunas = [];
   $scope.filtrosOficinas = [];
+  $scope.buscarOficina = {
+    nombreComuna: ""
+  };
   Oficinas.all().then(function(response){
     $scope.oficinas = response.oficinas;
     angular.forEach(response.oficinas, function(value, key){
@@ -541,6 +543,7 @@ angular.module('starter.controllers', [])
         });
       }
     });
+    console.log("Objeto Comunas", $scope.comunas);
   }).catch(function(err){
     console.log(err);
   });
@@ -550,7 +553,7 @@ angular.module('starter.controllers', [])
     console.log(err);
   });
   $scope.reseteaComunas = function(){
-    buscarOficina.nombreComuna = "";
+    $scope.buscarOficina.nombreComuna = "";
   }
 })
 
