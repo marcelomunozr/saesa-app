@@ -9,8 +9,7 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <allow-navigation href="http://api.multinet.cl/*"/>
-  <allow-navigation href="http://maps.googleapis.com/*"/>
+  <allow-navigation href="*" />
   <allow-intent href="cdvfile://*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
