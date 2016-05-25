@@ -41,6 +41,73 @@ angular.module('starter.services', [])
 	return esto;
 })
 
+.factory('Pago', function($http, $q, laConfig){
+	var esto = this;
+
+	esto.guardaDatosWebpayOC = function($data){
+		var res = $q.defer();
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'guardaWebpay',
+      data: {
+        oc: $data.oc,
+				nroServicio: $data.servicio,
+				nroDocumento: $data.documento,
+				monto: $data.monto,
+				fechaVencimiento: $data.vencimiento
+      }
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+	}
+
+	esto.creaOC = function($data){
+		var res = $q.defer();
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'CrearOCSaesa',
+      data: {
+				rut: $data.rut,
+				monto: $data.monto,
+				empresa: $data.empresa,
+      }
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+	}
+	return res.promise;
+})
+
 .factory('User', function($http, $q, laConfig){
   var esto = this;
 	esto.obtieneToken = function($data){

@@ -30,6 +30,26 @@ angular.module('starter.controllers', [])
     $rootScope.modal.hide();
   };
 
+  $rootScope.abrirTbk = function($data){
+    var defaultOptions = {
+      location: 'no',
+      clearcache: 'yes',
+      toolbar: 'no'
+    };
+    //laConfig = 'http://api.multinet.cl';
+    var url = laConfig + "redireccionaTbk/?";
+    url += "token=" + $data.token;
+    url += "monto=" + $data.monto;
+    url += "oc=" + $data.oc;
+    $cordovaInAppBrowser.open($direccion, '_blank', defaultOptions)
+    .then(function(event) {
+      // success
+    })
+    .catch(function(event) {
+      // error
+    });
+  };
+
   $rootScope.abrirExterna = function($direccion){
     var defaultOptions = {
       location: 'no',
@@ -189,7 +209,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
+.controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, Pago, localStorageService){
     $scope.cargando = true;
     $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
     console.log('## Los stateParams ##', $stateParams);

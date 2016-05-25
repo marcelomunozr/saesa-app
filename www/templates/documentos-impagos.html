@@ -31,26 +31,26 @@
         </div>
       </div>
       <div class="row">
-        <div class="col">
-          <div class="box impagos" ng-repeat="documento in cuenta.documentos">
-            <div class="row">
-              <div class="col-75">
-                <div class="contain">
-                  <p>Fecha de vencimiento {{documento.fechaVcto}}</p>
-                  <p>Deuda total {{documento.saldo | currency:"$":0}}</p>
-                  <p>Deuda vencida $0</p>
-                  <p class="total">TOTAL A PAGAR {{documento.saldo | currency:"$":0}}</p>
+          <div class="col">
+            <div class="box impagos" ng-repeat="documento in cuenta.documentos">
+              <div class="row">
+                <div class="col-75">
+                  <div class="contain">
+                    <p>Fecha de vencimiento {{documento.fechaVcto}}</p>
+                    <p>Deuda total {{documento.saldo | currency:"$":0}}</p>
+                    <p>Deuda vencida $0</p>
+                    <p class="total">TOTAL A PAGAR {{documento.saldo | currency:"$":0}}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="col">
-                <div class="ver-boleta" ng-click="abrirExterna(documento.url)">
-                  <div class="ti-file"></div>
-                  Ver boleta
+                <div class="col">
+                  <div class="ver-boleta" ng-click="abrirExterna(documento.url)">
+                    <div class="ti-file"></div>
+                    Ver boleta
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-    </div>
+      </div>
   </ion-content>
 </ion-view>
