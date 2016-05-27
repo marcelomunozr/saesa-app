@@ -1,7 +1,7 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
+.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, User, localStorageService) {
   var userId = localStorageService.get('user.id');
   var laActiva = localStorageService.get('user.propiedadActiva');
   if(angular.isDefined(userId) && userId != null){
@@ -31,24 +31,33 @@ angular.module('starter.controllers', [])
   };
 
   $rootScope.abrirTbk = function($data){
+    console.log("DISPARO!!!!");
     var defaultOptions = {
       location: 'no',
       clearcache: 'yes',
-      toolbar: 'no'
+      toolbar: 'no',
+      hardwareback : 'no'
     };
     //laConfig = 'http://api.multinet.cl';
-    var url = laConfig + "redireccionaTbk/?";
-    url += "token=" + $data.token;
-    url += "monto=" + $data.monto;
-    url += "oc=" + $data.oc;
-    $cordovaInAppBrowser.open($direccion, '_blank', defaultOptions)
-    .then(function(event) {
-      // success
-    })
-    .catch(function(event) {
-      // error
-    });
+    var url = laConfig.backend + "redireccionaTbk/";
+    url += "?token=" + $data.token;
+    url += "&monto=" + $data.monto;
+    url += "&oc=" + $data.oc;
+    console.log("La URL", url);
+    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
+    .then(function(event) {})
+    .catch(function(event) {});
   };
+
+  $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+    if (event.url.match("/mobile/close")) {
+      $cordovaInAppBrowser.close();
+    }
+  });
+
+  $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
+    $cordovaInAppBrowser.close();
+  });
 
   $rootScope.abrirExterna = function($direccion){
     var defaultOptions = {
@@ -56,13 +65,14 @@ angular.module('starter.controllers', [])
       clearcache: 'no',
       toolbar: 'no'
     };
-    $cordovaInAppBrowser.open($direccion, '_system', defaultOptions)
+    var ref = $cordovaInAppBrowser.open($direccion, '_system', defaultOptions)
     .then(function(event) {
       // success
     })
     .catch(function(event) {
       // error
     });
+
   };
 
   $scope.goBack = function() {
@@ -229,6 +239,41 @@ angular.module('starter.controllers', [])
       });
     });
 
+    $scope.iniciaPagoTotal = function(){
+      var data = {
+        token : "",
+        oc : "",
+        monto : "",
+        documento : "",
+        empresa : $scope.propiedadPortada.empresa,
+        servicio : $scope.propiedadPortada.numCliente,
+        vencimiento : ""
+      }
+      User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
+        data.token = res.token;
+        var creaLaOc = {
+          rut : $rootScope.sesionUsuario.rut,
+          empresa : $scope.propiedadPortada.numCliente,
+          monto : $scope.propiedadPortada.financieros.deudaTotal
+        };
+        Pago.creaOC(creaLaOc).then(function(res){
+          data.oc = res.oc;
+          data.monto = $scope.propiedadPortada.financieros.deudaTotal;
+          data.documento = $scope.propiedadPortada.ultimo_documento.nroDcto;
+          data.vencimiento = $scope.propiedadPortada.ultimo_documento.fechaVcto;
+          Pago.guardaDatosWebpayOC(data).then(function(res){
+              $rootScope.abrirTbk(data);
+          }).catch(function(err){
+            console.log('Error en Propiedad', err);
+          })
+        }).catch(function(err){
+          console.log('Error en Propiedad', err);
+        });
+      }).catch(function(err){
+        console.log('Error en Propiedad', err);
+      });
+    }
+
     $scope.fetchUser = function($cache){
 			User.fetchMeTheUser(userId, $cache).then(function(response){
 			  var propiedadPortada = {};
@@ -244,11 +289,13 @@ angular.module('starter.controllers', [])
           $rootScope.propiedadActiva = idPropiedadPortada;
           localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
           Property.getDetails(idPropiedadPortada).then(function(respuesta){
-			      //$scope.propiedadPortada.datos       = response.sesionUsuario.Propiedades[0];
+			      $scope.propiedadPortada.numCliente  = respuesta.detalle.Property.client_number;
+            $scope.propiedadPortada.empresa     = respuesta.detalle.Property.related_enterprise;
 			      $scope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
 			      $scope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
 			      $scope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
             $scope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
+            $scope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
 			      console.log('Propiedad de Portada: ', respuesta);
 			    }).catch(function(error){
 			      console.log('Error en Propiedad', error);

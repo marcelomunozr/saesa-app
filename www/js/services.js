@@ -105,7 +105,7 @@ angular.module('starter.services', [])
     });
     return res.promise;
 	}
-	return res.promise;
+	return esto;
 })
 
 .factory('User', function($http, $q, laConfig){
