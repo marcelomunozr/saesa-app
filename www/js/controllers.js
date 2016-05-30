@@ -59,6 +59,10 @@ angular.module('starter.controllers', [])
     $cordovaInAppBrowser.close();
   });
 
+  $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){
+    $state.go('app.resumen-cuenta', {fetch : true});
+  })
+
   $rootScope.abrirExterna = function($direccion){
     var defaultOptions = {
       location: 'no',
@@ -240,6 +244,9 @@ angular.module('starter.controllers', [])
     });
 
     $scope.iniciaPagoTotal = function(){
+      $ionicLoading.show({
+        template: 'Iniciando pago...'
+      });
       var data = {
         token : "",
         oc : "",
@@ -253,7 +260,7 @@ angular.module('starter.controllers', [])
         data.token = res.token;
         var creaLaOc = {
           rut : $rootScope.sesionUsuario.rut,
-          empresa : $scope.propiedadPortada.numCliente,
+          empresa : $scope.propiedadPortada.empresa,
           monto : $scope.propiedadPortada.financieros.deudaTotal
         };
         Pago.creaOC(creaLaOc).then(function(res){
@@ -262,6 +269,7 @@ angular.module('starter.controllers', [])
           data.documento = $scope.propiedadPortada.ultimo_documento.nroDcto;
           data.vencimiento = $scope.propiedadPortada.ultimo_documento.fechaVcto;
           Pago.guardaDatosWebpayOC(data).then(function(res){
+              $ionicLoading.hide();
               $rootScope.abrirTbk(data);
           }).catch(function(err){
             console.log('Error en Propiedad', err);
@@ -296,7 +304,7 @@ angular.module('starter.controllers', [])
 			      $scope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
             $scope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
             $scope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
-			      console.log('Propiedad de Portada: ', respuesta);
+			      console.log('Propiedad de Portada: ', $scope.propiedadPortada);
 			    }).catch(function(error){
 			      console.log('Error en Propiedad', error);
 			    }).finally(function(){
