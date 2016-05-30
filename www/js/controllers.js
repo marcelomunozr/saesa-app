@@ -377,10 +377,22 @@ angular.module('starter.controllers', [])
     });
   });
 
+  $scope.listadocumentos = [];
+
   Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
     console.log('La Respuesta', respuesta);
     $scope.cuenta.detalle = respuesta.detalle.details;
     $scope.cuenta.documentos = respuesta.detalle.unpaid;
+
+    $scope.selectDocumento = function(ind){
+      if(!$scope.listadocumentos[ind]){
+        $scope.listadocumentos[ind] = $scope.cuenta.documentos[ind];
+      } else {
+        $scope.listadocumentos.splice(ind);
+      }
+      $scope.totalAPagar = $scope.calcs($scope.listadocumentos);
+    };
+
   }).catch(function(err){
     console.log('El Cagazo', err);
   }).finally(function(){
@@ -388,6 +400,15 @@ angular.module('starter.controllers', [])
     console.log('Documentos', $scope.cuenta.documentos);
     $ionicLoading.hide();
   });
+
+  $scope.calcs = function(data){
+    var saldo = 0;
+    angular.forEach(data, function(bla){
+      saldo = saldo + parseInt(bla.saldo);
+    });
+    return saldo;
+  };
+
 
 })
 

@@ -9494,9 +9494,15 @@ ul.pasos li.active:first-child:before {
     .contenido .box .canvasjs-chart-credit {
       display: none;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
+  .contenido .box.impagos.seleccionada {
+    background-color: #B8D64F; }
+    .contenido .box.impagos.seleccionada p {
+      color: white; }
   .contenido .box.impagos {
     padding: 0;
     margin-bottom: 10px; }
+    .contenido .box.impagos.selecionada {
+      background-color: #B8D64F; }
     .contenido .box.impagos .row {
       padding: 0; }
     .contenido .box.impagos .col {

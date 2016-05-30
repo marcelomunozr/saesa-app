@@ -514,9 +514,18 @@ ul.pasos {
 		    font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
 		}
 	}
+  .box.impagos.seleccionada{
+    background-color: #B8D64F;
+    p{
+      color: white;
+    }
+  }
 	.box.impagos{
 		padding: 0;
 		margin-bottom: 10px;
+    &.selecionada{
+      background-color: #B8D64F;
+    }
 		.row{
 			padding: 0;
 		}
