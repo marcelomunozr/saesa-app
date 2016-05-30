@@ -44,6 +44,37 @@ angular.module('starter.services', [])
 .factory('Pago', function($http, $q, laConfig){
 	var esto = this;
 
+	esto.guardaVariosDatosWebpayOC = function($data){
+		var res = $q.defer();
+    $http({
+      method: 'POST',
+      url: laConfig.backend + 'guardaWebpayVarios',
+      data: {
+        oc: $data.oc,
+				nroServicio: $data.servicio,
+				documentos: $data.documentos,
+				monto: $data.monto
+      }
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : err;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+	}
+
 	esto.guardaDatosWebpayOC = function($data){
 		var res = $q.defer();
     $http({

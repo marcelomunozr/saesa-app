@@ -25,17 +25,19 @@
       </div>
       <div class="row" ng-if="cuenta.documentos.length > 0">
         <div class="col">
-          <button ng-if="listadocumentos.length <= 0" class="button button-block button-positive" ng-click="abrirExterna(linkPago)">
-            Pagar todo el saldo pendiente
-          </button>
-          <button ng-if="listadocumentos.length >= 1" class="button button-block button-positive" ng-click="abrirExterna(linkPago)">
-            Pagar {{listadocumentos.length}} <span ng-if="listadocumentos.length == 1">cuenta: ${{totalAPagar}}</span> <span ng-if="listadocumentos.length > 1 ">cuentas: ${{totalAPagar}}</span>
+          <button class="button button-block button-positive" ng-click="iniciaPago()">
+            <div id="TextoTotal" ng-if="seleccionados == 0">
+              Pagar todo el saldo pendiente
+            </div>
+            <div id="TextoAlgunas" ng-if="seleccionados > 0">
+              Pagar {{seleccionados}} <span ng-if="seleccionados == 1">cuenta: ${{saldoTotal}}</span> <span ng-if="seleccionados > 1 ">cuentas: ${{saldoTotal}}</span>
+            </div>
           </button>
         </div>
       </div>
       <div class="row">
           <div class="col">
-            <div class="box impagos" ng-class="{'seleccionada' : listadocumentos[$index]}" ng-click="selectDocumento($index)" ng-repeat="documento in cuenta.documentos">
+            <div class="box impagos" ng-class="{'seleccionada' : documento.seleccionado}" ng-click="selectDocumento($index)" ng-repeat="documento in cuenta.documentos">
               <div class="row">
                 <div class="col-75">
                   <div class="contain">
