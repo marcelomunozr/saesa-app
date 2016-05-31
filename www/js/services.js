@@ -349,7 +349,34 @@ angular.module('starter.services', [])
   }
 
 
-  esto.getDueDocuments = function($data){
+	esto.getOnlyDueDocuments = function($data){
+    var res = $q.defer();
+    var url = laConfig.backend + 'getOnlyDueDocuments/' + $data;
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'propiedad no agregada.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      console.log('El Error', err);
+      var error = (err.data == null) ? err : err.data.msg;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+  }
+
+	esto.getDueDocuments = function($data){
     var res = $q.defer();
     var url = laConfig.backend + 'getDueDocuments/' + $data;
     $http.get(url, {
