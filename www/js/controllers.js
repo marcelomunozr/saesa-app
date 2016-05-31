@@ -1,7 +1,7 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, Pago, User, localStorageService, Property) {
+.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, ngRut, Pago, User, localStorageService, Property) {
   var userId = localStorageService.get('user.id');
   var laActiva = localStorageService.get('user.propiedadActiva');
   if(angular.isDefined(userId) && userId != null){
@@ -153,8 +153,13 @@ angular.module('starter.controllers', [])
     $ionicHistory.goBack();
   };
 
+  $scope.formatRut = function(rut){
+    return ngRut.format(rut);
+  }
+
   $scope.doLogin = function() {
     console.log('Doing login', $scope.formdata);
+    $scope.formdata.rut = ngRut.clean($scope.formdata.rut);
     User.login($scope.formdata).then(function(response){
       if(response.idUsuario != null){
         localStorageService.set('user.id', response.idUsuario);
@@ -825,6 +830,7 @@ angular.module('starter.controllers', [])
       }
   });
 })
+
 .controller('ContactCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, $state, Contacto) {
   $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $scope.enviarConsulta = function(){

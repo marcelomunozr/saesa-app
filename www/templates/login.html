@@ -7,7 +7,7 @@
     <form name="login" ng-controller="AppCtrl" ng-submit="doLogin()">
       <div class="list list-inset">
         <label class="item item-input">
-          <input type="text" placeholder="RUT" ng-minlength="7" ng-model="formdata.rut" ng-required="true" ng-rut>
+          <input type="text" placeholder="RUT" ng-minlength="7" ng-model="formdata.rut" ng-required="true" ng-blur="formdata.rut=formatRut(formdata.rut)">
         </label>
         <label class="item item-input">
           <input type="password" placeholder="Contraseña" ng-maxlength="6" ng-model="formdata.password" ng-required="true">
