@@ -22,6 +22,24 @@ angular.module('starter.controllers', [])
     $rootScope.modal = modal;
   });
 
+  $rootScope.registraDispositivo = function(){
+    var registrado = localStorageService.get('device.registered');
+    var deviceKey =  localStorageService.get('device.registrationId');
+    var operativeSystem = localStorageService.get('device.os');
+    if(registrado == 0){
+      var data = {
+        deviceKey: deviceKey,
+        userId: $rootScope.sesionUsuario.id,
+        operativeSystem: operativeSystem
+      };
+      User.registraDispositivo(data).then(function(res){
+        localStorageService.set('device.registered', 1);
+      }).catch(function(err){
+        console.log("El Error", err);
+      });
+    }
+  }
+
   $rootScope.openModal = function() {
     $rootScope.modal.show();
   };
@@ -157,6 +175,7 @@ angular.module('starter.controllers', [])
     User.login($scope.formdata).then(function(response){
       if(response.idUsuario != null){
         localStorageService.set('user.id', response.idUsuario);
+        $rootScope.registraDispositivo();
         $state.go('app.resumen-cuenta');
       }
     }).catch(function(error){
@@ -300,10 +319,12 @@ angular.module('starter.controllers', [])
     console.log("LS Propiedad: ", $rootScope.propiedadActiva);
     console.log("Propeidad Portada: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
+    var devRegistrado = localStorageService.get('device.registered');
     var eltimer = $timeout(function(){
       $ionicLoading.hide();
       console.log('timeout');
     }, 10000);
+
     $scope.$on('$ionicView.beforeEnter', function(){
 	    if($stateParams.fetch){
 				$scope.fetchUser(true);
@@ -312,6 +333,10 @@ angular.module('starter.controllers', [])
         template: 'Consultando Información...'
       });
     });
+    if(devRegistrado == 0){
+      $rootScope.registraDispositivo();
+    }
+
     $scope.iniciaPago = function(){
       $rootScope.iniciaPagoTotal();
     }
