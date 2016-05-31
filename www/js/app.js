@@ -1,7 +1,7 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'angularFileUpload'])
 
-.run(function($ionicPlatform, $state, $rootScope, $log) {
+.run(function($ionicPlatform, $state, $rootScope, $log, localStorageService) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -12,6 +12,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     if(window.cordova && window.analytics) {
 			window.analytics.startTrackerWithId('UA-68788191-1');
     }
+    try{
+			var push = PushNotification.init({
+					android: {
+							senderID: '226351797418'
+					},
+					ios: {
+							alert: 'true',
+							badge: 'false',
+							sound: 'true'
+					},
+					windows: {}
+			});
+			push.on('registration', function(resp) {
+        localStorageService.set('device.registered', 0);
+        localStorageService.set('device.registrationId', resp.registrationId);
+        localStorageService.set('device.os', ionic.Platform.platform());
+			});
+			push.on('notification', function(data) {
+        console.log('notification', data);
+			});
+			push.on('error', function(e) {
+        console.log('error', e);
+			});
+		} catch(err){
+			$log.log(err);
+		}
   });
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     console.log('############ fromState.name:', fromState.name);
@@ -133,18 +159,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  /*detalle servicio*/
-/*  .state('app.servicios-asociados.detalle', {
-    url: "/servicios-asociados/:id",
-    cache: true,
-    views: {
-      'contenedorAsociados':{
-        templateUrl: "templates/detalle-asociados.html",
-        controller: "AsociadosCtrl"
-      }
-    }
-  }) */
-
+  
   //informar falla
   .state('app.informar-falla', {
     url: "/informar-falla",

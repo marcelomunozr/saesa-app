@@ -105,18 +105,26 @@ angular.module('starter.controllers', [])
       });
       data.monto = totalPagar;
       User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
-        data.token = res.token;
-        if(data.monto != $rootScope.propiedadPortada.financieros.deudaTotal){
-          var creaLaOc = {
-            rut : $rootScope.sesionUsuario.rut,
-            empresa : $rootScope.propiedadPortada.empresa,
-            monto : $rootScope.propiedadPortada.financieros.deudaTotal
-          };
-          Pago.creaOC(creaLaOc).then(function(res){
-            data.oc = res.oc;
-            Pago.guardaVariosDatosWebpayOC(data).then(function(res){
+          data.token = res.token;
+          if(data.monto == $rootScope.propiedadPortada.financieros.deudaTotal){
+            var creaLaOc = {
+              rut : $rootScope.sesionUsuario.rut,
+              empresa : $rootScope.propiedadPortada.empresa,
+              monto : $rootScope.propiedadPortada.financieros.deudaTotal
+            };
+            Pago.creaOC(creaLaOc).then(function(res){
+              data.oc = res.oc;
+              Pago.guardaVariosDatosWebpayOC(data).then(function(res){
+                  $ionicLoading.hide();
+                  $rootScope.abrirTbk(data);
+              }).catch(function(err){
+                var labelError = '';
+                $rootScope.tituloModal = 'Ha ocurrido un error';
+                labelError = 'Ha ocurrido un error al procesar la información, intentelo mas tarde.';
+                $rootScope.textoModal = labelError;
                 $ionicLoading.hide();
-                $rootScope.abrirTbk(data);
+                $rootScope.openModal();
+              });
             }).catch(function(err){
               var labelError = '';
               $rootScope.tituloModal = 'Ha ocurrido un error';
@@ -124,23 +132,9 @@ angular.module('starter.controllers', [])
               $rootScope.textoModal = labelError;
               $ionicLoading.hide();
               $rootScope.openModal();
-            })
-          }).catch(function(err){
-            var labelError = '';
-            $rootScope.tituloModal = 'Ha ocurrido un error';
-            labelError = 'Ha ocurrido un error al procesar la información, intentelo mas tarde.';
-            $rootScope.textoModal = labelError;
-            $ionicLoading.hide();
-            $rootScope.openModal();
-          });
-        }else{
-          var labelError = '';
-          $rootScope.tituloModal = 'Ha ocurrido un error';
-          labelError = 'Hay un error con su información financiera, por favor comuníquese con nuestro Call Center o acérquese a la sucursal más cercana';
-          $rootScope.textoModal = labelError;
-          $ionicLoading.hide();
-          $rootScope.openModal();
-        }
+            });
+          }
+
       }).catch(function(err){
         console.log('Error en Propiedad', err);
       });
@@ -189,6 +183,7 @@ angular.module('starter.controllers', [])
         }
         $rootScope.textoModal = labelError;
         $rootScope.openModal();
+        $scope.formdata.rut = ngRut.format($scope.formdata.rut);
     });
   };
 
