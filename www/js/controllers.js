@@ -49,6 +49,7 @@ angular.module('starter.controllers', [])
   };
 
   $rootScope.abrirTbk = function($data){
+    var url = laConfig.backend + "redireccionaTbk/";
     var defaultOptions = {
       location: 'yes',
       clearcache: 'yes',
@@ -56,15 +57,13 @@ angular.module('starter.controllers', [])
       hardwareback : 'no',
       closebuttoncaption : 'Volver',
       presentationstyle : 'pagesheet'
-
     };
-    //laConfig = 'http://api.multinet.cl';
-    var url = laConfig.backend + "redireccionaTbk/";
+    //var stringOptions = "location=yes, clearcache=yes, tootlbar=yes, hardwareback=no, closebuttoncaption=Volver, presentationstyle=pagesheet"
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     console.log("La URL", url);
-    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
+    cordova.InAppBrowser.open(url, '_blank', defaultOptions)
     .then(function(event) {})
     .catch(function(event) {});
   };
@@ -85,8 +84,8 @@ angular.module('starter.controllers', [])
 
   $rootScope.abrirExterna = function($direccion){
     var defaultOptions = {
-      location: 'no',
-      clearcache: 'no',
+      location: 'yes',
+      clearcache: 'yes',
       toolbar: 'no'
     };
     var ref = $cordovaInAppBrowser.open($direccion, '_system', defaultOptions)
