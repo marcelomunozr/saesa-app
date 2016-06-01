@@ -50,10 +50,13 @@ angular.module('starter.controllers', [])
 
   $rootScope.abrirTbk = function($data){
     var defaultOptions = {
-      location: 'no',
+      location: 'yes',
       clearcache: 'yes',
-      toolbar: 'no',
-      hardwareback : 'no'
+      toolbar: 'yes',
+      hardwareback : 'no',
+      closebuttoncaption : 'Volver',
+      presentationstyle : 'pagesheet'
+
     };
     //laConfig = 'http://api.multinet.cl';
     var url = laConfig.backend + "redireccionaTbk/";
