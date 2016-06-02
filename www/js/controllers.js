@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     console.log("La URL", url);
-    cordova.InAppBrowser.open(url, '_blank', defaultOptions)
+    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
     .then(function(event) {})
     .catch(function(event) {});
   };
