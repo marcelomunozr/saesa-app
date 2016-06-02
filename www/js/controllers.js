@@ -72,6 +72,9 @@ angular.module('starter.controllers', [])
     if (event.url.match("/mobile/close")) {
       $cordovaInAppBrowser.close();
     }
+    if(event.url.match("/webpaymobile/auth_emisor.cgi")){
+      $cordovaInAppBrowser.executeScript({code:'if(document.paso.length !== -1){setTimeout("document.paso.submit()", 2000);}'})
+    }
   });
 
   $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
