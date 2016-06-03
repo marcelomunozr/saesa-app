@@ -13,7 +13,7 @@
               <div class="input-label" ng-show="formdata.propiedad == -1">
                 Selecionar servicio
               </div>
-              <select ng-model="formdata.propiedad" name="propiedad" ng-change="cuandoCambia()" >
+              <select ng-model="formdata.propiedad" name="propiedad" ng-change="cuandoCambia()" ng-required="true">
                 <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
               </select>
             </label>
@@ -21,12 +21,12 @@
               <div class="input-label" ng-show="formdata.tipofalla == -1">
                 Tipo de eventualidad
               </div>
-              <select ng-model="formdata.tipofalla" name="tipoFalla">
+              <select ng-model="formdata.tipofalla" name="tipoFalla" ng-required="true">
                 <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
               </select>
             </label>
-            <label class="item item-input">
-              <textarea ng-model="formdata.comentarios" placeholder="Comentarios"></textarea>
+            <label class="item item-input" ng-class="{'valida' : InformaFalla.comentarios.$valid, 'invalida' : !InformaFalla.comentarios.$valid && !InformaFalla.comentarios.$pristine}">
+              <textarea name="comentarios" ng-model="formdata.comentarios" placeholder="Comentarios" ng-required="true"></textarea>
             </label>
             <div class="text-center">
               <label id="for-file-upload" class="item item-input upload" ng-click="abrirDialogoSubida()">

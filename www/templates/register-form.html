@@ -1,25 +1,25 @@
     <div class="registerForm1">
       <form name="register" ng-controller="RegisterFormCtrl" ng-submit="registerUser()">
         <div class="list list-inset">
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'valida' : register.razonSocial.$valid, 'invalida' : !register.razonSocial.$valid && !register.razonSocial.$pristine}">
             <input name="razonSocial" ng-model="formdata.razonSocial" type="text" placeholder="Nombre o razón social" ng-required="true">
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'valida' : register.rutContacto.$valid, 'invalida' : !register.rutContacto.$valid && !register.rutContacto.$pristine}">
             <input name="rutContacto" ng-model="formdata.rutContacto" type="text" placeholder="RUT" ng-minlength="7" ng-rut ng-required="true">
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'valida' : register.nombreContacto.$valid, 'invalida' : !register.nombreContacto.$valid && !register.nombreContacto.$pristine}">
             <input name="nombreContacto" ng-model="formdata.nombreContacto" type="text" placeholder="Nombre de contacto" ng-required="true">
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'valida' : register.emailContacto.$valid, 'invalida' : !register.emailContacto.$valid && !register.emailContacto.$pristine}">
             <input name="emailContacto" ng-model="formdata.emailContacto" type="email" placeholder="Email" ng-required="true">
           </label>
-          <label class="item item-input">
-            <input name="telefonoContacto" ng-model="formdata.telefonoContacto" type="tel" placeholder="Teléfono celular" ng-required="true">
+          <label class="item item-input" ng-class="{'valida' : register.telefonoContacto.$valid, 'invalida' : !register.telefonoContacto.$valid && !register.telefonoContacto.$pristine}">
+            <input name="telefonoContacto" ng-model="formdata.telefonoContacto" type="tel" placeholder="Teléfono Celular (ej: 923456789)" ng-maxlength="9" ng-minlength="9" ng-required="true">
           </label>
-          <label class="item item-input">
-            <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" ng-required="true">
+          <label class="item item-input" ng-class="{'valida' : register.passwordContacto.$valid, 'invalida' : !register.passwordContacto.$valid && !register.passwordContacto.$pristine}">
+            <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" ng-minlength="4" ng-required="true">
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'valida' : register.passwordRepetir.$valid, 'invalida' : !register.passwordRepetir.$valid && !register.passwordRepetir.$pristine}">
             <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" ng-required="true">
           </label>
           <div class="item item-checkbox">

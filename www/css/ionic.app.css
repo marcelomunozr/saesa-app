@@ -9082,6 +9082,20 @@ a.button.button-positive.button-clear {
   font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
   text-decoration: underline; }
 
+input.invalida, textarea.invalida, select.invalida, label.invalida {
+  border-color: rgba(255, 0, 0, 0.8);
+  outline: 0;
+  outline: thin dotted\9;
+  -webkit-box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+
+input.valida, textarea.valida, select.valida, label.valida {
+  border-color: rgba(40, 165, 76, 0.8);
+  outline: 0;
+  outline: thin dotted\9;
+  -webkit-box-shadow: 0 0 8px rgba(40, 165, 76, 0.6);
+  box-shadow: 0 0 8px rgba(40, 165, 76, 0.6); }
+
 input,
 textarea,
 .card .item.item-input {

@@ -728,7 +728,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, $log, Oficinas) {
+.controller('OficinasCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, $log, Oficinas) {
   $scope.oficinas = [];
   $scope.regiones = [];
   $scope.comunas = [];
@@ -737,32 +737,38 @@ angular.module('starter.controllers', [])
   $scope.buscarOficina = {
     nombreComuna: ""
   };
-  Oficinas.all().then(function(response){
-    $scope.oficinas = response.oficinas;
-    angular.forEach(response.oficinas, function(value, key){
-      if($scope.regiones.indexOf(value.nombreRegion) == -1){
-        $scope.regiones.push(value.nombreRegion);
-      }
-      if($scope.validaComunas.indexOf(value.nombreComuna) == -1){
-        $scope.validaComunas.push(value.nombreComuna);
-        $scope.comunas.push({
-          "labelComuna" : value.nombreComuna,
-          "nombreRegion" : value.nombreRegion
-        });
-      }
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
     });
-    console.log("Objeto Comunas", $scope.comunas);
-  }).catch(function(err){
-    console.log(err);
+    Oficinas.all().then(function(response){
+      $scope.oficinas = response.oficinas;
+      angular.forEach(response.oficinas, function(value, key){
+        if($scope.regiones.indexOf(value.nombreRegion) == -1){
+          $scope.regiones.push(value.nombreRegion);
+        }
+        if($scope.validaComunas.indexOf(value.nombreComuna) == -1){
+          $scope.validaComunas.push(value.nombreComuna);
+          $scope.comunas.push({
+            "labelComuna" : value.nombreComuna,
+            "nombreRegion" : value.nombreRegion
+          });
+        }
+      });
+      console.log("Objeto Comunas", $scope.comunas);
+      $ionicLoading.hide();
+    }).catch(function(err){
+      console.log(err);
+    });
+    Oficinas.getFiltros().then(function(res){
+      $scope.filtrosOficinas = res.filtros;
+    }).catch(function(err){
+      console.log(err);
+    });
+    $scope.reseteaComunas = function(){
+      $scope.buscarOficina.nombreComuna = "";
+    }
   });
-  Oficinas.getFiltros().then(function(res){
-    $scope.filtrosOficinas = res.filtros;
-  }).catch(function(err){
-    console.log(err);
-  });
-  $scope.reseteaComunas = function(){
-    $scope.buscarOficina.nombreComuna = "";
-  }
 })
 
 .controller('OficinaCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $ionicHistory, Oficinas) {

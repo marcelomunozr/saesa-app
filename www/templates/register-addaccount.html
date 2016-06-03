@@ -2,44 +2,40 @@
   <form name="addaccount" ng-controller="RegisterAddAccountCtrl" ng-submit="registerPropertyToUser()">
     <div class="list list-inset">
 	    <div class="add-account">
-			<label class="item item-input item-select">
-				<div class="input-label" ng-show="formdata.codEmpresa == -1">
-					Empresa
-				</div>
-				<select name="codEmpresa" class="servicios" ng-model="formdata.codEmpresa" required>
-					<option value="22">Frontel</option>
+			<label class="item item-input item-select" ng-class="{'valida' : addaccount.codEmpresa.$valid && formdata.codEmpresa != -1, 'invalida' : formdata.codEmpresa == -1 && !addaccount.codEmpresa.$pristine}">
+				<select name="codEmpresa" class="servicios" ng-model="formdata.codEmpresa" ng-required="true">
+          <option value="-1">Empresa</option>
+          <option value="22">Frontel</option>
 					<option value="39">Luz Osorno</option>
-					<option value="23" selected>Saesa</option>
+					<option value="23">Saesa</option>
 					<option value="24">Edelaysen</option>
 				</select>
 			</label>
 			<div class="row no-padding">
 			    <div class="col col-75 no-padding">
-					<label class="item item-input">
-						<input type="text" placeholder="Número de cliente" name="numCliente" ng-model="formdata.numCliente" required>
+					<label class="item item-input" ng-class="{'valida' : addaccount.numCliente.$valid, 'invalida' : !addaccount.numCliente.$valid && !addaccount.numCliente.$pristine}">
+						<input type="tel" placeholder="Número de cliente" name="numCliente" ng-model="formdata.numCliente" ng-maxlength="12" ng-required="true">
 					</label>
 			    </div>
 			    <div class="col no-padding"><div class="op-addAccount" id="numCliente"><span class="ti-help"></span></div></div>
 		    </div>
 			<div class="row no-padding">
 			    <div class="col col-75 no-padding">
-					<label class="item item-input">
-						<input type="text" placeholder="Número de boleta o factura" name="numBoleta" ng-model="formdata.numBoleta" required>
+					<label class="item item-input" ng-class="{'valida' : addaccount.numBoleta.$valid, 'invalida' : !addaccount.numBoleta.$valid && !addaccount.numBoleta.$pristine}">
+						<input type="tel" placeholder="Número de boleta o factura" name="numBoleta" ng-model="formdata.numBoleta" ng-required="true">
 					</label>
 			    </div>
 			    <div class="col no-padding"><div class="op-addAccount" id="numBoleta" ><span class="ti-help"></span></div></div>
 		    </div>
-			<label class="item item-input item-select">
-				<div class="input-label" ng-show="formdata.relPropiedad == -1">
-					Relación con Propiedad
-				</div>
-				<select name="relPropiedad" ng-model="formdata.relPropiedad" required>
-					<option value="Propietario" selected>Propietario</option>
+			<label class="item item-input item-select" ng-class="{'valida' : addaccount.relPropiedad.$valid && formdata.relPropiedad != -1, 'invalida' : !addaccount.relPropiedad.$valid && !addaccount.relPropiedad.$pristine}">
+				<select name="relPropiedad" ng-model="formdata.relPropiedad" ng-required="true">
+          <option value="-1" selected>Relación con Propiedad</option>
+          <option value="Propietario">Propietario</option>
 					<option value="Arrendatario">Arrendatario</option>
 				</select>
 			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="Asignar un alias a la cuenta, ejemplo: Mi casa" name="nomPropiedad" ng-model="formdata.nomPropiedad" required>
+			<label class="item item-input" ng-class="{'valida' : addaccount.nomPropiedad.$valid, 'invalida' : !addaccount.nomPropiedad.$valid && !addaccount.nomPropiedad.$pristine}">
+				<input type="text" placeholder="Asignar un alias a la cuenta, ejemplo: Mi casa" name="nomPropiedad" ng-model="formdata.nomPropiedad" ng-required="true">
 			</label>
 			<div class="clearfix"></div>
 	    </div>
