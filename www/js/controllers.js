@@ -9,6 +9,15 @@ angular.module('starter.controllers', [])
   }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
+  $rootScope.terminosCondiciones = "";
+  $rootScope.getTerminos = function(){
+    User.getTerminos().then(function(res){
+      console.log("Terminos y Condiciones", res);
+      $rootScope.terminosCondiciones = res.terminos.descripcion;
+    }).catch(function(err){
+
+    });
+  }
   if(angular.isDefined(laActiva) && laActiva != null){
     $rootScope.propiedadActiva = laActiva;
   }else{
@@ -21,7 +30,6 @@ angular.module('starter.controllers', [])
   }).then(function(modal){
     $rootScope.modal = modal;
   });
-
   $rootScope.registraDispositivo = function(){
     var registrado = localStorageService.get('device.registered');
     var deviceKey =  localStorageService.get('device.registrationId');
@@ -210,13 +218,45 @@ angular.module('starter.controllers', [])
         $scope.formdata.rut = ngRut.format($scope.formdata.rut);
     });
   };
-
+  $rootScope.getTerminos();
 })
 
-.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $state) {
+.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $ionicModal, $state) {
 	$scope.regdata = {};
   $scope.idUsuario = '';
-	console.log('paso', $scope.regdata);
+  $scope.formdata = {
+    terms:false
+  };
+  console.log('paso', $scope.regdata);
+
+  $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-terms.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal = modal;
+  });
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    $scope.formdata.terms = false;
+    $scope.modal.hide();
+  };
+
+  $scope.modalTerminosCondiciones = function(){
+    $scope.tituloModal = 'Ha ocurrido un error';
+    $scope.textoModal = 'Términos y condicines';
+    $scope.terminosCondiciones = $rootScope.terminosCondiciones;
+    $scope.openModal();
+  }
+
+  $scope.acceptTerms = function(){
+    $scope.formdata.terms = true;
+    $scope.modal.hide();
+  }
+
   $scope.goBack = function() {
     if($rootScope.originTrack != 'register.form'){
       if($rootScope.originTrack == ''){
@@ -272,6 +312,14 @@ angular.module('starter.controllers', [])
     $(this).fadeOut(300);
   });
   $scope.regdata.paso = 2;
+  $scope.listaRelaciones = [];
+  Property.getRelationList().then(function(res){
+    console.log(res);
+    $scope.listaRelaciones = res.relaciones;
+    console.log($scope.listaRelaciones);
+  }).catch(function(err){
+
+  });
   $scope.registerPropertyToUser = function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
@@ -314,7 +362,6 @@ angular.module('starter.controllers', [])
   $scope.formdata = [];
   $scope.formdata.codEmpresa = -1;
   $scope.formdata.relPropiedad = -1;
-
 })
 
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, Pago, localStorageService){
@@ -708,6 +755,7 @@ angular.module('starter.controllers', [])
       comentarios: $scope.formdata.comentarios,
       base64img: $scope.formdata.imagen
     };
+    console.log("Formulario Falla: ", falla);
     Fallas.reportarFalla(falla).then(function(res){
       console.log(res);
       $ionicLoading.hide();

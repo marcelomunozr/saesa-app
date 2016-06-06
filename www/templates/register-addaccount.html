@@ -30,8 +30,7 @@
 			<label class="item item-input item-select" ng-class="{'valida' : addaccount.relPropiedad.$valid && formdata.relPropiedad != -1, 'invalida' : !addaccount.relPropiedad.$valid && !addaccount.relPropiedad.$pristine}">
 				<select name="relPropiedad" ng-model="formdata.relPropiedad" ng-required="true">
           <option value="-1" selected>Relación con Propiedad</option>
-          <option value="Propietario">Propietario</option>
-					<option value="Arrendatario">Arrendatario</option>
+          <option ng-repeat="relacion in listaRelaciones" value="{{relacion.descripcion}}">{{relacion.descripcion}}</option>
 				</select>
 			</label>
 			<label class="item item-input" ng-class="{'valida' : addaccount.nomPropiedad.$valid, 'invalida' : !addaccount.nomPropiedad.$valid && !addaccount.nomPropiedad.$pristine}">
