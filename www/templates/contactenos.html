@@ -9,6 +9,14 @@
       <form name="FormContact" ng-controller="ContactCtrl" ng-submit="enviarConsulta()">
         <div class="list list-inset">
           <div class="send-contact">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Selecionar servicio
+              </div>
+              <select ng-model="formdata.propiedad" name="propiedad" ng-required="true">
+                <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
+              </select>
+            </label>
             <label class="item item-input">
               <textarea placeholder="Comentarios" class="max-text" maxlength="800" ng-model="formdata.comentarios" required></textarea>
             </label>

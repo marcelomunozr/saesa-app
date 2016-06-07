@@ -688,25 +688,25 @@ angular.module('starter.controllers', [])
   $scope.empresas[22] = {
       "idEmpresa" : 22,
       "numeroTelefono" : "600 4012021",
-      "clickeable" : "6004012020",
+      "clickeable" : "tel:6004012020",
       "empresa" : "Frontel"
   };
   $scope.empresas[39] = {
       "idEmpresa" : 39,
       "numeroTelefono" : "600 4012020",
-      "clickeable" : "6004012020",
+      "clickeable" : "tel:6004012020",
       "empresa" : "Luz Osorno"
   };
   $scope.empresas[23] = {
       "idEmpresa" : 23,
       "numeroTelefono" : "600 4012020",
-      "clickeable" : "6004012020",
+      "clickeable" : "tel:6004012020",
       "empresa" : "Saesa"
   };
   $scope.empresas[24] = {
       "idEmpresa" : 24,
       "numeroTelefono" : "600 4012022",
-      "clickeable" : "6004012022",
+      "clickeable" : "tel:6004012022",
       "empresa" : "Edelaysen"
   };
   $scope.formdata = [];
@@ -919,10 +919,11 @@ angular.module('starter.controllers', [])
     console.log($scope.formdata);
     var cntacto = {
       rut: $rootScope.sesionUsuario.rut,
-      idEmpresa: $scope.propiedades[0].related_enterprise,
-      idServicio: $scope.propiedades[0].client_number,
+      idEmpresa: $scope.propiedades[$scope.formdata.propiedad].related_enterprise,
+      idServicio: $scope.propiedades[$scope.formdata.propiedad].client_number,
       comentarios: $scope.formdata.comentarios
     };
+    console.log(cntacto);
     Contacto.enviaContacto(cntacto).then(function(res){
       console.log(res);
       $ionicLoading.hide();

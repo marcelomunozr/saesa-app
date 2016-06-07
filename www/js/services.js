@@ -259,9 +259,9 @@ angular.module('starter.services', [])
   esto.register = function($data){
     var res = $q.defer();
     var datos = {
-      RazonSocial : $data.razonSocial,
+      RazonSocial : $data.nombreContacto + " " + $data.razonSocial,
       RutContacto :  $data.rutContacto,
-      NombreContacto : $data.nombreContacto,
+      NombreContacto : $data.nombreContacto + " " + $data.razonSocial,
       EmailContacto : $data.emailContacto,
       TelefonoContacto : $data.telefonoContacto,
       PasswordContacto : $data.passwordContacto,
