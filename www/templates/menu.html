@@ -46,7 +46,7 @@
                 <span class="ticon ti-layers-alt pull-left"></span>
                 <h4>Servicios Asociados</h4>
                 <ul>
-                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" >{{propiedad.property_nickname}}</li>
+                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" >{{propiedad.property_nickname}} <span class="pull-right ticon ti-close"></span></li>
                 </ul>
                 </div>
               <a href="#" class="agregar-servicio" menu-close ui-sref="register.addaccount">Agregar Servicio</a>

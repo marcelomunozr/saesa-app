@@ -9416,7 +9416,9 @@ ul.pasos li.active:first-child:before {
       font-size: 18px; }
   .contenido .la-boleta {
     font-size: 12px;
-    text-decoration: none; }
+    text-decoration: none;
+    position: relative;
+    right: 20px; }
     .contenido .la-boleta:visited, .contenido .la-boleta:hover {
       text-decoration: none; }
   .contenido .alert {
@@ -9661,7 +9663,7 @@ ul.pasos li.active:first-child:before {
     display: inline-block;
     border: none;
     border-bottom: 2px solid #1d4e66;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     width: auto;
     height: 32px;
@@ -9670,7 +9672,7 @@ ul.pasos li.active:first-child:before {
     font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
     margin: 15px 0; }
   .asociados-service .button-assertive {
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     width: auto;
     height: 32px;
@@ -9741,6 +9743,10 @@ ul.pasos li.active:first-child:before {
   .menu .list .item .ttl .ticon {
     margin-right: 10px;
     font-size: 16px; }
+    .menu .list .item .ttl .ticon.ti-close {
+      color: #d80b00;
+      font-size: 14px;
+      position: relative; }
   .menu .list .item .ttl h4 {
     color: #00599b;
     font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
@@ -9748,13 +9754,16 @@ ul.pasos li.active:first-child:before {
     margin: 0; }
   .menu .list .item .ttl ul {
     margin: 5px 0 0 0;
-    padding: 0 0 0 50px; }
+    padding: 0 0 0 26px; }
     .menu .list .item .ttl ul li {
       font-size: 12px;
       font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
       width: 130px;
+      width: 100%;
       position: relative;
-      margin: 0 0 2px; }
+      margin: 0 0 2px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
     .menu .list .item .ttl ul li:before {
       content: "";
       width: 6px;
@@ -9766,15 +9775,17 @@ ul.pasos li.active:first-child:before {
       background: #26c281;
       position: absolute;
       right: 100%;
-      top: 6px;
+      top: 15px;
       margin-right: 5px; }
     .menu .list .item .ttl ul li.por-vencer:before {
       background: #f7ca18; }
     .menu .list .item .ttl ul li.vencida:before {
       background: #dc3023; }
   .menu .list .item .ttl a.agregar-servicio {
-    float: right;
-    font-size: 12px; }
+    float: left;
+    font-size: 12px;
+    margin-left: 27px;
+    padding: 7px 0px 0; }
 
 .preview-foto img {
   max-width: 100%; }
@@ -9945,6 +9956,16 @@ span.back-text {
   .showsBoleta span {
     color: #fff;
     font-size: 20px; }
+
+.input-label {
+  font-size: 14px; }
+
+.item-select select {
+  padding: 11px 48px 12px 16px;
+  font-size: 13px;
+  background: none;
+  font-size: 14px;
+  font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
 
 /*RETINA*/
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-device-pixel-ratio: 1.5) {
