@@ -159,7 +159,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  
+
   //informar falla
   .state('app.informar-falla', {
     url: "/informar-falla",

@@ -9399,14 +9399,15 @@ ul.pasos li.active:first-child:before {
     line-height: 15px;
     font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
   .contenido .ver-boleta {
-    width: 84px;
-    height: 64px;
+    width: 92px;
+    height: 60px;
     padding: 12px 0;
     border: 1px solid #ddd;
     margin: 0 auto;
     color: #00599b;
     text-align: center;
-    font-size: 10px;
+    font-size: 9px;
+    line-height: 20px;
     font-weight: bold;
     /*border-radius: 100%;
 		-moz-border-radius: 100%;
@@ -9945,6 +9946,10 @@ span.back-text {
   .showsBoleta span {
     color: #fff;
     font-size: 20px; }
+
+.item-select select {
+  padding: 10px 35px 13px 10px;
+  font-size: 13px; }
 
 /*RETINA*/
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-device-pixel-ratio: 1.5) {
