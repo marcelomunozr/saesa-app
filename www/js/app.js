@@ -52,7 +52,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $rootScope.originTrack = fromState.name;
   });
   $rootScope.$state = $state;
-
 })
 
 .constant('laConfig', {
@@ -159,7 +158,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  
+
   //informar falla
   .state('app.informar-falla', {
     url: "/informar-falla",

@@ -879,14 +879,14 @@ angular.module('starter.services', [])
           message: 'no info.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
       var error = (err.data != null) ? err.data.msg : err;
-      res.reject({
+			res.reject({
         reason: 'error',
-        err: error
+        err: error,
+				mensaje : err.data.res.comentario
       });
     });
     return res.promise;
