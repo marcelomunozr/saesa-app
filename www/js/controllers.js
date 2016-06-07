@@ -64,7 +64,8 @@ angular.module('starter.controllers', [])
       toolbar: 'yes',
       hardwareback : 'no',
       closebuttoncaption : 'Volver',
-      presentationstyle : 'pagesheet'
+      presentationstyle : 'pagesheet',
+      zoom: 'no'
     };
     //var stringOptions = "location=yes, clearcache=yes, tootlbar=yes, hardwareback=no, closebuttoncaption=Volver, presentationstyle=pagesheet"
     url += "?token=" + $data.token;
@@ -728,11 +729,13 @@ angular.module('starter.controllers', [])
         quality: 75,
         destinationType: Camera.DestinationType.DATA_URL,
         sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: true,
+        allowEdit: false,
         encodingType: Camera.EncodingType.JPEG,
         popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: false,
-        correctOrientation:true
+        correctOrientation:true,
+        targetWidth: 1920,
+        targetHeight: 1080
       };
       $cordovaCamera.getPicture(options).then(function(imageData) {
         $scope.formdata.imagen = "data:image/jpeg;base64," + imageData;
@@ -768,7 +771,7 @@ angular.module('starter.controllers', [])
       $ionicLoading.hide();
       $state.go('app.resumen-cuenta');
       $rootScope.tituloModal = 'Error';
-      $rootScope.textoModal = 'Ha ocurrido un error al enviar el informe';
+      $rootScope.textoModal = err.mensaje;
       $rootScope.openModal();
     }).finally(function(ble){
       console.log(ble);

@@ -52,7 +52,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $rootScope.originTrack = fromState.name;
   });
   $rootScope.$state = $state;
-
 })
 
 .constant('laConfig', {
