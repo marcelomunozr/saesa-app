@@ -9958,11 +9958,6 @@ span.back-text {
     color: #fff;
     font-size: 20px; }
 
-<<<<<<< HEAD
-.item-select select {
-  padding: 10px 35px 13px 10px;
-  font-size: 13px; }
-=======
 .input-label {
   font-size: 14px; }
 
@@ -9972,7 +9967,6 @@ span.back-text {
   background: none;
   font-size: 14px;
   font-family: 'DINNextLTPro-Light_0', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif; }
->>>>>>> 4bd0ee142d4fd7105d9cf928784b8a67023338ae
 
 /*RETINA*/
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-device-pixel-ratio: 1.5) {
