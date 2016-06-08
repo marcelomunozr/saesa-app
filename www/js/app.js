@@ -38,6 +38,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		} catch(err){
 			$log.log(err);
 		}
+    $ionicPlatform.registerBackButtonAction(function (event) {
+      if($state.current.name=="app.resumen-cuenta"){
+        navigator.app.exitApp();
+      }
+      else {
+        console.log("EL ANTERIOR: ", $rootScope.originTrack );
+        navigator.app.backHistory();
+      }
+    }, 100);
   });
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     console.log('############ fromState.name:', fromState.name);

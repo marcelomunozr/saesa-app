@@ -1,11 +1,11 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, ngRut, Pago, User, localStorageService, Property) {
+.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $ionicPopup, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, ngRut, Pago, User, localStorageService, Property) {
   var userId = localStorageService.get('user.id');
   var laActiva = localStorageService.get('user.propiedadActiva');
   if(angular.isDefined(userId) && userId != null){
-    $state.go('app.resumen-cuenta');
+    $state.go('app.resumen-cuenta', {}, {location: true, inherit:false, reload:true});
   }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
@@ -220,6 +220,43 @@ angular.module('starter.controllers', [])
     });
   };
   $rootScope.getTerminos();
+
+  $rootScope.marcarComoPortada = function(idPortada){
+    $rootScope.propiedadActiva = idPortada;
+    localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
+    //$state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:true});
+    $state.go($state.current, {fetch : true}, {reload: true});
+  }
+
+  $rootScope.modalConfirmacionEliminar = function(laPropiedad) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Eliminar Propiedad',
+      template: 'Seguro que desea eliminar la propiedad ' + laPropiedad.property_nickname,
+      cancelText: 'Cancelar',
+      okText: 'Aceptar'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        localStorageService.set('user.propiedadActiva', 0);
+        $rootScope.propiedadActiva = 0;
+        $rootScope.eliminarServicio(laPropiedad);
+      }
+    });
+  };
+
+  $rootScope.eliminarServicio = function(laPropiedad){
+    var propiedades = $rootScope.sesionUsuario.Propiedades.length;
+    console.log('Eliminar Servicio');
+    console.log("Propiedades: ", laPropiedad);
+    Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
+      console.log("LLEGO LA RESPUESTA!", res);
+      console.log("hasta aca se deberia haber ejecutado");
+    }).catch(function(err){
+      console.log(err);
+    }).finally(function(){
+      $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+    });
+  }
 })
 
 .controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $ionicModal, $state) {

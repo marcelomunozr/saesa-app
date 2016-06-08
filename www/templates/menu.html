@@ -42,11 +42,11 @@
         <ion-item nav-clear>
           <div class="row">
             <div class="col ttl">
-              <div nav-clear menu-close ui-sref="app.servicios-asociados">
+              <div nav-clear menu-close>
                 <span class="ticon ti-layers-alt pull-left"></span>
                 <h4>Servicios Asociados</h4>
                 <ul>
-                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" >{{propiedad.property_nickname}} <span class="pull-right ticon ti-close"></span></li>
+                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" ng-click="marcarComoPortada(propiedad.id)">{{propiedad.property_nickname}} <span class="pull-right ticon ti-close" ng-click="modalConfirmacionEliminar(propiedad)"></span></li>
                 </ul>
                 </div>
               <a href="#" class="agregar-servicio" menu-close ui-sref="register.addaccount">Agregar Servicio</a>
