@@ -139,7 +139,7 @@ angular.module('starter.services', [])
 	return esto;
 })
 
-.factory('User', function($http, $q, laConfig){
+.factory('User', function($http, $q, laConfig, localStorageService){
   var esto = this;
 	esto.getTerminos = function(){
 		var res = $q.defer();
@@ -344,6 +344,11 @@ angular.module('starter.services', [])
     });
     return res.promise;
   }
+
+	esto.isLogged = function(){
+		return localStorageService.get('user.id');
+	}
+	
   return esto;
 })
 

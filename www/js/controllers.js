@@ -1,12 +1,12 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $ionicPopup, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, ngRut, Pago, User, localStorageService, Property) {
-  var userId = localStorageService.get('user.id');
+.controller('AppCtrl', function(laConfig, $rootScope, $scope, $ionicHistory, $ionicModal, $ionicPopup, $state, $timeout, $sce, $compile, $ionicModal, $cordovaInAppBrowser, $ionicLoading, Pago, User, localStorageService, Property) {
+  // var userId = localStorageService.get('user.id');
   var laActiva = localStorageService.get('user.propiedadActiva');
-  if(angular.isDefined(userId) && userId != null){
-    $state.go('app.resumen-cuenta', {}, {location: true, inherit:false, reload:true});
-  }
+  // if(angular.isDefined(userId) && userId != null){
+  //   $state.go('app.resumen-cuenta', {}, {location: true, inherit:false, reload:true});
+  // }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
   $rootScope.terminosCondiciones = "";
@@ -179,46 +179,7 @@ angular.module('starter.controllers', [])
     $ionicHistory.goBack();
   };
 
-  $scope.formatRut = function(rut){
-    return ngRut.format(rut);
-  }
 
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.formdata);
-    $scope.formdata.rut = ngRut.clean($scope.formdata.rut);
-    User.login($scope.formdata).then(function(response){
-      if(response.idUsuario != null){
-        localStorageService.set('user.id', response.idUsuario);
-        $rootScope.registraDispositivo();
-        $state.go('app.resumen-cuenta');
-      }
-    }).catch(function(error){
-      console.log('Error: ', error);
-      /** Levantamos modal con mensajes de error **/
-        var labelError = '';
-        $rootScope.tituloModal = 'Ha ocurrido un error';
-        switch(error.err){
-          case 'password-incorrecto':
-            labelError = 'La contraseña es incorrecta';
-            break;
-          case 'no-registrado':
-            labelError = 'El rut no se encuentra registrado';
-            break;
-          case 'empty-password':
-            labelError = 'Debe ingresar su contraseña';
-            break;
-          case 'empty-rut':
-            labelError = 'Debe ingresar su rut para continuar';
-            break;
-          default:
-            labelError = 'Error al procesar la información';
-            break;
-        }
-        $rootScope.textoModal = labelError;
-        $rootScope.openModal();
-        $scope.formdata.rut = ngRut.format($scope.formdata.rut);
-    });
-  };
   $rootScope.getTerminos();
 
   $rootScope.marcarComoPortada = function(idPortada){
@@ -1002,6 +963,84 @@ angular.module('starter.controllers', [])
   }).finally(function(){
     $ionicLoading.hide();
   });
+})
+.controller('LoginCtrl', function($scope, $state, ngRut, User, localStorageService, $rootScope, $ionicModal){
+  $scope.formdata = {};
+
+  $rootScope.modal = $ionicModal.fromTemplateUrl('templates/modal-test.html', {
+    scope: $rootScope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $rootScope.modal = modal;
+  });
+
+  $rootScope.registraDispositivo = function(){
+    var registrado = localStorageService.get('device.registered');
+    var deviceKey =  localStorageService.get('device.registrationId');
+    var operativeSystem = localStorageService.get('device.os');
+    if(registrado == 0){
+      var data = {
+        deviceKey: deviceKey,
+        userId: $rootScope.sesionUsuario.id,
+        operativeSystem: operativeSystem
+      };
+      User.registraDispositivo(data).then(function(res){
+        localStorageService.set('device.registered', 1);
+      }).catch(function(err){
+        console.log("El Error", err);
+      });
+    }
+  }
+
+
+  $rootScope.openModal = function() {
+    $rootScope.modal.show();
+  };
+
+  $rootScope.closeModal = function() {
+    $rootScope.modal.hide();
+  };
+
+  $scope.formatRut = function(rut){
+    return ngRut.format(rut);
+  }
+
+  $scope.doLogin = function() {
+    console.log('Doing login', $scope.formdata);
+    $scope.formdata.rut = ngRut.clean($scope.formdata.rut);
+    User.login($scope.formdata).then(function(response){
+      if(response.idUsuario != null){
+        localStorageService.set('user.id', response.idUsuario);
+        $rootScope.registraDispositivo();
+        $state.go('app.resumen-cuenta');
+      }
+    }).catch(function(error){
+      console.log('Error: ', error);
+      /** Levantamos modal con mensajes de error **/
+        var labelError = '';
+        $rootScope.tituloModal = 'Ha ocurrido un error';
+        switch(error.err){
+          case 'password-incorrecto':
+            labelError = 'La contraseña es incorrecta';
+            break;
+          case 'no-registrado':
+            labelError = 'El rut no se encuentra registrado';
+            break;
+          case 'empty-password':
+            labelError = 'Debe ingresar su contraseña';
+            break;
+          case 'empty-rut':
+            labelError = 'Debe ingresar su rut para continuar';
+            break;
+          default:
+            labelError = 'Error al procesar la información';
+            break;
+        }
+        $rootScope.textoModal = labelError;
+        $rootScope.openModal();
+        $scope.formdata.rut = ngRut.format($scope.formdata.rut);
+    });
+  };
 })
 
 .config(function($ionicConfigProvider) {

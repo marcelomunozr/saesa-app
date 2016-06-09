@@ -4,7 +4,7 @@
   </ion-header-bar>
   <ion-content>
     <div class="logo-login"></div>
-    <form name="login" ng-controller="AppCtrl" ng-submit="doLogin()">
+    <form name="login" ng-submit="doLogin()">
       <div class="list list-inset">
         <label class="item item-input">
           <input type="text" placeholder="RUT" ng-minlength="7" ng-model="formdata.rut" ng-required="true" ng-blur="formdata.rut=formatRut(formdata.rut)">

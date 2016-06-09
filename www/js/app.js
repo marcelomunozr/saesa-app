@@ -98,7 +98,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $stateProvider
   .state('login', {
     url: "/login",
-    templateUrl: "templates/login.html"
+    templateUrl: "templates/login.html",
+    controller: 'LoginCtrl',
+    onEnter: function($state, User){
+      if(User.isLogged()){
+        $state.go('app.resumen-cuenta',{fetch : true});
+      }
+    }
   })
 
   //register content
@@ -141,7 +147,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: "/app",
     abstract: true,
     templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+    onEnter: function(User, $state){
+      if(!User.isLogged()){
+        $state.go('login');
+      }
+    }
   })
 
   //resumen cuenta
