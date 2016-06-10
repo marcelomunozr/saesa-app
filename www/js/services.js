@@ -244,6 +244,17 @@ angular.module('starter.services', [])
         });
       } else {
         console.log('Respuesta desde servidor:',response);
+				var data = {
+					deviceKey : localStorageService.get('deviceregistrationId'),
+					userId: response.idUsuario,
+					operativeSystem: localStorageService.get('deviceos')
+				}
+				esto.registraDispositivo(data).then(function(response){
+					console.log(response);
+				}).catch(function(err){
+					console.log(err);
+				});
+
         res.resolve(response);
       }
     }).catch(function(err){
@@ -279,6 +290,18 @@ angular.module('starter.services', [])
         });
       } else {
         console.log('Respuesta desde servidor:',response);
+
+				var data = {
+					deviceKey : localStorageService.get('deviceregistrationId'),
+					userId: response.idUsuario,
+					operativeSystem: localStorageService.get('deviceos')
+				}
+				esto.registraDispositivo(data).then(function(response){
+					console.log(response);
+				}).catch(function(err){
+					console.log(err);
+				});
+
         res.resolve(response);
       }
     }).catch(function(err){
@@ -348,7 +371,7 @@ angular.module('starter.services', [])
 	esto.isLogged = function(){
 		return localStorageService.get('user.id');
 	}
-	
+
   return esto;
 })
 

@@ -1,7 +1,7 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'angularFileUpload'])
 
-.run(function($ionicPlatform, $state, $rootScope, $log, localStorageService) {
+.run(function($ionicPlatform, $state, $rootScope, $log, localStorageService, $ionicPopup) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -15,7 +15,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     try{
 			var push = PushNotification.init({
 					android: {
-							senderID: '226351797418'
+							senderID: '1015297443872'
 					},
 					ios: {
 							alert: 'true',
@@ -25,12 +25,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 					windows: {}
 			});
 			push.on('registration', function(resp) {
-        localStorageService.set('device.registered', 0);
-        localStorageService.set('device.registrationId', resp.registrationId);
-        localStorageService.set('device.os', ionic.Platform.platform());
+        localStorageService.set('deviceregistrationId', resp.registrationId);
+        localStorageService.set('deviceos', ionic.Platform.platform());
 			});
 			push.on('notification', function(data) {
         console.log('notification', data);
+        $ionicPopup.alert({
+           title: data.title,
+           template: data.message
+        });
 			});
 			push.on('error', function(e) {
         console.log('error', e);
