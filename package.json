@@ -24,7 +24,7 @@
     "cordova-plugin-inappbrowser",
     {
       "variables": {
-        "SENDER_ID": "226351797418"
+        "SENDER_ID": "1015297443872"
       },
       "locator": "phonegap-plugin-push",
       "id": "phonegap-plugin-push"
