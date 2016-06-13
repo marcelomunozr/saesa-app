@@ -9,15 +9,6 @@ angular.module('starter.controllers', [])
   // }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
-  $rootScope.terminosCondiciones = "";
-  $rootScope.getTerminos = function(){
-    User.getTerminos().then(function(res){
-      //console.log("Terminos y Condiciones", res);
-      $rootScope.terminosCondiciones = res.terminos.descripcion;
-    }).catch(function(err){
-
-    });
-  }
   if(angular.isDefined(laActiva) && laActiva != null){
     $rootScope.propiedadActiva = laActiva;
   }else{
@@ -179,9 +170,6 @@ angular.module('starter.controllers', [])
     $ionicHistory.goBack();
   };
 
-
-  $rootScope.getTerminos();
-
   $rootScope.marcarComoPortada = function(idPortada){
     $rootScope.propiedadActiva = idPortada;
     localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
@@ -220,14 +208,22 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $ionicModal, $state) {
+.controller('RegisterCtrl', function($scope, $rootScope, $ionicHistory, $ionicModal, $state, User) {
 	$scope.regdata = {};
   $scope.idUsuario = '';
   $scope.formdata = {
     terms:false
   };
-  //console.log('paso', $scope.regdata);
+  $scope.terminosCondiciones = "";
+  $scope.getTerminos = function(){
+    User.getTerminos().then(function(res){
+      console.log("Terminos y Condiciones", res);
+      $scope.terminosCondiciones = res.terminos.descripcion;
+    }).catch(function(err){
 
+    });
+  }
+  $scope.getTerminos();
   $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-terms.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -245,9 +241,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.modalTerminosCondiciones = function(){
-    $scope.tituloModal = 'Términos y condicines';
-    $scope.textoModal = 'Términos y condicines';
-    $scope.terminosCondiciones = $rootScope.terminosCondiciones;
+    $scope.tituloModal = 'Términos y Condiciones';
+    $scope.textoModal = 'Términos y Condiciones';
     $scope.openModal();
   }
 
