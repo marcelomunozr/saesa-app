@@ -258,7 +258,7 @@ angular.module('starter.services', [])
         res.resolve(response);
       }
     }).catch(function(err){
-      var error = (err.data != null) ? err.data.msg : err;
+      var error = (err.res != null) ? err.res : err;
       res.reject({
         reason: 'error',
         err: error
@@ -814,53 +814,33 @@ angular.module('starter.services', [])
   return esto;
 })
 
-.factory('Notificaciones', function() {
-  var datos = [
-    // {
-    //   id: 1,
-    //   prioridad: "media",//media y alta
-    //   estado: "nueva",
-    //   contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
-    // },
-    // {
-    //   id: 2,
-    //   prioridad: "alta",//media y alta
-    //   estado: "nueva",
-    //   contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
-    // },
-    // {
-    //   id: 3,
-    //   prioridad: "alta",//media y alta
-    //   estado: "leida",
-    //   contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
-    // },
-    // {
-    //   id: 4,
-    //   prioridad: "alta",//media y alta
-    //   estado: "leida",
-    //   contenido: "Tienes una deuda con la propiedad Santos Dumont 190."
-    // },
-    // {
-    //   id: 5,
-    //   prioridad: "alta",//media y alta
-    //   estado: "leida",
-    //   contenido: "Corte programado para el día 18 agosto 20:00, propiedad Av. Providencia 1870, reposición en caso de pago en 24 horas."
-    // }
-  ];
-  return {
-    all: function() {
-      return datos;
-    },
-    get: function(notificacionId) {
-      for (var i = 0; i < datos.length;) {
-        if (datos[i].id === parseInt(notificacionId)) {
-          console.log("datos",datos[i]);
-          return datos[i];
-        }
+.factory('Notificaciones', function($http, $q, laConfig) {
+	var esto = this;
+	esto.getNotificaciones = function($userId){
+		var res = $q.defer();
+    var url = laConfig.backend + 'getNotifications/' + $userId;
+    $http.get(url, {
+      cache: true,
+      timeout: 30000
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error al rescatar notificaciones.'
+        });
+      } else {
+        res.resolve(response.notificaciones);
       }
-      return null;
-    }
-  };
+    }).catch(function(err){
+      var error = (err.data == null) ? err : err.data.msg;
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+    return res.promise;
+	}
+	return esto;
 })
 
 .factory('Fallas', function($http, $q, laConfig){

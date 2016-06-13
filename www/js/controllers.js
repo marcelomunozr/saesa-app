@@ -245,7 +245,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.modalTerminosCondiciones = function(){
-    $scope.tituloModal = 'Ha ocurrido un error';
+    $scope.tituloModal = 'Términos y condicines';
     $scope.textoModal = 'Términos y condicines';
     $scope.terminosCondiciones = $rootScope.terminosCondiciones;
     $scope.openModal();
@@ -899,16 +899,39 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('NotificacionesCtrl', function($scope, $rootScope, $ionicHistory, Notificaciones) {
-  $scope.notificaciones = Notificaciones.all();
-  $(".max-text").keyup(function(){
-      el = $(this);
-      if(el.val().length >= 800){
-          el.val( el.val().substr(0, 800) );
-      } else {
-          $("#charNum").text(800-el.val().length);
-      }
+.controller('NotificacionesCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, Notificaciones, localStorageService) {
+  $scope.notificaciones = [];
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+    Notificaciones.getNotificaciones($rootScope.sesionUsuario.id).then(function(res){
+      angular.forEach(res, function(v, k){
+        var estadoNotificacion = localStorageService.get('notificaciones.leidas.' + v.Notification.remote_id);
+        if(angular.isUndefined(estadoNotificacion) || estadoNotificacion == null){
+          if(v.Notification.type == 'retail'){
+            v.Notification.prioridad = 'alta';
+          }else{
+            v.Notification.prioridad = 'media';
+          }
+        }else{
+          v.Notification.prioridad = 'leida';
+        }
+        $scope.notificaciones.push(v.Notification)
+      });
+    }).catch(function(err){
+
+    });
+    $ionicLoading.hide();
   });
+  $scope.marcarLeida = function(remote_id){
+    localStorageService.set('notificaciones.leidas.' + remote_id, 1);
+    angular.forEach($scope.notificaciones, function(v, k){
+      if(v.remote_id == remote_id){
+        $scope.notificaciones[k].prioridad = 'leida';
+      }
+    });
+  };
 })
 
 .controller('ContactCtrl', function($scope, $rootScope, $ionicHistory, $ionicLoading, $state, Contacto) {
@@ -1019,22 +1042,10 @@ angular.module('starter.controllers', [])
       /** Levantamos modal con mensajes de error **/
         var labelError = '';
         $rootScope.tituloModal = 'Ha ocurrido un error';
-        switch(error.err){
-          case 'password-incorrecto':
-            labelError = 'La contraseña es incorrecta';
-            break;
-          case 'no-registrado':
-            labelError = 'El rut no se encuentra registrado';
-            break;
-          case 'empty-password':
-            labelError = 'Debe ingresar su contraseña';
-            break;
-          case 'empty-rut':
-            labelError = 'Debe ingresar su rut para continuar';
-            break;
-          default:
-            labelError = 'Error al procesar la información';
-            break;
+        if(error.err.data.res != null && angular.isDefined(error.err.data.res)){
+          labelError = error.err.data.res;
+        }else{
+          labelError = "Ha ocurrido un error al procesar la información, para mayor información contactese con nosotros";
         }
         $rootScope.textoModal = labelError;
         $rootScope.openModal();
