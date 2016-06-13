@@ -29,14 +29,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         localStorageService.set('deviceos', ionic.Platform.platform());
 			});
 			push.on('notification', function(data) {
-        console.log('notification', data);
+        //console.log('notification', data);
         $ionicPopup.alert({
            title: data.title,
-           template: data.message
+           template: data.message,
+           buttons: [{
+            text: '<b>Ver notificaciones</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              $state.go('app.notificaciones', {}, {location: true});
+            }
+          }]
         });
 			});
 			push.on('error', function(e) {
-        console.log('error', e);
+        //console.log('error', e);
 			});
 		} catch(err){
 			$log.log(err);
@@ -46,14 +53,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         navigator.app.exitApp();
       }
       else {
-        console.log("EL ANTERIOR: ", $rootScope.originTrack );
+        //console.log("EL ANTERIOR: ", $rootScope.originTrack );
         navigator.app.backHistory();
       }
     }, 100);
   });
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    console.log('############ fromState.name:', fromState.name);
-    console.log('############ toState.name:' , toState.name);
+    //console.log('############ fromState.name:', fromState.name);
+    //console.log('############ toState.name:' , toState.name);
     $rootScope.$broadcast('clase', {clase: toState.name, params: toParams});
     if(window.cordova && window.analytics){
 			window.analytics.trackView(toState.name);

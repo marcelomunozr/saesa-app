@@ -26,7 +26,7 @@ angular.module('starter.services', [])
           message: 'error contacto.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -62,7 +62,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -94,7 +94,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -124,7 +124,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -154,7 +154,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -185,7 +185,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -214,7 +214,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -243,16 +243,16 @@ angular.module('starter.services', [])
           message: 'ingreso incorrecto.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
 				var data = {
 					deviceKey : localStorageService.get('deviceregistrationId'),
 					userId: response.idUsuario,
 					operativeSystem: localStorageService.get('deviceos')
 				}
 				esto.registraDispositivo(data).then(function(response){
-					console.log(response);
+					//console.log(response);
 				}).catch(function(err){
-					console.log(err);
+					//console.log(err);
 				});
 
         res.resolve(response);
@@ -289,7 +289,7 @@ angular.module('starter.services', [])
           message: 'registro incorrecto.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
 
 				var data = {
 					deviceKey : localStorageService.get('deviceregistrationId'),
@@ -297,9 +297,9 @@ angular.module('starter.services', [])
 					operativeSystem: localStorageService.get('deviceos')
 				}
 				esto.registraDispositivo(data).then(function(response){
-					console.log(response);
+					//console.log(response);
 				}).catch(function(err){
-					console.log(err);
+					//console.log(err);
 				});
 
         res.resolve(response);
@@ -327,7 +327,7 @@ angular.module('starter.services', [])
           message: 'no info.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -355,7 +355,7 @@ angular.module('starter.services', [])
           message: 'no info.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -393,11 +393,11 @@ angular.module('starter.services', [])
           message: 'lista no pudo ser rescatada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -420,11 +420,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -447,11 +447,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -475,11 +475,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -502,11 +502,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -538,11 +538,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -570,11 +570,11 @@ angular.module('starter.services', [])
           message: 'propiedad Eliminada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -646,7 +646,7 @@ angular.module('starter.services', [])
     get: function(graficoId) {
       for (var i = 0; i < datos.length; i++) {
         if (datos[i].id === parseInt(graficoId)) {
-          console.log("datos",datos[i]);
+          //console.log("datos",datos[i]);
           return datos[i];
         }
       }
@@ -710,7 +710,7 @@ angular.module('starter.services', [])
     get: function(servicioId) {
       for (var i = 0; i < datos.length; i++) {
         if (datos[i].id === parseInt(servicioId)) {
-          console.log("datos",datos[i]);
+          //console.log("datos",datos[i]);
           return datos[i];
         }
       }
@@ -770,12 +770,12 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
         datos = response.oficinas;
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -798,11 +798,11 @@ angular.module('starter.services', [])
           message: 'propiedad no agregada.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
-      console.log('El Error', err);
+      //console.log('El Error', err);
       var error = (err.data == null) ? err : err.data.msg;
       res.reject({
         reason: 'error',
@@ -942,7 +942,7 @@ angular.module('starter.services', [])
     get: function(documentoId) {
       for (var i = 0; i < datos.length;) {
         if (datos[i].id === parseInt(documentoId)) {
-          console.log("datos",datos[i]);
+          //console.log("datos",datos[i]);
           return datos[i];
         }
       }

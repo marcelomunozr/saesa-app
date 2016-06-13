@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
   $rootScope.terminosCondiciones = "";
   $rootScope.getTerminos = function(){
     User.getTerminos().then(function(res){
-      console.log("Terminos y Condiciones", res);
+      //console.log("Terminos y Condiciones", res);
       $rootScope.terminosCondiciones = res.terminos.descripcion;
     }).catch(function(err){
 
@@ -43,7 +43,7 @@ angular.module('starter.controllers', [])
       User.registraDispositivo(data).then(function(res){
         localStorageService.set('device.registered', 1);
       }).catch(function(err){
-        console.log("El Error", err);
+        //console.log("El Error", err);
       });
     }
   }
@@ -71,7 +71,7 @@ angular.module('starter.controllers', [])
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
-    console.log("La URL", url);
+    //console.log("La URL", url);
     $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
     .then(function(event) {})
     .catch(function(event) {});
@@ -123,7 +123,7 @@ angular.module('starter.controllers', [])
       servicio : $rootScope.propiedadPortada.numCliente
     }
     Property.getOnlyDueDocuments($rootScope.propiedadActiva).then(function(res){
-      console.log("Los Impagos", res);
+      //console.log("Los Impagos", res);
       var documentos = res.detalle.unpaid;
       var totalPagar = 0;
       angular.forEach(documentos, function(value, key) {
@@ -168,10 +168,10 @@ angular.module('starter.controllers', [])
           }
 
       }).catch(function(err){
-        console.log('Error en Propiedad', err);
+        //console.log('Error en Propiedad', err);
       });
     }).catch(function(err){
-      console.log("El Error", err);
+      //console.log("El Error", err);
     });
   }
 
@@ -207,13 +207,13 @@ angular.module('starter.controllers', [])
 
   $rootScope.eliminarServicio = function(laPropiedad){
     var propiedades = $rootScope.sesionUsuario.Propiedades.length;
-    console.log('Eliminar Servicio');
-    console.log("Propiedades: ", laPropiedad);
+    //console.log('Eliminar Servicio');
+    //console.log("Propiedades: ", laPropiedad);
     Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
-      console.log("LLEGO LA RESPUESTA!", res);
-      console.log("hasta aca se deberia haber ejecutado");
+      //console.log("LLEGO LA RESPUESTA!", res);
+      //console.log("hasta aca se deberia haber ejecutado");
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
     }).finally(function(){
       $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
     });
@@ -226,7 +226,7 @@ angular.module('starter.controllers', [])
   $scope.formdata = {
     terms:false
   };
-  console.log('paso', $scope.regdata);
+  //console.log('paso', $scope.regdata);
 
   $scope.modal = $ionicModal.fromTemplateUrl('templates/modal-terms.html', {
     scope: $scope,
@@ -272,11 +272,11 @@ angular.module('starter.controllers', [])
 .controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $stateParams, $ionicHistory, User, localStorageService){
 	$scope.regdata.paso = 1;
   $scope.registerUser = function(){
-    console.log('paso', $scope.formdata);
+    //console.log('paso', $scope.formdata);
     User.register($scope.formdata).then(function(response){
       $scope.idUsuario = response.idUsuario;
       localStorageService.set('user.id', response.idUsuario);
-      console.log('ID del Registro', $scope.idUsuario);
+      //console.log('ID del Registro', $scope.idUsuario);
       $state.go('register.addaccount');
     }).catch(function(err){
       var labelError = '';
@@ -313,9 +313,9 @@ angular.module('starter.controllers', [])
   $scope.regdata.paso = 2;
   $scope.listaRelaciones = [];
   Property.getRelationList().then(function(res){
-    console.log(res);
+    //console.log(res);
     $scope.listaRelaciones = res.relaciones;
-    console.log($scope.listaRelaciones);
+    //console.log($scope.listaRelaciones);
   }).catch(function(err){
 
   });
@@ -356,7 +356,7 @@ angular.module('starter.controllers', [])
     }else{
       $state.go('register.form');
     }
-    console.log('Los datos', $scope.formdata);
+    //console.log('Los datos', $scope.formdata);
   }
   $scope.formdata = [];
   $scope.formdata.codEmpresa = -1;
@@ -366,14 +366,14 @@ angular.module('starter.controllers', [])
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, Pago, localStorageService){
     $scope.cargando = true;
     $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
-    console.log('## Los stateParams ##', $stateParams);
-    console.log("LS Propiedad: ", $rootScope.propiedadActiva);
-    console.log("Propeidad Portada: ", $rootScope.propiedadActiva);
+    //console.log('## Los stateParams ##', $stateParams);
+    //console.log("LS Propiedad: ", $rootScope.propiedadActiva);
+    //console.log("Propeidad Portada: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
     var devRegistrado = localStorageService.get('device.registered');
     var eltimer = $timeout(function(){
       $ionicLoading.hide();
-      console.log('timeout');
+      //console.log('timeout');
     }, 10000);
 
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -402,7 +402,7 @@ angular.module('starter.controllers', [])
           }else{
             idPropiedadPortada = $rootScope.propiedadActiva;
           }
-          console.log("LA propiedad activa", $rootScope.propiedadActiva);
+          //console.log("LA propiedad activa", $rootScope.propiedadActiva);
           $rootScope.propiedadActiva = idPropiedadPortada;
           localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
           Property.getDetails(idPropiedadPortada).then(function(respuesta){
@@ -413,11 +413,11 @@ angular.module('starter.controllers', [])
 			      $rootScope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
             $rootScope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
             $rootScope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
-			      console.log('Propiedad de Portada: ', $rootScope.propiedadPortada);
+			      //console.log('Propiedad de Portada: ', $rootScope.propiedadPortada);
 			    }).catch(function(error){
-			      console.log('Error en Propiedad', error);
+			      //console.log('Error en Propiedad', error);
 			    }).finally(function(){
-			      console.log('La Propiedad portada', $rootScope.propiedadPortada);
+			      //console.log('La Propiedad portada', $rootScope.propiedadPortada);
 			      $scope.cargando = false;
 			      CanvasJS.addColorSet("colorCol",
 			        [
@@ -444,7 +444,7 @@ angular.module('starter.controllers', [])
 			      }
 			      topeGrafico = maximoGrafico + 10;
             intervalo = Math.ceil(maximoGrafico / 6)
-			      console.log("Valor maximo del grafico", maximoGrafico);
+			      //console.log("Valor maximo del grafico", maximoGrafico);
 			      var chart = new CanvasJS.Chart("chartContainer",{
 			        animationEnabled: true,
 			        interactivityEnabled: false,
@@ -458,7 +458,7 @@ angular.module('starter.controllers', [])
 			        },
 			        data: GraficoCuenta.transformDatos($rootScope.propiedadPortada.consumo, maximoGrafico)
 			      });
-            console.log('La sesion', $rootScope.sesionUsuario);
+            //console.log('La sesion', $rootScope.sesionUsuario);
             chart.render();
 			      $ionicLoading.hide();
 			      $timeout.cancel(eltimer);
@@ -467,7 +467,7 @@ angular.module('starter.controllers', [])
 			    $state.go('register.addaccount');
 			  }
 			}).catch(function(err){
-			  console.log('Error en Usuario', err);
+			  //console.log('Error en Usuario', err);
 			});
     }
     $scope.fetchUser();
@@ -485,11 +485,11 @@ angular.module('starter.controllers', [])
       template: 'Consultando Información...'
     });
   });
-  console.log($rootScope.propiedadPortada),
+  //console.log($rootScope.propiedadPortada),
   $scope.listadocumentos = [];
 
   Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
-    console.log('La Respuesta', respuesta);
+    //console.log('La Respuesta', respuesta);
     $scope.cuenta.detalle = respuesta.detalle.details;
     $scope.cuenta.documentos = respuesta.detalle.unpaid;
     $scope.saldoTotal = 0;
@@ -497,7 +497,7 @@ angular.module('starter.controllers', [])
     angular.forEach($scope.cuenta.documentos, function(value, key) {
       $scope.cuenta.documentos[key].seleccionado = false;
     })
-    console.log("Impagos", $scope.cuenta.documentos);
+    //console.log("Impagos", $scope.cuenta.documentos);
     $scope.iniciaPago = function(){
       if($scope.seleccionados > 0){
         $ionicLoading.show({
@@ -531,18 +531,18 @@ angular.module('starter.controllers', [])
                 data.documentos.push(documento);
               }
             });
-            console.log("Los datos hermanos", data);
+            //console.log("Los datos hermanos", data);
             Pago.guardaVariosDatosWebpayOC(data).then(function(res){
               $ionicLoading.hide();
               $rootScope.abrirTbk(data);
             }).catch(function(err){
-              console.log('Error en Propiedad', err);
+              //console.log('Error en Propiedad', err);
             })
           }).catch(function(err){
-            console.log('Error en Propiedad', err);
+            //console.log('Error en Propiedad', err);
           });
         }).catch(function(err){
-          console.log('Error en Propiedad', err);
+          //console.log('Error en Propiedad', err);
         });
       }else{
         $rootScope.iniciaPagoTotal();
@@ -562,10 +562,10 @@ angular.module('starter.controllers', [])
       $scope.saldoTotal = saldoTotal;
     };
   }).catch(function(err){
-    console.log('El Cagazo', err);
+    //console.log('El Cagazo', err);
   }).finally(function(){
-    console.log('El Detalle', $scope.cuenta.detalle);
-    console.log('Documentos', $scope.cuenta.documentos);
+    //console.log('El Detalle', $scope.cuenta.detalle);
+    //console.log('Documentos', $scope.cuenta.documentos);
     $ionicLoading.hide();
   });
 })
@@ -578,14 +578,14 @@ angular.module('starter.controllers', [])
       template: 'Consultando Información...'
     });
     $scope.poblarPropiedad().then(function(res){
-      console.log('Termino de cargar las propiedades');
+      //console.log('Termino de cargar las propiedades');
       execute();
     }).catch(function(err){
       $ionicLoading.hide();
     }).finally(function(){
       $ionicSlideBoxDelegate.update();
       $ionicLoading.hide();
-      console.log("LA WEA DE LA WEA", $rootScope.slideServicios);
+      //console.log("LA WEA DE LA WEA", $rootScope.slideServicios);
     });
   });
 
@@ -613,14 +613,14 @@ angular.module('starter.controllers', [])
 
   $scope.eliminarServicio = function(laPropiedad){
     var propiedades = $scope.PropiedadesUsuario.length;
-    console.log('Eliminar Servicio');
-    console.log("Propiedades: ", laPropiedad);
+    //console.log('Eliminar Servicio');
+    //console.log("Propiedades: ", laPropiedad);
     Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
-      console.log("LLEGO LA RESPUESTA!", res);
+      //console.log("LLEGO LA RESPUESTA!", res);
 
-      console.log("hasta aca se deberia haber ejecutado");
+      //console.log("hasta aca se deberia haber ejecutado");
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
     }).finally(function(){
       $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
     });
@@ -633,14 +633,14 @@ angular.module('starter.controllers', [])
       var prom = $q.defer();
       Property.getDetails(laPropiedad.id).then(function(response){
         var portada = false;
-        console.log($rootScope.propiedadActiva);
+        //console.log($rootScope.propiedadActiva);
         if($rootScope.propiedadActiva == laPropiedad.id){
           portada = true;
         }
         $scope.PropiedadesUsuario[llave]  = {esPortada:portada, propiedad: laPropiedad, detalles: response.detalle.Property};
         prom.resolve();
       }).catch(function(err){
-        console.log("ERROR EN SERVICIO", err);
+        //console.log("ERROR EN SERVICIO", err);
         prom.reject({
           reason: 'no',
           message: 'ingreso incorrecto.'
@@ -662,15 +662,15 @@ angular.module('starter.controllers', [])
     }, 50);
   };
   function execute() {
-    console.log($scope.PropiedadesUsuario);
+    //console.log($scope.PropiedadesUsuario);
     $rootScope.slideServicios = $scope.PropiedadesUsuario;
   }
   $scope.nextSlide = function() {
-    console.log('next');
+    //console.log('next');
     $ionicSlideBoxDelegate.next();
   }
   $scope.prevSlide = function() {
-    console.log('prev');
+    //console.log('prev');
     $ionicSlideBoxDelegate.previous();
   }
 
@@ -713,14 +713,14 @@ angular.module('starter.controllers', [])
   $scope.formdata.propiedad = -1;
   $scope.formdata.tipofalla = -1;
   $scope.cuandoCambia = function(){
-    console.log($scope.propiedades[$scope.formdata.propiedad]);
+    //console.log($scope.propiedades[$scope.formdata.propiedad]);
     var indiceActivo = parseInt($scope.propiedades[$scope.formdata.propiedad].related_enterprise);
     if(angular.isNumber(indiceActivo)){
       $scope.activa = $scope.empresas[indiceActivo];
     }
-    console.log("Cambia activa", $scope.activa);
+    //console.log("Cambia activa", $scope.activa);
   }
-  console.log("La Activa", $scope.activa);
+  //console.log("La Activa", $scope.activa);
   $scope.abrirDialogoSubida = function(){
     $ionicPlatform.ready(function(){
       var options = {
@@ -747,7 +747,7 @@ angular.module('starter.controllers', [])
     $ionicLoading.show({
       template: 'Enviando formulario...'
     });
-    console.log($scope.formdata);
+    //console.log($scope.formdata);
     var falla = {
       rut: $rootScope.sesionUsuario.rut,
       idEmpresa: $scope.propiedades[$scope.formdata.propiedad].related_enterprise,
@@ -756,23 +756,23 @@ angular.module('starter.controllers', [])
       comentarios: $scope.formdata.comentarios,
       base64img: $scope.formdata.imagen
     };
-    console.log("Formulario Falla: ", falla);
+    //console.log("Formulario Falla: ", falla);
     Fallas.reportarFalla(falla).then(function(res){
-      console.log(res);
+      //console.log(res);
       $ionicLoading.hide();
       $state.go('app.resumen-cuenta');
       $rootScope.tituloModal = 'Formulario enviado';
       $rootScope.textoModal = 'Se ha enviado su informe de falla';
       $rootScope.openModal();
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
       $ionicLoading.hide();
       $state.go('app.resumen-cuenta');
       $rootScope.tituloModal = 'Error';
       $rootScope.textoModal = err.mensaje;
       $rootScope.openModal();
     }).finally(function(ble){
-      console.log(ble);
+      //console.log(ble);
     });
   }
 })
@@ -804,15 +804,15 @@ angular.module('starter.controllers', [])
           });
         }
       });
-      console.log("Objeto Comunas", $scope.comunas);
+      //console.log("Objeto Comunas", $scope.comunas);
       $ionicLoading.hide();
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
     });
     Oficinas.getFiltros().then(function(res){
       $scope.filtrosOficinas = res.filtros;
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
     });
     $scope.reseteaComunas = function(){
       $scope.buscarOficina.nombreComuna = "";
@@ -849,7 +849,7 @@ angular.module('starter.controllers', [])
           infowindow.open(map,marker);
         });
       }
-      console.log($scope.oficina.grafico);
+      //console.log($scope.oficina.grafico);
       $scope.map = map;
       $ionicLoading.hide();
     });
@@ -865,14 +865,14 @@ angular.module('starter.controllers', [])
   $scope.rememberThePassword = function(){
     User.forgotPassword($scope.formdata.rut).then(function(response){
       if(response.exito == 1){
-        console.log(response.exito);
+        //console.log(response.exito);
         $state.go('login');
         $rootScope.tituloModal = 'Recuperación Exitosa';
         $rootScope.textoModal = response.vb;
         $rootScope.openModal();
       }
     }).catch(function(error){
-      console.log('Error: ', error);
+      //console.log('Error: ', error);
       /** Levantamos modal con mensajes de error **/
         var labelError = '';
         $rootScope.tituloModal = 'Ha ocurrido un error';
@@ -940,30 +940,30 @@ angular.module('starter.controllers', [])
     $ionicLoading.show({
       template: 'Enviando consulta...'
     });
-    console.log($scope.formdata);
+    //console.log($scope.formdata);
     var cntacto = {
       rut: $rootScope.sesionUsuario.rut,
       idEmpresa: $scope.propiedades[$scope.formdata.propiedad].related_enterprise,
       idServicio: $scope.propiedades[$scope.formdata.propiedad].client_number,
       comentarios: $scope.formdata.comentarios
     };
-    console.log(cntacto);
+    //console.log(cntacto);
     Contacto.enviaContacto(cntacto).then(function(res){
-      console.log(res);
+      //console.log(res);
       $ionicLoading.hide();
       $state.go('app.resumen-cuenta');
       $rootScope.tituloModal = 'Contacto Enviado';
       $rootScope.textoModal = 'Se ha enviado su consulta';
       $rootScope.openModal();
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
       $ionicLoading.hide();
       $state.go('app.resumen-cuenta');
       $rootScope.tituloModal = 'Error';
       $rootScope.textoModal = 'Ha ocurrido un error al enviar su consulta';
       $rootScope.openModal();
     }).finally(function(ble){
-      console.log(ble);
+      //console.log(ble);
     });
   }
 })
@@ -976,13 +976,13 @@ angular.module('starter.controllers', [])
       template: 'Consultando Información...'
     });
   });
-  console.log("Estate Params", $stateParams);
+  //console.log("Estate Params", $stateParams);
   Property.getUltimosPagos($stateParams.propertyId).then(function(respuesta){
-    console.log('La Respuesta', respuesta);
+    //console.log('La Respuesta', respuesta);
     $scope.pagados = respuesta.pagos;
     $scope.detalles = respuesta.detalles;
   }).catch(function(err){
-    console.log('El Cagazo', err);
+    //console.log('El Cagazo', err);
   }).finally(function(){
     $ionicLoading.hide();
   });
@@ -1010,7 +1010,7 @@ angular.module('starter.controllers', [])
       User.registraDispositivo(data).then(function(res){
         localStorageService.set('device.registered', 1);
       }).catch(function(err){
-        console.log("El Error", err);
+        //console.log("El Error", err);
       });
     }
   }
@@ -1029,7 +1029,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.formdata);
+    //console.log('Doing login', $scope.formdata);
     $scope.formdata.rut = ngRut.clean($scope.formdata.rut);
     User.login($scope.formdata).then(function(response){
       if(response.idUsuario != null){
@@ -1038,7 +1038,7 @@ angular.module('starter.controllers', [])
         $state.go('app.resumen-cuenta');
       }
     }).catch(function(error){
-      console.log('Error: ', error);
+      //console.log('Error: ', error);
       /** Levantamos modal con mensajes de error **/
         var labelError = '';
         $rootScope.tituloModal = 'Ha ocurrido un error';
