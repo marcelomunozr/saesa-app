@@ -1,61 +1,71 @@
-<ion-view view-title="Oficinas">
-  <ion-content>
-    <form>
-        <div class="list list-inset">
-          <div class="oficinas">
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Región
-              </div>
-              <select ng-model="buscarOficina.nombreRegion" ng-change="reseteaComunas()" name="buscarOficinaSelectRegion">
-                <option value="">Seleccione una región</option>
-                <option value="{{region}}" ng-repeat="region in regiones">
-                  {{region | capitalize}}
-                </option>
-              </select>
-            </label>
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Comuna
-              </div>
-              <select ng-model="buscarOficina.nombreComuna" name="buscarOficinaSelectComuna">
-                <option value="">Seleccione comuna</option>
-                <option value="{{comuna.labelComuna}}" ng-repeat="comuna in comunas | filter:buscarOficina.nombreRegion | orderBy">
-                  {{comuna.labelComuna | capitalize}}
-                </option>
-              </select>
-            </label>
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Tipo de oficina
-              </div>
-              <select name="filtrarOficinaSelect" ng-model="buscarOficina.idTipoOficina" >
-                <option value="">Seleccione un tipo</option>
-                <option value="{{filtro.idTipoOficina}}" ng-repeat="filtro in filtrosOficinas">
-                  {{filtro.descripcion}}
-                </option>
-              </select>
-            </label>
-            <label class="item item-input">
-              <input type="text" placeholder="Buscar oficina" ng-model="buscarOficina.direccion" name="buscarOficinaInput">
-            </label>
-            <div class="clear-10"></div>
-            <div class="cargador-oficinas" name="cargadorOficinas">
-              <ion-item class="" ng-repeat="oficina in oficinas | filter:buscarOficina | orderBy" ui-sref="app.oficina({oficinaId: oficina.id})">
-                <div class="row no-padding la-oficina">
-                  <div class="col no-padding text-center">
-                    <span class="ticon ti-map-alt"></span>
-                  </div>
-                  <div class="col col-80 no-padding">
-                    <h3>{{oficina.nombreComuna | capitalize}} - {{oficina.nombreRegion | capitalize}}</h3>
-                    <h3>{{oficina.direccion.trim() | capitalize}}</h3>
-                    <h6>{{oficina.descripcion.trim() | capitalize}}</h6>
-                  </div>
+  <ion-view view-title="Oficinas" hide-back-button="true">
+    <ion-nav-bar class="bar-stable oficinas-head">
+      <ion-nav-back-button>
+        <button class="button button-clear back-header" ui-sref="app.profile">
+          <span class="ti-user"></span>
+        </button>
+        <button class="button button-clear go-homi" ui-sref="app.home">
+          <span class="ti-home"></span>
+        </button>
+      </ion-nav-back-button>
+    </ion-nav-bar>>
+    <ion-content>
+      <form>
+          <div class="list list-inset">
+            <div class="oficinas">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Región
                 </div>
-              </ion-item>
+                <select ng-model="buscarOficina.nombreRegion" ng-change="reseteaComunas()" name="buscarOficinaSelectRegion">
+                  <option value="">Seleccione una región</option>
+                  <option value="{{region}}" ng-repeat="region in regiones">
+                    {{region | capitalize}}
+                  </option>
+                </select>
+              </label>
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Comuna
+                </div>
+                <select ng-model="buscarOficina.nombreComuna" name="buscarOficinaSelectComuna">
+                  <option value="">Seleccione comuna</option>
+                  <option value="{{comuna.labelComuna}}" ng-repeat="comuna in comunas | filter:buscarOficina.nombreRegion | orderBy">
+                    {{comuna.labelComuna | capitalize}}
+                  </option>
+                </select>
+              </label>
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Tipo de oficina
+                </div>
+                <select name="filtrarOficinaSelect" ng-model="buscarOficina.idTipoOficina" >
+                  <option value="">Seleccione un tipo</option>
+                  <option value="{{filtro.idTipoOficina}}" ng-repeat="filtro in filtrosOficinas">
+                    {{filtro.descripcion}}
+                  </option>
+                </select>
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="Buscar oficina" ng-model="buscarOficina.direccion" name="buscarOficinaInput">
+              </label>
+              <div class="clear-10"></div>
+              <div class="cargador-oficinas" name="cargadorOficinas">
+                <ion-item class="" ng-repeat="oficina in oficinas | filter:buscarOficina | orderBy" ui-sref="app.oficina({oficinaId: oficina.id})">
+                  <div class="row no-padding la-oficina">
+                    <div class="col no-padding text-center">
+                      <span class="ticon ti-map-alt"></span>
+                    </div>
+                    <div class="col col-80 no-padding">
+                      <h3>{{oficina.nombreComuna | capitalize}} - {{oficina.nombreRegion | capitalize}}</h3>
+                      <h3>{{oficina.direccion.trim() | capitalize}}</h3>
+                      <h6>{{oficina.descripcion.trim() | capitalize}}</h6>
+                    </div>
+                  </div>
+                </ion-item>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-  </ion-content>
-</ion-view>
+        </form>
+    </ion-content>
+  </ion-view>

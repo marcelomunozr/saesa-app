@@ -1,0 +1,32 @@
+<ion-view view-title="Editar mis datos" enable-menu-with-back-views="true" hide-back-button="true">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+      <button class="button button-clear go-back" ng-click="goBack()">
+        <span class="ti-back-left"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="new-profile">
+      <h4>Datos Usuario</h4>
+      <form name="login" ng-submit="doLogin()">
+        <label class="item item-input">
+          <input type="text" value="{{sesionUsuario.contact_name}}" ng-required="true">
+        </label>
+        <label class="item item-input disabled">
+          <input type="text" value="{{propiedadPortada.detalles.rutCliente}}" ng-required="true" disabled="disabled">
+        </label>
+        <label class="item item-input">
+          <input type="text" value="+569 82403890" ng-required="true">
+        </label>
+        <label class="item item-input">
+          <input type="text" value="mmunoz@multinet.cl" ng-required="true">
+        </label>
+        <button class="button button-block" type="submit">Guardar <span class="ti-arrow-right"></span></button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

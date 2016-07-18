@@ -1,10 +1,14 @@
-<ion-view view-title="Contáctenos">
-  <ion-header-bar>
-    <h1 class="title">Contáctenos</h1>
-    <div>
-      <button class="button button-clear back-header"><span class="ti-back-left"></span></button>
-    </div>
-  </ion-header-bar>
+<ion-view view-title="Contáctenos" hide-back-button="true">
+  <ion-nav-bar class="bar-stable contacto-head">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content>
       <form name="FormContact" ng-controller="ContactCtrl" ng-submit="enviarConsulta()">
         <div class="list list-inset">
@@ -25,7 +29,7 @@
           </div>
 
           <label>
-            <button class="button button-block" type="submit" ng-disabled="FormContact.$invalid || FormContact.$pristine">Enviar</button>
+            <button class="button button-block" type="submit" ng-disabled="FormContact.$invalid || FormContact.$pristine">Enviar <span class="ti-arrow-right"></span></button>
           </label>
         </div>
       </form>
@@ -33,7 +37,7 @@
         <div class="group-box">
           <div class="row">
             <div class="col col-55">
-              <img src="img/saesa.png" alt="Saesa" class="img-responsive">
+              <span class="saesa"></span>
             </div>
             <div class="col col-45">
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012020')">
@@ -46,7 +50,7 @@
         <div class="group-box">
           <div class="row">
             <div class="col col-55">
-              <img src="img/luz-osorno.png" alt="Luz Osorno" class="img-responsive">
+              <span class="luz-osorno"></span>
             </div>
             <div class="col col-45">
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012020')">
@@ -59,7 +63,7 @@
         <div class="group-box">
           <div class="row">
             <div class="col col-55">
-              <img src="img/frontel.png" alt="Frontel" class="img-responsive">
+              <span class="frontel"></span>
             </div>
             <div class="col col-45">
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
@@ -72,7 +76,7 @@
         <div class="group-box">
           <div class="row">
             <div class="col col-55">
-              <img src="img/edelaysen.png" alt="Edelaysen" class="img-responsive">
+              <span class="edelaysen"></span>
             </div>
             <div class="col col-45">
               <a class="btn pull-right" ng-click="abrirExterna('tel:6004012022')">
@@ -83,6 +87,7 @@
           </div>
         </div>
       </div>
+      <div class="clear-30"></div>
 
   </ion-content>
 </ion-view>

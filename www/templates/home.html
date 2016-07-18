@@ -1,0 +1,69 @@
+<ion-view view-title="Mi cuenta" enable-menu-with-back-views="false" hide-back-button="true">
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+        <button class="button button-clear back-header" ui-sref="app.profile">
+          <span class="ti-user"></span>
+        </button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content>
+    <div class="new-homi">
+      <div class="row">
+
+        <ion-logo-homi class="logo-homi">
+          <ion-logaso class="logo-saesa"></ion-logaso>
+        </ion-logo-homi>
+        <div class="clearfix"></div>
+
+        <div class="five-col color1" ui-sref="app.pagar({ propertyId : propiedadActiva })"><!-- iniciaPagoTotal() -->
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-money"></span>
+              <h2>Pagar</h2>
+            </div>
+          </div>
+        </div>
+        <div class="five-col color2" ng-click="abrirExterna(propiedadPortada.last_voucher)">
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-receipt"></span>
+              <h2>Última Boleta</h2>
+            </div>
+          </div>
+        </div>
+        <div class="five-col color3" ui-sref="app.informar-falla">
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-light-bulb"></span>
+              <h2>Estoy sin luz</h2>
+            </div>
+          </div>
+        </div>
+        <div class="five-col color4" ui-sref="app.notificaciones">
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-bell"></span>
+              <h2>Notificaciones</h2>
+            </div>
+          </div>
+        </div>
+        <div class="five-col color5" ui-sref="app.contactenos">
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-email"></span>
+              <h2>Contáctanos</h2>
+            </div>
+          </div>
+        </div>
+        <div class="five-col color6" ui-sref="app.oficinas">
+          <div class="v-table">
+            <div class="v-table-cell">
+              <span class="ti-location-pin"></span>
+              <h2>Oficinas</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

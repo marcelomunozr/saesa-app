@@ -1,45 +1,32 @@
-<ion-view view-title="Servicios asociados" enable-menu-with-back-views="true">
-  <ion-header-bar>
-  </ion-header-bar>
+<ion-view view-title="Servicios" hide-back-button="true">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content>
-    <div class="contenido">
-      <div class="gradient-left"></div>
-      <div class="gradient-right"></div>
-      <ion-slide-box on-slide-changed="slideChanged()" active-slide="activeSlide" show-pager="false" ng-if="slideServicios">
-        <ion-slide ng-repeat="servicio in slideServicios" class="ion-slide menu-asociados">
-          <span class="ti-angle-left" ng-click="prevSlide()"></span>
-          <span class="ti-angle-right" ng-click="nextSlide()"></span>
-          <a class="{{servicio.detalles.details.estadoServicio}}">{{servicio.propiedad.property_nickname  | capitalize}}</a>
-          <!-- app.servicios-asociados.detalle({id:1}) -->
-        </ion-slide>
-      </ion-slide-box>
-
-      <ion-slide-box on-slide-changed="slideChanged()" active-slide="activeSlide" show-pager="false" delegate-handle="slider-asociados">
-        <ion-slide ng-repeat="servicio in slideServicios" class="ion-slide contenedor-asociados">
-          <div class="box-container">
-            <div ng-if="servicio.estado=='vencida' || servicio.estado=='por-vencer'" class="alert {{servicio.estado}}">
-              <div ng-if="servicio.estado=='vencida'"><span class="ti-announcement"></span>Propiedad con suministro cortado</div>
-              <div ng-if="servicio.estado=='por-vencer'"><span class="ti-announcement"></span>Propiedad a punto de vencer</div>
-            </div>
-
-            <div class="asociados-service">       
-              <p>Nombre Titular: <strong>{{servicio.detalles.details.nombreTitular  | capitalize}}</strong></p>
-              <p>Estado del servicio: <strong>{{servicio.detalles.details.estadoServicio  | capitalize}}</strong></p>
-              <p>Fecha de corte: <strong>{{servicio.detalles.financial.fechaCorte }}</strong></p>
-              <div class="text-center">
-                <button class="button button-positive" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
-                  <span ng-show="servicio.esPortada">Propiedad de Portada</span>
-                  <span ng-hide="servicio.esPortada">Mostrar en portada</span>
-                </button>
-                <button class="button button-assertive" ng-click="modalConfirmacionEliminar(servicio.propiedad)">
-                  <span>Eliminar Propiedad</span>
-                </button>
-              </div>
-            </div>
-            <!--<p ng-if="servicio.estado=='vencida'">Para regularizar dirijasé nuestras oficinas lo más pronto posible para evitar más cargos de reposición de servicio.</p>-->
+    <div class="new-look">
+      <div class="row el-servicio menu-asociados" ng-if="slideServicios" ng-repeat="servicio in slideServicios">
+        <div class="col col-50">
+          <span class="{{servicio.detalles.details.estadoServicio}}">{{servicio.propiedad.property_nickname  | capitalize}}</span>
+        </div>
+        <div class="col text-right">
+          <div class="inline" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
+            <i ng-show="servicio.esPortada" class="ti-home in-on"></i>
+            <i ng-hide="servicio.esPortada" class="ti-home in-off"></i>
           </div>
-        </ion-slide>
-      </ion-slide-box>
+          <div class="inline" ng-click="modalConfirmacionEliminar(servicio.propiedad)">
+            <i class="ti-close danger"></i>
+          </div>
+        </div>
+      </div>
+      <button class="button button-block" type="submit">Agregar Servicios <span class="ti-layers-alt"></span></button>
     </div>
+    
   </ion-content>
 </ion-view> 

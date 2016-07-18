@@ -82,7 +82,7 @@ angular.module('starter.controllers', [])
   });
 
   $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){
-    $state.go('app.resumen-cuenta', {fetch : true});
+    $state.go('app.home', {fetch : true});
   })
 
   $rootScope.abrirExterna = function($direccion){
@@ -203,7 +203,7 @@ angular.module('starter.controllers', [])
     }).catch(function(err){
       //console.log(err);
     }).finally(function(){
-      $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+      $state.go('app.home', {fetch : true}, {location: false, inherit:false, reload:false});
     });
   }
 })
@@ -254,7 +254,7 @@ angular.module('starter.controllers', [])
   $scope.goBack = function() {
     if($rootScope.originTrack != 'register.form'){
       if($rootScope.originTrack == ''){
-        $state.go('app.resumen-cuenta');
+        $state.go('app.home');
       }else{
         $state.go($rootScope.originTrack);
       }
@@ -323,7 +323,7 @@ angular.module('starter.controllers', [])
       Property.addProperty($scope.formdata).then(function(response){
         $rootScope.propiedadActiva = response.propertyId;
         localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
-        $state.go('app.resumen-cuenta', {fetch : true});
+        $state.go('app.home', {fetch : true});
         /** Navegamos a resumen donde pediremos los datos **/
       }).catch(function(error){
         /** Levantamos modal con mensajes de error **/
@@ -587,7 +587,7 @@ angular.module('starter.controllers', [])
   $scope.marcarComoPortada = function(idPortada){
     $rootScope.propiedadActiva = idPortada;
     localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
-    $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+    $state.go('app.home', {fetch : true}, {location: false, inherit:false, reload:false});
   }
 
   $scope.modalConfirmacionEliminar = function(laPropiedad) {
@@ -617,7 +617,7 @@ angular.module('starter.controllers', [])
     }).catch(function(err){
       //console.log(err);
     }).finally(function(){
-      $state.go('app.resumen-cuenta', {fetch : true}, {location: false, inherit:false, reload:false});
+      $state.go('app.home', {fetch : true}, {location: false, inherit:false, reload:false});
     });
   }
 
@@ -755,14 +755,14 @@ angular.module('starter.controllers', [])
     Fallas.reportarFalla(falla).then(function(res){
       //console.log(res);
       $ionicLoading.hide();
-      $state.go('app.resumen-cuenta');
+      $state.go('app.home');
       $rootScope.tituloModal = 'Formulario enviado';
       $rootScope.textoModal = 'Se ha enviado su informe de falla';
       $rootScope.openModal();
     }).catch(function(err){
       //console.log(err);
       $ionicLoading.hide();
-      $state.go('app.resumen-cuenta');
+      $state.go('app.home');
       $rootScope.tituloModal = 'Error';
       $rootScope.textoModal = err.mensaje;
       $rootScope.openModal();
@@ -946,14 +946,14 @@ angular.module('starter.controllers', [])
     Contacto.enviaContacto(cntacto).then(function(res){
       //console.log(res);
       $ionicLoading.hide();
-      $state.go('app.resumen-cuenta');
+      $state.go('app.home');
       $rootScope.tituloModal = 'Contacto Enviado';
       $rootScope.textoModal = 'Se ha enviado su consulta';
       $rootScope.openModal();
     }).catch(function(err){
       //console.log(err);
       $ionicLoading.hide();
-      $state.go('app.resumen-cuenta');
+      $state.go('app.home');
       $rootScope.tituloModal = 'Error';
       $rootScope.textoModal = 'Ha ocurrido un error al enviar su consulta';
       $rootScope.openModal();
@@ -1030,7 +1030,7 @@ angular.module('starter.controllers', [])
       if(response.idUsuario != null){
         localStorageService.set('user.id', response.idUsuario);
         $rootScope.registraDispositivo();
-        $state.go('app.resumen-cuenta');
+        $state.go('app.home');
       }
     }).catch(function(error){
       //console.log('Error: ', error);
@@ -1048,6 +1048,10 @@ angular.module('starter.controllers', [])
     });
   };
 })
+
+
+/*MARCELOSHET*/
+
 
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.backButton.text('').icon('ti-back-left');

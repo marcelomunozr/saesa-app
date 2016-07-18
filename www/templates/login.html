@@ -13,7 +13,7 @@
           <input type="password" placeholder="Contraseña" ng-maxlength="6" ng-model="formdata.password" ng-required="true">
         </label>
         <label>
-          <button class="button button-block" type="submit" ng-disabled="login.$invalid || login.$pristine">Ingresar</button>
+          <button class="button button-block" type="submit" ng-disabled="login.$invalid || login.$pristine">Ingresar <span class="ti-arrow-right"></span></button>
         </label>
         <a ui-sref="register.form" class="pull-left button button-clear button-positive">Registrarme</a>
         <a ui-sref="forgot-password" class="pull-right button button-clear button-positive">Olvidé mi contraseña</a>

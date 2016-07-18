@@ -1,92 +1,36 @@
-<ion-side-menus enable-menu-with-back-views="true"><!--  -->
-  <ion-side-menu-content>
+<!-- ======================================================================= -->
+<!-- NEW LOOK MENU -->
+<!-- ======================================================================= -->
+<ion-side-menus><!--  -->
+  <ion-side-menu-content><!-- 
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
-<!--      <button class="button button-clear back-header" ng-click="goBack()">
-          <span class="ti-back-left"></span>
-        </button> -->
-      </ion-nav-back-button>
-      <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        <button class="button button-clear back-header" ui-sref="">
+          <span class="ti-user"></span>
         </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
+      </ion-nav-back-button>
+    </ion-nav-bar> -->
+
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-
-  <ion-side-menu side="right">
-    <ion-header-bar class="bar-stable">
-
-    </ion-header-bar>
-    <ion-content>
-      <ion-list>
-        <ion-item nav-clear menu-close ui-sref="app.pantalla-configuracion">
-          <div class="row">
-            <div class="col col-75">
-              <h2>{{sesionUsuario.contact_name}}</h2>
-              <h3>Titular: {{sesionUsuario.contact_name}}</h3>
-            </div>
-            <div class="col">
-              <span class="ticon ti-settings pull-right"></span>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="app.resumen-cuenta">
-          <div class="row">
-            <div class="col ttl">
-              <span class="ticon ti-layout-accordion-separated pull-left"></span>
-              <h4>Resumen Cuenta</h4>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear>
-          <div class="row">
-            <div class="col ttl">
-              <div nav-clear menu-close>
-                <span class="ticon ti-layers-alt pull-left"></span>
-                <h4>Servicios Asociados</h4>
-                <ul>
-                  <li ng-repeat="propiedad in sesionUsuario.Propiedades" ng-click="marcarComoPortada(propiedad.id)">{{propiedad.property_nickname}} <span class="pull-right ticon ti-close" ng-click="modalConfirmacionEliminar(propiedad)"></span></li>
-                </ul>
-                </div>
-              <a href="#" class="agregar-servicio" menu-close ui-sref="register.addaccount">Agregar Servicio</a>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="app.informar-falla">
-          <div class="row">
-            <div class="col ttl">
-              <span class="ticon ti-flag pull-left"></span>
-              <h4>Informar Falla</h4>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="app.oficinas">
-          <div class="row">
-            <div class="col ttl">
-              <span class="ticon ti-location-pin pull-left"></span>
-              <h4>Oficinas</h4>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="app.notificaciones">
-          <div class="row">
-            <div class="col ttl">
-              <span class="ticon ti-bell pull-left"></span>
-              <h4>Notificaciones</h4>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="app.contactenos">
-          <div class="row">
-            <div class="col ttl">
-              <span class="ticon ti-clipboard pull-left"></span>
-              <h4>Contáctanos</h4>
-            </div>
-          </div>
-        </ion-item>
-
-      </ion-list>
-    </ion-content>
-  </ion-side-menu>
 </ion-side-menus>
+
+
+<ion-new-menu class="ion-new-menu">
+  <ion class="btn-nav" ui-sref="app.servicios-asociados" ui-sref-active="current">
+    <span class="ti-layers-alt"></span>
+    <h3>Servicios</h3>
+  </ion>
+  <ion class="btn-nav" ui-sref="app.consumo" ui-sref-active="current">
+    <span class="ti-bar-chart"></span>
+    <h3>Consumo</h3>
+  </ion>
+  <ion class="btn-nav" ui-sref="app.documentos-pagados({ propertyId : propiedadActiva })" ui-sref-active="current">
+    <span class="ti-calendar"></span>
+    <h3>Historial <br>de Pagos</h3>
+  </ion>
+  <ion class="btn-nav" ui-sref="app.documentos-impagos({ propertyId : propiedadActiva })" ui-sref-active="current">
+    <span class="ti-bookmark"></span>
+    <h3>Pagos Pendientes</h3>
+  </ion>
+</ion-new-menu>

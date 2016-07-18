@@ -1,21 +1,21 @@
-<ion-view view-title="Registro de Pagos">
-  <ion-header-bar>
-    <h1 class="title">Registro de Pagos</h1>
-    <div>
-      <button class="button button-clear back-header" ng-click="goBack()"><span class="ti-back-left"></span></button>
-    </div>
-  </ion-header-bar>
+<ion-view view-title="Historial de Pagos" hide-back-button="true">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content>
-    <div class="contenido">
-      <div class="row">
-        <div class="col col-75 datos">
-          <h3>{{detalles.nombreTitular}}</h3>
-          <p>Rut: {{detalles.rutCliente}}</p>
-          <p>Número de cliente: {{detalles.numeroServicio}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
+    <div class="new-look">
+      <h4>{{detalles.nombreTitular}}</h4>
+      <!-- <p>Rut: {{detalles.rutCliente}}</p>
+      <p>Número de cliente: {{detalles.numeroServicio}}</p> -->
+      <div class="row no-padd">
+        <div class="col no-padd">
           <div class="box impagos" ng-repeat="pago in pagados">
             <div class="row">
               <div class="col">
@@ -29,6 +29,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="clear-20"></div>
     </div>
   </ion-content>
 </ion-view>

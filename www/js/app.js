@@ -112,10 +112,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'LoginCtrl',
     onEnter: function($state, User){
       if(User.isLogged()){
-        $state.go('app.resumen-cuenta',{fetch : true});
+        $state.go('app.home',{fetch : true});
       }
     }
   })
+
 
   //register content
   .state('register', {
@@ -291,6 +292,62 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent':{
         templateUrl: "templates/pantalla-configuracion.html"
+      }
+    }
+  })
+
+
+
+
+  /*MARCELOSHET 2016-07-13*/
+  //HOME
+  .state('app.home', {
+    url: "/home?fetch",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/home.html",
+        controller: "ResumenCtrl"
+      }
+    }
+  })
+  .state('app.profile', {
+    url: "/profile",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/profile.html",
+        controller: "ResumenCtrl"
+      }
+    }
+  })
+  .state('app.profile-edit', {
+    url: "/profile-edit",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/profile-edit.html",
+        controller: "ResumenCtrl"
+      }
+    }
+  })
+  .state('app.pagar', {
+    url: "/pagar/:propertyId",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/pagar.html",
+        controller: "DocumentosImpagosCtrl"
+      }
+    }
+  })
+  .state('app.consumo', {
+    url: "/consumo",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/consumo.html",
+        controller: "ResumenCtrl"
       }
     }
   })
