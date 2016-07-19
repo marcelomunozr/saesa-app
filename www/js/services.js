@@ -141,6 +141,39 @@ angular.module('starter.services', [])
 
 .factory('User', function($http, $q, laConfig, localStorageService){
   var esto = this;
+
+	esto.editarCuenta = function($data){
+		var res = $q.defer();
+		$http({
+      method: 'POST',
+      url: laConfig.backend + 'modificarCuenta',
+      data: {
+				'rut' : $data.rut,
+				'celular' : $data.telephone,
+				'correo' : $data.email,
+				'nombre' : $data.contact_name,
+				'user_id' : $data.user_id
+			}
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : "Ha ocurrido un error, favor contactenos";
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+		return res.promise;
+	}
+
 	esto.getTerminos = function(){
 		var res = $q.defer();
 		$http({

@@ -358,24 +358,175 @@ angular.module('starter.controllers', [])
   $scope.formdata.relPropiedad = -1;
 })
 
+.controller('ChangePasswordCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, localStorageService, User){
+
+})
+
+.controller('EditaCuentaCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, localStorageService, User){
+  var userId = localStorageService.get('user.id');
+  var eltimer = $timeout(function(){
+    $ionicLoading.hide();
+  }, 10000);
+  $scope.formdata = {};
+  $scope.fetchUser = function($cache){
+    User.fetchMeTheUser(userId, $cache).then(function(response){
+      $rootScope.sesionUsuario = response.sesionUsuario;
+      $scope.formdata.rut = response.sesionUsuario.rut;
+      $scope.formdata.contact_name = response.sesionUsuario.contact_name;
+      $scope.formdata.email = response.sesionUsuario.email;
+      $scope.formdata.telephone = response.sesionUsuario.telephone;
+      console.log("La Sesion del usuario de la wea de la wea: ", $rootScope.sesionUsuario);
+    }).catch(function(err){
+      console.log('Error en Usuario', err);
+    }).finally(function(){
+      $ionicLoading.hide();
+    });
+  }
+  $scope.editarCuenta = function(){
+    $ionicLoading.show({
+      template: 'Enviando formulario...'
+    });
+    $scope.formdata.user_id = userId;
+    User.editarCuenta($scope.formdata).then(function(res){
+      $ionicLoading.hide();
+      $state.go('app.home');
+      $rootScope.tituloModal = 'Formulario enviado';
+      $rootScope.textoModal = res.msg;
+      $rootScope.openModal();
+    }).catch(function(err){
+      console.log(err);
+      $ionicLoading.hide();
+      $state.go('app.home');
+      $rootScope.tituloModal = 'Error';
+      $rootScope.textoModal = err.err;
+      $rootScope.openModal();
+    });
+  }
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.fetchUser(true);
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+  });
+
+})
+.controller('ConsumoCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, localStorageService){
+  $scope.cargando = true;
+  var userId = localStorageService.get('user.id');
+  var devRegistrado = localStorageService.get('device.registered');
+  var eltimer = $timeout(function(){
+    $ionicLoading.hide();
+  }, 10000);
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.fetchUser(true);
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+  });
+  if(devRegistrado == 0){
+    $rootScope.registraDispositivo();
+  }
+
+  $scope.fetchUser = function($cache){
+    User.fetchMeTheUser(userId, $cache).then(function(response){
+      var propiedadPortada = {};
+      $rootScope.sesionUsuario = response.sesionUsuario;
+      if(!angular.isUndefined(response.sesionUsuario.Propiedades[0])){
+        var idPropiedadPortada = 0;
+        if($rootScope.propiedadActiva == 0){
+          idPropiedadPortada = response.sesionUsuario.Propiedades[0].id;
+        }else{
+          idPropiedadPortada = $rootScope.propiedadActiva;
+        }
+        //console.log("LA propiedad activa", $rootScope.propiedadActiva);
+        $rootScope.propiedadActiva = idPropiedadPortada;
+        localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
+        Property.getDetails(idPropiedadPortada).then(function(respuesta){
+          $rootScope.propiedadPortada.numCliente  = respuesta.detalle.Property.client_number;
+          $rootScope.propiedadPortada.empresa     = respuesta.detalle.Property.related_enterprise;
+          $rootScope.propiedadPortada.consumo     = respuesta.detalle.Property.consumption;
+          $rootScope.propiedadPortada.detalles    = respuesta.detalle.Property.details;
+          $rootScope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
+          $rootScope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
+          $rootScope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
+          //console.log('Propiedad de Portada: ', $rootScope.propiedadPortada);
+        }).catch(function(error){
+          //console.log('Error en Propiedad', error);
+        }).finally(function(){
+          //console.log('La Propiedad portada', $rootScope.propiedadPortada);
+          $scope.cargando = false;
+          CanvasJS.addColorSet("colorCol",
+            [
+            "#d7e4ec",
+            "#17c300"
+            ]
+          );
+          var maximoGrafico = 0;
+          var maxAnterior = 0;
+          var maxActual = 0;
+          var intervalo = 20;
+          angular.forEach($rootScope.propiedadPortada.consumo, function(objeto, llave){
+              if(parseInt(objeto.anoActual) > maxActual){
+                maxActual = parseInt(objeto.anoActual);
+              }
+              if(parseInt(objeto.anoAnterior) > maxAnterior){
+                maxAnterior = parseInt(objeto.anoAnterior);
+              }
+          });
+          if(maxAnterior > maxActual){
+            maximoGrafico = parseInt(maxAnterior);
+          }else{
+            maximoGrafico = parseInt(maxActual);
+          }
+          topeGrafico = maximoGrafico + 10;
+          intervalo = Math.ceil(maximoGrafico / 6)
+          //console.log("Valor maximo del grafico", maximoGrafico);
+          var chart = new CanvasJS.Chart("chartContainer",{
+            animationEnabled: true,
+            interactivityEnabled: false,
+            backgroundColor: "#fcfcfc",
+            colorSet: "colorCol",
+            dataPointMaxWidth: 12,
+            height: 180,
+            axisY:{
+              interval: intervalo,
+              maximum: topeGrafico
+            },
+            data: GraficoCuenta.transformDatos($rootScope.propiedadPortada.consumo, maximoGrafico)
+          });
+          //console.log('La sesion', $rootScope.sesionUsuario);
+          chart.render();
+          $ionicLoading.hide();
+          $timeout.cancel(eltimer);
+        });
+      }else{
+        $state.go('register.addaccount');
+      }
+    }).catch(function(err){
+      //console.log('Error en Usuario', err);
+    });
+  }
+  $scope.fetchUser();
+  $scope.$on('$destroy', function(event){
+    $timeout.cancel(eltimer);
+  });
+})
+
+
+
 .controller('ResumenCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, GraficoCuenta, User, Property, Pago, localStorageService){
     $scope.cargando = true;
-    $scope.linkPago = 'http://portal.saesa.cl:7778/portal/page?_pageid=1052,9429437&_dad=portal&_schema=PORTAL&_requestedpageid=PAG_WEB_V2_PAGUELINEA';
-    //console.log('## Los stateParams ##', $stateParams);
-    //console.log("LS Propiedad: ", $rootScope.propiedadActiva);
-    //console.log("Propeidad Portada: ", $rootScope.propiedadActiva);
     var userId = localStorageService.get('user.id');
     var devRegistrado = localStorageService.get('device.registered');
     var eltimer = $timeout(function(){
       $ionicLoading.hide();
       //console.log('timeout');
     }, 10000);
-
     $scope.$on('$ionicView.beforeEnter', function(){
-	    if($stateParams.fetch){
-				$scope.fetchUser(true);
-	    }
-      $ionicLoading.show({
+	    $scope.fetchUser(true);
+	    $ionicLoading.show({
         template: 'Consultando Información...'
       });
     });
@@ -383,9 +534,6 @@ angular.module('starter.controllers', [])
       $rootScope.registraDispositivo();
     }
 
-    $scope.iniciaPago = function(){
-      $rootScope.iniciaPagoTotal();
-    }
     $scope.fetchUser = function($cache){
 			User.fetchMeTheUser(userId, $cache).then(function(response){
 			  var propiedadPortada = {};
@@ -397,7 +545,6 @@ angular.module('starter.controllers', [])
           }else{
             idPropiedadPortada = $rootScope.propiedadActiva;
           }
-          //console.log("LA propiedad activa", $rootScope.propiedadActiva);
           $rootScope.propiedadActiva = idPropiedadPortada;
           localStorageService.set('user.propiedadActiva', $rootScope.propiedadActiva);
           Property.getDetails(idPropiedadPortada).then(function(respuesta){
@@ -412,49 +559,6 @@ angular.module('starter.controllers', [])
 			    }).catch(function(error){
 			      //console.log('Error en Propiedad', error);
 			    }).finally(function(){
-			      //console.log('La Propiedad portada', $rootScope.propiedadPortada);
-			      $scope.cargando = false;
-			      CanvasJS.addColorSet("colorCol",
-			        [
-			        "#d7e4ec",
-			        "#17c300"
-			        ]
-			      );
-			      var maximoGrafico = 0;
-			      var maxAnterior = 0;
-			      var maxActual = 0;
-            var intervalo = 20;
-			      angular.forEach($rootScope.propiedadPortada.consumo, function(objeto, llave){
-			          if(parseInt(objeto.anoActual) > maxActual){
-			            maxActual = parseInt(objeto.anoActual);
-			          }
-			          if(parseInt(objeto.anoAnterior) > maxAnterior){
-			            maxAnterior = parseInt(objeto.anoAnterior);
-			          }
-			      });
-			      if(maxAnterior > maxActual){
-			        maximoGrafico = parseInt(maxAnterior);
-			      }else{
-			        maximoGrafico = parseInt(maxActual);
-			      }
-			      topeGrafico = maximoGrafico + 10;
-            intervalo = Math.ceil(maximoGrafico / 6)
-			      //console.log("Valor maximo del grafico", maximoGrafico);
-			      var chart = new CanvasJS.Chart("chartContainer",{
-			        animationEnabled: true,
-			        interactivityEnabled: false,
-			        backgroundColor: "#fcfcfc",
-			        colorSet: "colorCol",
-			        dataPointMaxWidth: 12,
-			        height: 180,
-			        axisY:{
-			          interval: intervalo,
-			          maximum: topeGrafico
-			        },
-			        data: GraficoCuenta.transformDatos($rootScope.propiedadPortada.consumo, maximoGrafico)
-			      });
-            //console.log('La sesion', $rootScope.sesionUsuario);
-            chart.render();
 			      $ionicLoading.hide();
 			      $timeout.cancel(eltimer);
 			    });
@@ -506,7 +610,9 @@ angular.module('starter.controllers', [])
           empresa : $rootScope.propiedadPortada.empresa,
           servicio : $rootScope.propiedadPortada.numCliente
         }
+        console.log("El usuario: ", $rootScope.sesionUsuario);
         User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
+
           data.token = res.token;
           var creaLaOc = {
             rut : $rootScope.sesionUsuario.rut,

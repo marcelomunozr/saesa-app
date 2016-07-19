@@ -327,7 +327,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent':{
         templateUrl: "templates/profile-edit.html",
-        controller: "ResumenCtrl"
+        controller: "EditaCuentaCtrl"
+      }
+    }
+  })
+  .state('app.profile-password', {
+    url: "/profile-password",
+    cache: false,
+    views: {
+      'menuContent':{
+        templateUrl: "templates/profile-password.html",
+        controller: "ChangePasswordCtrl"
       }
     }
   })
@@ -347,7 +357,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent':{
         templateUrl: "templates/consumo.html",
-        controller: "ResumenCtrl"
+        controller: "ConsumoCtrl"
       }
     }
   })
