@@ -1,9 +1,6 @@
-<ion-view view-title="Oficinas" hide-back-button="true">
+<ion-view view-title="Oficinas" hide-back-button="false">
   <ion-nav-bar class="bar-stable oficinas-head">
     <ion-nav-back-button>
-      <button class="button button-clear back-header" ui-sref="app.profile">
-        <span class="ti-user"></span>
-      </button>
       <button class="button button-clear go-homi" ui-sref="app.home">
         <span class="ti-home"></span>
       </button>
@@ -21,13 +18,9 @@
     <div class="new-look">
       <p class="">
         {{oficina.direccion}} <br>
-        {{oficina.descripcion}} <br> 
+        {{oficina.descripcion}} <br>
         {{oficina.oficin}}</p>
     </div>
     <div class="clear-20"></div>
   </ion-content>
 </ion-view>
-
-
-
-

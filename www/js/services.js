@@ -141,7 +141,35 @@ angular.module('starter.services', [])
 
 .factory('User', function($http, $q, laConfig, localStorageService){
   var esto = this;
-
+	esto.cambiaPassword = function($data){
+		var res = $q.defer();
+		$http({
+      method: 'POST',
+      url: laConfig.backend + 'modificarPassword',
+      data: {
+				'old_password' : $data.old_password,
+				'new_password' : $data.new_password,
+				'user_id' : $data.user_id
+			}
+    }).success(function(response){
+      if(response === false){
+        res.reject({
+          reason: 'no',
+          message: 'error.'
+        });
+      } else {
+        console.log('Respuesta desde servidor:',response);
+        res.resolve(response);
+      }
+    }).catch(function(err){
+      var error = (err.data != null) ? err.data.msg : "Ha ocurrido un error, favor contactenos";
+      res.reject({
+        reason: 'error',
+        err: error
+      });
+    });
+		return res.promise;
+	}
 	esto.editarCuenta = function($data){
 		var res = $q.defer();
 		$http({

@@ -359,7 +359,36 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChangePasswordCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, localStorageService, User){
+  var userId = localStorageService.get('user.id');
+  var eltimer = $timeout(function(){
+    $ionicLoading.hide();
+  }, 10000);
+  $scope.formdata = {};
+  $scope.confirmaCambio = function(){
+    $ionicLoading.show({
+      template: 'Enviando formulario...'
+    });
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+    $scope.formdata.user_id = userId;
+    User.cambiaPassword($scope.formdata).then(function(res){
+      $ionicLoading.hide();
+      $state.go('app.home');
+      $rootScope.tituloModal = 'Formulario enviado';
+      $rootScope.textoModal = res.msg;
+      $rootScope.openModal();
+    }).catch(function(err){
+      console.log(err);
+      $ionicLoading.hide();
+      $rootScope.tituloModal = 'Error';
+      $rootScope.textoModal = err.err;
+      $rootScope.openModal();
+    });
+  }
+  $scope.$on('$ionicView.beforeEnter', function(){
 
+  });
 })
 
 .controller('EditaCuentaCtrl', function($rootScope, $scope, $ionicLoading, $state, $stateParams, $timeout, capitalizeFilter, localStorageService, User){
