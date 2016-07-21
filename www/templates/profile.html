@@ -11,10 +11,10 @@
       <h4>Datos usuario</h4>
       <div class="profile-contain">
         <h6>Nombre: {{sesionUsuario.contact_name}}</h6>
-        <h6>Rut: {{propiedadPortada.detalles.rutCliente}}</h6>
+        <h6>Rut: {{sesionUsuario.rut}}</h6>
         <h6>Tipo de tárifa: {{propiedadPortada.detalles.tarifa}}</h6>
-        <h6>Teléfono: +569 82403890</h6>
-        <h6>Email: mmunoz@multinet.cl</h6>
+        <h6>Teléfono: {{sesionUsuario.telephone}}</h6>
+        <h6>Email: {{sesionUsuario.email}}</h6>
       </div>
       <div class="button button-block" ui-sref="app.profile-edit">
         Modificar mis datos <span class="ti-arrow-right"></span>
