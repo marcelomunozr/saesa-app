@@ -584,7 +584,8 @@ angular.module('starter.controllers', [])
 			      $rootScope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
             $rootScope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
             $rootScope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
-			      //console.log('Propiedad de Portada: ', $rootScope.propiedadPortada);
+            $rootScope.propiedadPortada.nickname = respuesta.detalle.Property.nickname;
+			      //console.log('Propiedad de Portada: ', respuesta);
 			    }).catch(function(error){
 			      //console.log('Error en Propiedad', error);
 			    }).finally(function(){
