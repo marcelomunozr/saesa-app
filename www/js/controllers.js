@@ -747,7 +747,6 @@ angular.module('starter.controllers', [])
     //console.log("Propiedades: ", laPropiedad);
     Property.removeProperty({idPropiedad: laPropiedad.id, idUsuario: laPropiedad.user_id}).then(function(res){
       //console.log("LLEGO LA RESPUESTA!", res);
-
       //console.log("hasta aca se deberia haber ejecutado");
     }).catch(function(err){
       //console.log(err);
@@ -811,8 +810,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FallaCtrl', function($rootScope, $scope, $cordovaCamera, $ionicPlatform, $state, $ionicLoading, Fallas){
-  $scope.fallas = Fallas.lasFallas();
-  $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
+  $scope.fallas = [
+      {
+          "descripcion": "Alza o baja de voltaje",
+          "id": 1
+      },
+      {
+          "descripcion": "Caída de Árbol o ramas en las líneas",
+          "id": 2
+      },
+      {
+          "descripcion": "Incendio",
+          "id": 3
+      },
+      {
+          "descripcion": "Líneas cortadas",
+          "id": 4
+      },
+      {
+          "descripcion": "Poste Chocado",
+          "id": 5
+      },
+      {
+          "descripcion": "Sin suministro",
+          "id": 6
+      }
+  ];
   $scope.empresas = [];
   $scope.empresas[22] = {
       "idEmpresa" : 22,
@@ -838,10 +861,32 @@ angular.module('starter.controllers', [])
       "clickeable" : "tel:6004012022",
       "empresa" : "Edelaysen"
   };
+  $scope.propiedades = $rootScope.sesionUsuario.Propiedades;
   $scope.formdata = [];
   $scope.activa = $scope.empresas[23];
   $scope.formdata.propiedad = -1;
   $scope.formdata.tipofalla = -1;
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicLoading.show({
+      template: 'Consultando Información...'
+    });
+    Fallas.lasFallas().then(function(response){
+      $scope.fallas = [];
+      angular.forEach(response.fallas, function(value, key){
+        var lafalla = {
+          "descripcion" : value.descripcion,
+          "id" : parseInt(value.idFalla, 10)
+        };
+        $scope.fallas.push(lafalla);
+      });
+      console.log("Las pifias", response);
+    }).catch(function(err){
+      //console.log(err);
+    }).finally(function(){
+      $ionicLoading.hide();
+    });
+  });
+
   $scope.cuandoCambia = function(){
     //console.log($scope.propiedades[$scope.formdata.propiedad]);
     var indiceActivo = parseInt($scope.propiedades[$scope.formdata.propiedad].related_enterprise);

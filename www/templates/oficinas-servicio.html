@@ -18,7 +18,7 @@
     <div class="new-look">
       <p class="">
         {{oficina.direccion}} <br>
-        {{oficina.descripcion}} <br>
+        <span ng-bind-html="oficina.descripcion"></span><br>
         {{oficina.oficin}}</p>
     </div>
     <div class="clear-20"></div>

@@ -59,7 +59,7 @@
                     <div class="col col-80 no-padding">
                       <h3>{{oficina.nombreComuna | capitalize}} - {{oficina.nombreRegion | capitalize}}</h3>
                       <h3>{{oficina.direccion.trim() | capitalize}}</h3>
-                      <h6>{{oficina.descripcion.trim() | capitalize}}</h6>
+                      <h6 ng-bind-html="oficina.descripcion.trim()"></h6>
                     </div>
                   </div>
                 </ion-item>
