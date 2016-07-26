@@ -21,6 +21,11 @@ angular.module('starter.controllers', [])
   }).then(function(modal){
     $rootScope.modal = modal;
   });
+  $rootScope.logout = function(){
+    localStorageService.clearAll();
+    $state.go('login');
+  }
+
   $rootScope.registraDispositivo = function(){
     var registrado = localStorageService.get('device.registered');
     var deviceKey =  localStorageService.get('device.registrationId');
