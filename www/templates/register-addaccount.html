@@ -34,8 +34,9 @@
 				</select>
 			</label>
 			<label class="item item-input" ng-class="{'valida' : addaccount.nomPropiedad.$valid, 'invalida' : !addaccount.nomPropiedad.$valid && !addaccount.nomPropiedad.$pristine}">
-				<input type="text" placeholder="Asignar un alias a la cuenta, ejemplo: Mi casa" name="nomPropiedad" ng-model="formdata.nomPropiedad" ng-required="true">
+				<input type="text" placeholder="Asignar un alias a la cuenta, ejemplo: Mi casa" name="nomPropiedad" ng-model="formdata.nomPropiedad" ng-maxlength="25" ng-required="true">
 			</label>
+			<div class="place"><h6>El alias debe tener un máximo de 25 caracteres</h6></div>
 			<div class="clearfix"></div>
 	    </div>
       <label>

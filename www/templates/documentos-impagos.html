@@ -11,11 +11,38 @@
   </ion-nav-bar>
   <ion-content>
     <div class="new-look">
-      <h4>Seleccione boletas a pagar</h4>
+      <h4>Mi Casa</h4>
       <div class="alert">
         <h6>Estado del Servicio: <strong>{{cuenta.detalle.estadoServicio}}</strong></h6>
       </div>
 
+      <div class="top-pago row">
+        <div class="col col-50">
+          <p>Deuda Total</p>
+          <p>Deuda Vencida</p>
+          <p>Fecha Corte</p>
+        </div>
+        <div class="col text-right">
+          <p>$0</p>
+          <p>$0</p>
+          <p>01-08-2016</p>
+        </div>
+      </div>
+
+
+      <div ng-if="cuenta.documentos.length > 0">
+        <button class="button button-block button-positive" ng-click="iniciaPago()">
+          <div id="TextoTotal" ng-if="seleccionados == 0">
+            Pagar todo el saldo pendiente
+          </div>
+          <div id="TextoAlgunas" ng-if="seleccionados > 0">
+            pagar {{seleccionados}} <ng-pate ng-if="seleccionados == 1">cuenta: ${{saldoTotal}}</ng-pate> <ng-pate ng-if="seleccionados > 1 ">cuentas: ${{saldoTotal}}</ng-pate>
+          </div>
+        </button>
+      </div>
+      
+      <div class="clearfix"></div>
+      <h4>Seleccione boletas a pagar</h4>
       <div class="box impagos" ng-class="{'seleccionada' : documento.seleccionado}" ng-click="selectDocumento($index)" ng-repeat="documento in cuenta.documentos">
         <div class="check">
           <span class="ti-check"></span>
@@ -35,17 +62,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div ng-if="cuenta.documentos.length > 0">
-        <button class="button button-block button-positive" ng-click="iniciaPago()">
-          <div id="TextoTotal" ng-if="seleccionados == 0">
-            pagar todo el saldo pendiente
-          </div>
-          <div id="TextoAlgunas" ng-if="seleccionados > 0">
-            pagar {{seleccionados}} <ng-pate ng-if="seleccionados == 1">cuenta: ${{saldoTotal}}</ng-pate> <ng-pate ng-if="seleccionados > 1 ">cuentas: ${{saldoTotal}}</ng-pate>
-          </div>
-        </button>
       </div>
 
     </div>

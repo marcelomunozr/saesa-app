@@ -1236,7 +1236,7 @@ angular.module('starter.controllers', [])
 })
 
 
-/*MARCELOSHET*/
+/*MARCELOSHET RELOAD*/
 
 
 .config(function($ionicConfigProvider) {

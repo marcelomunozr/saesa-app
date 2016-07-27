@@ -323,6 +323,16 @@ ul.pasos {
 		margin-bottom: 0;
 		color: #00599b;
 	}
+	.place{
+		h6{
+			padding: 0;
+			margin: -5px 0 0;
+			color: #868686;
+			font-size: 11px;
+			/*color: red;*/
+			opacity: .9;
+		}
+	}
 	.oficinas{
 		h3{
 			font-family: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-serif;
@@ -1016,6 +1026,7 @@ p{
 		color: #cc6600;
 		p{
 			color: #cc6600;
+			text-align: justify;
 		}
 	}
 	.row.alta{
@@ -1101,8 +1112,8 @@ $gris-medium: #e0e0e0;
 $girs-light: #f8f8f8;
 $color1: #ffb500;
 $color2: #1485cc;
-$color3: #00b233;
-$color4: #ff4c4c;
+$color3: #ff4c4c;
+$color4: #00b233;
 $color5: #8e30f7;
 $color6: #ff8a00;
 
@@ -1207,7 +1218,7 @@ $regular: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-s
 .logo-homi{
 	width: 100%;
 	height: 10%;
-	padding: 8px 0 5px;
+	padding: 11px 0 5px;
 	display: block;
 	position: relative;
 	text-align: center;
@@ -1217,7 +1228,7 @@ $regular: 'DINNextLTPro-Regular', 'Helvetica Neue', 'Roboto', 'Segoe UI', sans-s
 		background-size: contain;
 		display: inline-block;
 		width: 160px;
-		height: 28px;
+		height: 25px;
 		position: relative;
 		max-height: 100%
 	}
@@ -1642,5 +1653,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
 	.saesa{
 		background: url(../img/saesa@2x.png) no-repeat;
 		background-size: contain;
+	}
+	.logo-homi{
+		.logo-saesa{
+			background: url(../img/logo-saesa@2x.png) no-repeat;
+			background-size: contain;
+		}
 	}
 }
