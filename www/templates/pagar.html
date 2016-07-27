@@ -11,7 +11,7 @@
   </ion-nav-bar>
   <ion-content>
     <div class="new-look">
-      <h4>Mi Casa</h4>
+      <h4>{{propiedadPortada.nickname}}</h4>
       <div class="alert">
         <h6>Estado del Servicio: <strong>{{cuenta.detalle.estadoServicio}}</strong></h6>
       </div>
@@ -23,9 +23,9 @@
           <p>Fecha Corte</p>
         </div>
         <div class="col text-right">
-          <p>$0</p>
-          <p>$0</p>
-          <p>01-08-2016</p>
+          <p>{{propiedadPortada.financieros.deudaTotal | currency:"$":0}}</p>
+          <p>{{propiedadPortada.financieros.deudaVencida | currency:"$":0}}</p>
+          <p>{{propiedadPortada.financieros.fechaCorte}}</p>
         </div>
       </div>
 

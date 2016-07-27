@@ -589,7 +589,7 @@ angular.module('starter.controllers', [])
 			      $rootScope.propiedadPortada.financieros = respuesta.detalle.Property.financial;
             $rootScope.propiedadPortada.last_voucher = respuesta.detalle.Property.last_voucher.url;
             $rootScope.propiedadPortada.ultimo_documento = respuesta.detalle.Property.last_voucher;
-            $rootScope.propiedadPortada.nickname = respuesta.detalle.Property.nickname;
+            $rootScope.propiedadPortada.nickname = respuesta.detalle.Property.property_nickname;
 			      //console.log('Propiedad de Portada: ', respuesta);
 			    }).catch(function(error){
 			      //console.log('Error en Propiedad', error);
@@ -619,7 +619,7 @@ angular.module('starter.controllers', [])
       template: 'Consultando Información...'
     });
   });
-  //console.log($rootScope.propiedadPortada),
+  console.log($rootScope.propiedadPortada),
   $scope.listadocumentos = [];
 
   Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
@@ -631,7 +631,6 @@ angular.module('starter.controllers', [])
     angular.forEach($scope.cuenta.documentos, function(value, key) {
       $scope.cuenta.documentos[key].seleccionado = false;
     })
-    //console.log("Impagos", $scope.cuenta.documentos);
     $scope.iniciaPago = function(){
       if($scope.seleccionados > 0){
         $ionicLoading.show({
