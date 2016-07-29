@@ -518,7 +518,7 @@ angular.module('starter.controllers', [])
           intervalo = Math.ceil(maximoGrafico / 6)
           //console.log("Valor maximo del grafico", maximoGrafico);
           var chart = new CanvasJS.Chart("chartContainer",{
-            animationEnabled: true,
+            animationEnabled: false,
             interactivityEnabled: false,
             backgroundColor: "#fcfcfc",
             colorSet: "colorCol",
@@ -614,94 +614,93 @@ angular.module('starter.controllers', [])
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
   $scope.total = 0;
+  $scope.listadocumentos = [];
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
     });
-  });
-  console.log($rootScope.propiedadPortada),
-  $scope.listadocumentos = [];
-
-  Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
-    //console.log('La Respuesta', respuesta);
-    $scope.cuenta.detalle = respuesta.detalle.details;
-    $scope.cuenta.documentos = respuesta.detalle.unpaid;
-    $scope.saldoTotal = 0;
-    $scope.seleccionados = 0;
-    angular.forEach($scope.cuenta.documentos, function(value, key) {
-      $scope.cuenta.documentos[key].seleccionado = false;
-    })
-    $scope.iniciaPago = function(){
-      if($scope.seleccionados > 0){
-        $ionicLoading.show({
-          template: 'Iniciando pago...'
-        });
-        var data = {
-          token : "",
-          oc : "",
-          monto : "",
-          documentos : [],
-          empresa : $rootScope.propiedadPortada.empresa,
-          servicio : $rootScope.propiedadPortada.numCliente
-        }
-        console.log("El usuario: ", $rootScope.sesionUsuario);
-        User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
-
-          data.token = res.token;
-          var creaLaOc = {
-            rut : $rootScope.sesionUsuario.rut,
+    Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
+      //console.log('La Respuesta', respuesta);
+      $scope.cuenta.detalle = respuesta.detalle.details;
+      $scope.cuenta.documentos = respuesta.detalle.unpaid;
+      $scope.saldoTotal = 0;
+      $scope.seleccionados = 0;
+      angular.forEach($scope.cuenta.documentos, function(value, key) {
+        $scope.cuenta.documentos[key].seleccionado = false;
+      })
+      $scope.iniciaPago = function(){
+        if($scope.seleccionados > 0){
+          $ionicLoading.show({
+            template: 'Iniciando pago...'
+          });
+          var data = {
+            token : "",
+            oc : "",
+            monto : "",
+            documentos : [],
             empresa : $rootScope.propiedadPortada.empresa,
-            monto : $scope.saldoTotal
-          };
-          Pago.creaOC(creaLaOc).then(function(res){
-            data.oc = res.oc;
-            data.monto = $scope.saldoTotal;
-            angular.forEach($scope.cuenta.documentos, function(value, key) {
-              if(value.seleccionado == true){
-                var documento = {
-                  monto : parseInt(value.saldo),
-                  nroDocumento : value.nroDcto,
-                  vencimiento : value.fechaVcto
+            servicio : $rootScope.propiedadPortada.numCliente
+          }
+          console.log("El usuario: ", $rootScope.sesionUsuario);
+          User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
+
+            data.token = res.token;
+            var creaLaOc = {
+              rut : $rootScope.sesionUsuario.rut,
+              empresa : $rootScope.propiedadPortada.empresa,
+              monto : $scope.saldoTotal
+            };
+            Pago.creaOC(creaLaOc).then(function(res){
+              data.oc = res.oc;
+              data.monto = $scope.saldoTotal;
+              angular.forEach($scope.cuenta.documentos, function(value, key) {
+                if(value.seleccionado == true){
+                  var documento = {
+                    monto : parseInt(value.saldo),
+                    nroDocumento : value.nroDcto,
+                    vencimiento : value.fechaVcto
+                  }
+                  data.documentos.push(documento);
                 }
-                data.documentos.push(documento);
-              }
-            });
-            //console.log("Los datos hermanos", data);
-            Pago.guardaVariosDatosWebpayOC(data).then(function(res){
-              $ionicLoading.hide();
-              $rootScope.abrirTbk(data);
+              });
+              //console.log("Los datos hermanos", data);
+              Pago.guardaVariosDatosWebpayOC(data).then(function(res){
+                $ionicLoading.hide();
+                $rootScope.abrirTbk(data);
+              }).catch(function(err){
+                //console.log('Error en Propiedad', err);
+              })
             }).catch(function(err){
               //console.log('Error en Propiedad', err);
-            })
+            });
           }).catch(function(err){
             //console.log('Error en Propiedad', err);
           });
-        }).catch(function(err){
-          //console.log('Error en Propiedad', err);
-        });
-      }else{
-        $rootScope.iniciaPagoTotal();
-      }
-    }
-    $scope.selectDocumento = function(ind){
-      var seleccionados = 0;
-      var saldoTotal = 0;
-      $scope.cuenta.documentos[ind].seleccionado = !$scope.cuenta.documentos[ind].seleccionado;
-      angular.forEach($scope.cuenta.documentos, function(value, key) {
-        if(value.seleccionado == true){
-          seleccionados += 1;
-          saldoTotal += parseInt(value.saldo);
+        }else{
+          $rootScope.iniciaPagoTotal();
         }
-      })
-      $scope.seleccionados = seleccionados;
-      $scope.saldoTotal = saldoTotal;
-    };
-  }).catch(function(err){
-    //console.log('El Cagazo', err);
-  }).finally(function(){
-    //console.log('El Detalle', $scope.cuenta.detalle);
-    //console.log('Documentos', $scope.cuenta.documentos);
-    $ionicLoading.hide();
+      }
+      $scope.selectDocumento = function(ind){
+        var seleccionados = 0;
+        var saldoTotal = 0;
+        $scope.cuenta.documentos[ind].seleccionado = !$scope.cuenta.documentos[ind].seleccionado;
+        angular.forEach($scope.cuenta.documentos, function(value, key) {
+          if(value.seleccionado == true){
+            seleccionados += 1;
+            saldoTotal += parseInt(value.saldo);
+          }
+        })
+        $scope.seleccionados = seleccionados;
+        $scope.saldoTotal = saldoTotal;
+      };
+    }).catch(function(err){
+      //console.log('El Cagazo', err);
+    }).finally(function(){
+      //console.log('El Detalle', $scope.cuenta.detalle);
+      //console.log('Documentos', $scope.cuenta.documentos);
+      $ionicLoading.hide();
+    });
+
   });
 })
 
@@ -884,7 +883,7 @@ angular.module('starter.controllers', [])
         };
         $scope.fallas.push(lafalla);
       });
-      console.log("Las pifias", response);
+      //console.log("Las pifias", response);
     }).catch(function(err){
       //console.log(err);
     }).finally(function(){
