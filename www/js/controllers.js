@@ -559,7 +559,7 @@ angular.module('starter.controllers', [])
       //console.log('timeout');
     }, 10000);
     $scope.$on('$ionicView.beforeEnter', function(){
-	    $scope.fetchUser(true);
+	    $scope.fetchUser(false);
 	    $ionicLoading.show({
         template: 'Consultando Información...'
       });
