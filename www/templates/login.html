@@ -10,7 +10,7 @@
           <input type="text" placeholder="RUT" ng-minlength="7" ng-model="formdata.rut" ng-required="true" ng-blur="formdata.rut=formatRut(formdata.rut)">
         </label>
         <label class="item item-input">
-          <input type="password" placeholder="Contraseña" ng-maxlength="6" ng-model="formdata.password" ng-required="true">
+          <input type="password" placeholder="Contraseña" ng-model="formdata.password" ng-minlength="4" ng-required="true">
         </label>
         <label>
           <button class="button button-block" type="submit" ng-disabled="login.$invalid || login.$pristine">Ingresar <span class="ti-arrow-right"></span></button>

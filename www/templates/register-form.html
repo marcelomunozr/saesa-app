@@ -20,7 +20,7 @@
             <input name="passwordContacto" ng-model="formdata.passwordContacto"  type="password" placeholder="Contraseña" ng-minlength="4" ng-required="true">
           </label>
           <label class="item item-input" ng-class="{'valida' : register.passwordRepetir.$valid, 'invalida' : !register.passwordRepetir.$valid && !register.passwordRepetir.$pristine}">
-            <input name="passwordRepetir" ng-model="formdata.passwordRepetir"  type="password" placeholder="Repetir contraseña" ng-required="true">
+            <input name="passwordRepetir" ng-model="formdata.passwordRepetir" ng-minlength="4" type="password" placeholder="Repetir contraseña" ng-required="true">
           </label>
           <div class="item item-checkbox">
             <label class="checkbox">

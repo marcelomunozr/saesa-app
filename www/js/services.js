@@ -158,7 +158,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){
@@ -189,7 +189,7 @@ angular.module('starter.services', [])
           message: 'error.'
         });
       } else {
-        console.log('Respuesta desde servidor:',response);
+        //console.log('Respuesta desde servidor:',response);
         res.resolve(response);
       }
     }).catch(function(err){

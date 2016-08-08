@@ -428,7 +428,7 @@ angular.module('starter.controllers', [])
       $rootScope.textoModal = res.msg;
       $rootScope.openModal();
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
       $ionicLoading.hide();
       $state.go('app.home');
       $rootScope.tituloModal = 'Error';
@@ -641,7 +641,7 @@ angular.module('starter.controllers', [])
             empresa : $rootScope.propiedadPortada.empresa,
             servicio : $rootScope.propiedadPortada.numCliente
           }
-          console.log("El usuario: ", $rootScope.sesionUsuario);
+          //console.log("El usuario: ", $rootScope.sesionUsuario);
           User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
 
             data.token = res.token;
