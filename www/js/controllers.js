@@ -56,7 +56,8 @@ angular.module('starter.controllers', [])
     var url = laConfig.backend + "redireccionaTbk/";
     var defaultOptions = {
       location: 'yes',
-      clearcache: 'yes',
+      clearcache: 'no',
+      clearsessioncache: 'no',
       toolbar: 'yes',
       hardwareback : 'no',
       closebuttoncaption : 'Volver',
@@ -67,6 +68,7 @@ angular.module('starter.controllers', [])
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
+    url += "&empresa=" + $data.empresa;
     //console.log("La URL", url);
     $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
     .then(function(event) {})
@@ -142,6 +144,7 @@ angular.module('starter.controllers', [])
             };
             Pago.creaOC(creaLaOc).then(function(res){
               data.oc = res.oc;
+              data.empresa = creaLaOc.empresa;
               Pago.guardaVariosDatosWebpayOC(data).then(function(res){
                   $ionicLoading.hide();
                   $rootScope.abrirTbk(data);
@@ -652,6 +655,7 @@ angular.module('starter.controllers', [])
             };
             Pago.creaOC(creaLaOc).then(function(res){
               data.oc = res.oc;
+              data.empresa = creaLaOc.empresa;
               data.monto = $scope.saldoTotal;
               angular.forEach($scope.cuenta.documentos, function(value, key) {
                 if(value.seleccionado == true){
