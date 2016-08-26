@@ -85,7 +85,7 @@ angular.module('starter.controllers', [])
   });
 
   $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
-    $cordovaInAppBrowser.close();
+    //$cordovaInAppBrowser.close();
   });
 
   $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){

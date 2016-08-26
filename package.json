@@ -21,13 +21,16 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-whitelist",
     "cordova-plugin-camera",
-    "cordova-plugin-inappbrowser",
     {
       "variables": {
         "SENDER_ID": "1015297443872"
       },
       "locator": "phonegap-plugin-push",
       "id": "phonegap-plugin-push"
+    },
+    {
+      "locator": "https://alejandro_multinet@bitbucket.org/multicueva/inappbrowser-con-cookies.git",
+      "id": "cordova-plugin-inappbrowser"
     }
   ],
   "cordovaPlatforms": [
