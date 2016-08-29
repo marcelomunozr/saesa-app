@@ -523,11 +523,11 @@ angular.module('starter.services', [])
   }
 
 
-	esto.getOnlyDueDocuments = function($data){
+	esto.getOnlyDueDocuments = function($data, $cache = false){
     var res = $q.defer();
     var url = laConfig.backend + 'getOnlyDueDocuments/' + $data;
     $http.get(url, {
-      cache: true,
+      cache: !$cache,
       timeout: 30000
     }).success(function(response){
       if(response === false){
@@ -550,11 +550,11 @@ angular.module('starter.services', [])
     return res.promise;
   }
 
-	esto.getDueDocuments = function($data){
+	esto.getDueDocuments = function($data, $cache = false){
     var res = $q.defer();
     var url = laConfig.backend + 'getDueDocuments/' + $data;
     $http.get(url, {
-      cache: true,
+      cache: !$cache,
       timeout: 30000
     }).success(function(response){
       if(response === false){

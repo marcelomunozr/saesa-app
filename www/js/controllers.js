@@ -89,7 +89,7 @@ angular.module('starter.controllers', [])
   });
 
   $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){
-    $state.go('app.home', {fetch : true});
+    $state.go('app.documentos-impagos', { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
   })
 
   $rootScope.abrirExterna = function($direccion){
@@ -120,7 +120,7 @@ angular.module('starter.controllers', [])
       empresa : $rootScope.propiedadPortada.empresa,
       servicio : $rootScope.propiedadPortada.numCliente
     }
-    Property.getOnlyDueDocuments($rootScope.propiedadActiva).then(function(res){
+    Property.getOnlyDueDocuments($rootScope.propiedadActiva, true).then(function(res){
       //console.log("Los Impagos", res);
       var documentos = res.detalle.unpaid;
       var totalPagar = 0;
@@ -613,16 +613,20 @@ angular.module('starter.controllers', [])
 		});
 })
 
-.controller('DocumentosImpagosCtrl', function($scope, $rootScope, $ionicLoading, $stateParams, Property, DocumentosImpagos, User, Pago){
+.controller('DocumentosImpagosCtrl', function($scope, $rootScope, $ionicLoading, $state, $stateParams, Property, DocumentosImpagos, User, Pago){
   $scope.documentos = DocumentosImpagos.all();
   $scope.cuenta = {};
   $scope.total = 0;
   $scope.listadocumentos = [];
+  var cache = false;
+  if(!angular.isUndefined($stateParams.fetch)){
+    cache = $stateParams.fetch;
+  }
   $scope.$on('$ionicView.beforeEnter', function(){
     $ionicLoading.show({
       template: 'Consultando Información...'
     });
-    Property.getDueDocuments($stateParams.propertyId).then(function(respuesta){
+    Property.getDueDocuments($stateParams.propertyId, cache).then(function(respuesta){
       //console.log('La Respuesta', respuesta);
       $scope.cuenta.detalle = respuesta.detalle.details;
       $scope.cuenta.documentos = respuesta.detalle.unpaid;
@@ -646,7 +650,6 @@ angular.module('starter.controllers', [])
           }
           //console.log("El usuario: ", $rootScope.sesionUsuario);
           User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
-
             data.token = res.token;
             var creaLaOc = {
               rut : $rootScope.sesionUsuario.rut,

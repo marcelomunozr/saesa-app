@@ -263,7 +263,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   //documentos impagos
   .state('app.documentos-impagos', {
-    url: "/documentos-impagos/:propertyId",
+    url: "/documentos-impagos/:propertyId/?fetch",
     cache: false,
     views: {
       'menuContent':{
@@ -342,7 +342,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
   .state('app.pagar', {
-    url: "/pagar/:propertyId",
+    url: "/pagar/:propertyId?fetch",
     cache: false,
     views: {
       'menuContent':{
@@ -361,7 +361,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-
   $urlRouterProvider.otherwise('/login');
-
 });
