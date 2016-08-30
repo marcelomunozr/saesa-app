@@ -1,0 +1,26 @@
+<ion-view view-title="Oficinas" hide-back-button="false">
+  <ion-nav-bar class="bar-stable oficinas-head">
+    <ion-nav-back-button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="contenido-mapa" ng-hide="!oficina.grafico">
+       <ion-content class="map-content" >
+        <div id="map" data-tap-disabled="true"></div>
+      </ion-content>
+    </div>
+    <div class="no-mapa" ng-hide="oficina.grafico">
+      <h4 class="text-center">Información geográfica en desarrollo</h4>
+    </div>
+    <div class="new-look">
+      <p class="">
+        {{oficina.direccion}} <br>
+        <span ng-bind-html="oficina.descripcion"></span><br>
+        {{oficina.oficin}}</p>
+    </div>
+    <div class="clear-20"></div>
+  </ion-content>
+</ion-view>

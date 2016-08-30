@@ -1,0 +1,32 @@
+<ion-view view-title="Servicios" hide-back-button="true">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="new-look">
+      <div class="row el-servicio menu-asociados" ng-if="slideServicios" ng-repeat="servicio in slideServicios">
+        <div class="col col-50">
+          <span class="{{servicio.detalles.details.estadoServicio}}">{{servicio.propiedad.property_nickname  | capitalize}}</span>
+        </div>
+        <div class="col text-right">
+          <div class="inline" ng-disabled="servicio.esPortada" ng-click="marcarComoPortada(servicio.propiedad.id)">
+            <i ng-show="servicio.esPortada" class="ti-home in-on"></i>
+            <i ng-hide="servicio.esPortada" class="ti-home in-off"></i>
+          </div>
+          <div class="inline" ng-click="modalConfirmacionEliminar(servicio.propiedad)">
+            <i class="ti-close danger"></i>
+          </div>
+        </div>
+      </div>
+      <button class="button button-block" ui-sref="register.addaccount">Agregar Servicios <span class="ti-layers-alt"></span></button>
+    </div>
+
+  </ion-content>
+</ion-view>

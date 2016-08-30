@@ -1,0 +1,65 @@
+<ion-view view-title="Estoy sin Luz" hide-back-button="true">
+  <ion-nav-bar class="bar-stable sin-luz-head">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+      <form name="InformaFalla" ng-submit="informarLaFalla()">
+        <div class="list list-inset">
+          <div class="add-account">
+            <label class="item item-input item-select">
+              <div class="input-label" ng-show="formdata.propiedad == -1">
+                Selecionar servicio
+              </div>
+              <select ng-model="formdata.propiedad" name="propiedad" ng-change="cuandoCambia()" ng-required="true">
+                <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label" ng-show="formdata.tipofalla == -1">
+                Tipo de eventualidad
+              </div>
+              <select ng-model="formdata.tipofalla" name="tipoFalla" ng-required="true">
+                <option ng-repeat="falla in fallas" value="{{falla.id}}">{{falla.descripcion}}</option>
+              </select>
+            </label>
+            <label class="item item-input" ng-class="{'valida' : InformaFalla.comentarios.$valid, 'invalida' : !InformaFalla.comentarios.$valid && !InformaFalla.comentarios.$pristine}">
+              <textarea name="comentarios" ng-model="formdata.comentarios" placeholder="Comentarios" ng-required="true"></textarea>
+            </label>
+            <div class="text-center">
+              <label id="for-file-upload" class="item item-input upload" ng-click="abrirDialogoSubida()">
+                Adjuntar imagen <span class="ti-camera"></span>
+              </label>
+              <div class="preview-foto">
+                <img src="{{formdata.imagen}}"/>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <label>
+            <button class="button button-block" type="submit" ng-disabled="InformaFalla.$invalid || InformaFalla.$pristine">Enviar Requerimiento <span class="ti-arrow-right"></span></button>
+          </label>
+          <h6 class="text-justify"><span class="alrt"><i class="ti-alert"></i></span>Estimado Cliente, antes de notificar un servicio sin suministro no olvide revisar su interruptor, debe recordar que si la situación es solo una baja del interruptor, el costo por la atención es asumido por usted, por no ser responsabilidad de la empresa.</h6>
+        </div>
+      </form>
+      <div class="contenido">
+        <div class="row">
+          <div class="col">
+            <div class="btn-main center">
+              <div class="btn" ng-click="abrirExterna(activa.clickeable)">
+                <span class="ion-ios-telephone-outline"></span>
+                {{activa.empresa}} - {{activa.numeroTelefono}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear-30"></div>
+      </div>
+  </ion-content>
+</ion-view>

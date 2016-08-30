@@ -523,7 +523,8 @@ angular.module('starter.services', [])
   }
 
 
-	esto.getOnlyDueDocuments = function($data, $cache = false){
+	esto.getOnlyDueDocuments = function($data, $cache){
+		$cache = $cache || false;
     var res = $q.defer();
     var url = laConfig.backend + 'getOnlyDueDocuments/' + $data;
     $http.get(url, {
@@ -550,7 +551,8 @@ angular.module('starter.services', [])
     return res.promise;
   }
 
-	esto.getDueDocuments = function($data, $cache = false){
+	esto.getDueDocuments = function($data, $cache){
+		$cache = $cache || false;
     var res = $q.defer();
     var url = laConfig.backend + 'getDueDocuments/' + $data;
     $http.get(url, {

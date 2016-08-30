@@ -1,0 +1,93 @@
+<ion-view view-title="Contáctenos" hide-back-button="true">
+  <ion-nav-bar class="bar-stable contacto-head">
+    <ion-nav-back-button>
+      <button class="button button-clear back-header" ui-sref="app.profile">
+        <span class="ti-user"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+      <form name="FormContact" ng-controller="ContactCtrl" ng-submit="enviarConsulta()">
+        <div class="list list-inset">
+          <div class="send-contact">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Selecionar servicio
+              </div>
+              <select ng-model="formdata.propiedad" name="propiedad" ng-required="true">
+                <option ng-repeat="propiedad in propiedades" value="{{$index}}">{{propiedad.property_nickname}}</option>
+              </select>
+            </label>
+            <label class="item item-input">
+              <textarea placeholder="Comentarios" class="max-text" maxlength="800" ng-model="formdata.comentarios" required></textarea>
+            </label>
+            <h6 class="max-chars">Máximo de caracteres:  <span id="charNum">800</span></h6>
+            <div class="clearfix"></div>
+          </div>
+
+          <label>
+            <button class="button button-block" type="submit" ng-disabled="FormContact.$invalid || FormContact.$pristine">Enviar <span class="ti-arrow-right"></span></button>
+          </label>
+        </div>
+      </form>
+      <div class="contenido">
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <span class="saesa"></span>
+            </div>
+            <div class="col col-45">
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012020')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012020
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <span class="luz-osorno"></span>
+            </div>
+            <div class="col col-45">
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012020')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012020
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <span class="frontel"></span>
+            </div>
+            <div class="col col-45">
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012021')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012021
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="group-box">
+          <div class="row">
+            <div class="col col-55">
+              <span class="edelaysen"></span>
+            </div>
+            <div class="col col-45">
+              <a class="btn pull-right" ng-click="abrirExterna('tel:6004012022')">
+                <span class="ion-ios-telephone-outline"></span>
+                600 4012022
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear-30"></div>
+
+  </ion-content>
+</ion-view>

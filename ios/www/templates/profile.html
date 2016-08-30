@@ -1,0 +1,28 @@
+<ion-view view-title="Perfil" enable-menu-with-back-views="true" hide-back-button="true">
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+        <button class="button button-clear go-homi" ui-sref="app.home">
+          <span class="ti-home"></span>
+        </button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content>
+    <div class="new-profile">
+      <h4>Datos usuario</h4>
+      <div class="profile-contain">
+        <h6>Nombre: {{sesionUsuario.contact_name}}</h6>
+        <h6>Rut: {{sesionUsuario.rut}}</h6>
+        <h6>Tipo de tarifa: {{propiedadPortada.detalles.tarifa}}</h6>
+        <h6>Teléfono: {{sesionUsuario.telephone}}</h6>
+        <h6>Email: {{sesionUsuario.email}}</h6>
+      </div>
+      <div class="button button-block" ui-sref="app.profile-edit">
+        Modificar mis Datos <span class="ti-arrow-right"></span>
+      </div>
+      <div class="button button-block" ui-sref="app.profile-password">
+        Cambiar Contraseña <span class="ti-arrow-right"></span>
+      </div>
+      <a class="pull-left button button-clear button-positive" ng-click="logout()">Cerrar sesión</a>
+    </div>
+  </ion-content>
+</ion-view>
