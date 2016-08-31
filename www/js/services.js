@@ -350,8 +350,6 @@ angular.module('starter.services', [])
           message: 'registro incorrecto.'
         });
       } else {
-        //console.log('Respuesta desde servidor:',response);
-
 				var data = {
 					deviceKey : localStorageService.get('deviceregistrationId'),
 					userId: response.idUsuario,
@@ -531,7 +529,7 @@ angular.module('starter.services', [])
 			laCache = $cache;
 		}
 		$http.get(url, {
-      cache: !laCache,
+      cache: false,
       timeout: 30000
     }).success(function(response){
       if(response === false){
@@ -562,7 +560,7 @@ angular.module('starter.services', [])
 			laCache = $cache;
 		}
 		$http.get(url, {
-      cache: !laCache,
+      cache: false,
       timeout: 30000
     }).success(function(response){
       if(response === false){
