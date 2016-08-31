@@ -350,8 +350,6 @@ angular.module('starter.services', [])
           message: 'registro incorrecto.'
         });
       } else {
-        //console.log('Respuesta desde servidor:',response);
-
 				var data = {
 					deviceKey : localStorageService.get('deviceregistrationId'),
 					userId: response.idUsuario,
@@ -524,11 +522,16 @@ angular.module('starter.services', [])
 
 
 	esto.getOnlyDueDocuments = function($data, $cache){
-		$cache = $cache || false;
+		// $cache = $cache || false;
+
     var res = $q.defer();
     var url = laConfig.backend + 'getOnlyDueDocuments/' + $data;
-    $http.get(url, {
-      cache: !$cache,
+		var laCache = false;
+		if(!angular.isUndefined($cache)){
+			laCache = $cache;
+		}
+		$http.get(url, {
+      cache: false,
       timeout: 30000
     }).success(function(response){
       if(response === false){
@@ -552,11 +555,16 @@ angular.module('starter.services', [])
   }
 
 	esto.getDueDocuments = function($data, $cache){
-		$cache = $cache || false;
+		//
+		// $cache = $cache || false;
     var res = $q.defer();
     var url = laConfig.backend + 'getDueDocuments/' + $data;
-    $http.get(url, {
-      cache: !$cache,
+		var laCache = false;
+		if(!angular.isUndefined($cache)){
+			laCache = $cache;
+		}
+		$http.get(url, {
+      cache: false,
       timeout: 30000
     }).success(function(response){
       if(response === false){
