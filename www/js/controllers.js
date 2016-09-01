@@ -57,8 +57,8 @@ angular.module('starter.controllers', [])
     var url = laConfig.backend + "redireccionaTbk/";
     var defaultOptions = {
       location: 'yes',
-      clearcache: 'no',
-      clearsessioncache: 'no',
+      clearcache: 'yes',
+      clearsessioncache: 'yes',
       toolbar: 'yes',
       hardwareback : 'no',
       closebuttoncaption : 'Volver',
@@ -71,13 +71,12 @@ angular.module('starter.controllers', [])
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     url += "&empresa=" + $data.empresa;
-    //console.log("La URL", url);
-    if(os == 'ios'){
+    if(!angular.isUndefined(ionic.Platform.platform()) && == 'ios'){
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});
     }else{
-      $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
+    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});
     }
