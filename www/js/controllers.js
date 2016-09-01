@@ -65,15 +65,22 @@ angular.module('starter.controllers', [])
       presentationstyle : 'pagesheet',
       zoom: 'no'
     };
+    var os = localStorageService.get('deviceos');
     //var stringOptions = "location=yes, clearcache=yes, tootlbar=yes, hardwareback=no, closebuttoncaption=Volver, presentationstyle=pagesheet"
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     url += "&empresa=" + $data.empresa;
     //console.log("La URL", url);
-    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
-    .then(function(event) {})
-    .catch(function(event) {});
+    if(os == 'ios'){
+      $cordovaInAppBrowser.open(url, '_system', defaultOptions)
+      .then(function(event) {})
+      .catch(function(event) {});
+    }else{
+      $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
+      .then(function(event) {})
+      .catch(function(event) {});
+    }
   };
 
   $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
