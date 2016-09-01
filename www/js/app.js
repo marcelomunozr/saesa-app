@@ -3,6 +3,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .run(function($ionicPlatform, $state, $rootScope, $log, localStorageService, $ionicPopup) {
   $ionicPlatform.ready(function() {
+    function handleOpenURL(url) {
+      console.log("received url: " + url);
+    }
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     }

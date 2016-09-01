@@ -66,19 +66,19 @@ angular.module('starter.controllers', [])
       zoom: 'no'
     };
     var os = localStorageService.get('deviceos');
-    //var stringOptions = "location=yes, clearcache=yes, tootlbar=yes, hardwareback=no, closebuttoncaption=Volver, presentationstyle=pagesheet"
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     url += "&empresa=" + $data.empresa;
     if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'ios'){
+      url += "&os=ios";
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});
     }else{
-    $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
-      .then(function(event) {})
-      .catch(function(event) {});
+      $cordovaInAppBrowser.open(url, '_blank', defaultOptions)
+        .then(function(event) {})
+        .catch(function(event) {});
     }
   };
 
@@ -87,7 +87,7 @@ angular.module('starter.controllers', [])
       $cordovaInAppBrowser.close();
     }
     if(event.url.match("/webpaymobile/auth_emisor.cgi")){
-      $cordovaInAppBrowser.executeScript({code:'if(document.paso.length !== -1){setTimeout("document.paso.submit()", 2000);}'})
+      $cordovaInAppBrowser.executeScript({code:'if(document.paso.length !== -1){setTimeout("document.paso.submit()", 1500);}'})
     }
   });
 
