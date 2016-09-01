@@ -71,7 +71,7 @@ angular.module('starter.controllers', [])
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     url += "&empresa=" + $data.empresa;
-    if(!angular.isUndefined(ionic.Platform.platform()) && == 'ios'){
+    if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'ios'){
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});
