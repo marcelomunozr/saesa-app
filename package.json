@@ -31,6 +31,13 @@
     {
       "locator": "https://alejandro_multinet@bitbucket.org/multicueva/inappbrowser-con-cookies.git",
       "id": "cordova-plugin-inappbrowser"
+    },
+    {
+      "variables": {
+        "URL_SCHEME": "saesapp"
+      },
+      "locator": "cordova-plugin-customurlscheme",
+      "id": "cordova-plugin-customurlscheme"
     }
   ],
   "cordovaPlatforms": [
