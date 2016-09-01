@@ -1,0 +1,14 @@
+  <ion-header-bar>
+    <h1 class="title">Registrarme</h1>
+    <div>
+      <button class="button button-clear back-header" ng-click="goBack()"><span class="ti-back-left"></span></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <ul class="pasos">
+      <li class="one" ng-class="{1 : 'active'}[regdata.paso]"><strong>1</strong></li>
+      <li class="two" ng-class="{2 : 'active'}[regdata.paso]"><strong>2</strong></li>
+      <div class="clearfix"></div>
+    </ul>
+	<div ui-view name="register"></div>
+  </ion-content>

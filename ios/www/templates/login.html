@@ -1,0 +1,23 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Iniciar Sesión</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="logo-login"></div>
+    <form name="login" ng-submit="doLogin()">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="RUT" ng-minlength="7" ng-model="formdata.rut" ng-required="true" ng-blur="formdata.rut=formatRut(formdata.rut)">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Contraseña" ng-model="formdata.password" ng-minlength="4" ng-required="true">
+        </label>
+        <label>
+          <button class="button button-block" type="submit" ng-disabled="login.$invalid || login.$pristine">Ingresar <span class="ti-arrow-right"></span></button>
+        </label>
+        <a ui-sref="register.form" class="pull-left button button-clear button-positive">Registrarme</a>
+        <a ui-sref="forgot-password" class="pull-right button button-clear button-positive">Olvidé mi contraseña</a>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

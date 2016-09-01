@@ -522,6 +522,8 @@ angular.module('starter.services', [])
 
 
 	esto.getOnlyDueDocuments = function($data, $cache){
+		// $cache = $cache || false;
+
     var res = $q.defer();
     var url = laConfig.backend + 'getOnlyDueDocuments/' + $data;
 		var laCache = false;
@@ -553,6 +555,8 @@ angular.module('starter.services', [])
   }
 
 	esto.getDueDocuments = function($data, $cache){
+		//
+		// $cache = $cache || false;
     var res = $q.defer();
     var url = laConfig.backend + 'getDueDocuments/' + $data;
 		var laCache = false;

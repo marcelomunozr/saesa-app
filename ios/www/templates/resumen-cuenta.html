@@ -1,0 +1,112 @@
+<ion-view view-title="Resumen de la cuenta" enable-menu-with-back-views="true" hide-back-button="true">
+  <ion-header-bar>
+    <h1 class="title">Resumen de la cuenta</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="contenido">
+      <div class="row">
+        <div class="col col-75 datos">
+          <h3>{{propiedadPortada.detalles.nombreTitular}}</h3>
+          <p>Rut: {{propiedadPortada.detalles.rutCliente}}</p>
+          <p>Número de cliente: {{propiedadPortada.detalles.numeroServicio}}</p>
+          <p>Dirección: {{propiedadPortada.detalles.direccion}}</p>
+          <p>Comuna: {{propiedadPortada.detalles.comuna}}</p>
+          <p>Estado de Servicio: {{propiedadPortada.detalles.estadoServicio}}</p>
+          <p>Tipo Tarifa: {{propiedadPortada.detalles.tarifa}}</p>
+        </div>
+        <div class="col">
+          <a href="#" class="la-boleta" ng-click="abrirExterna(propiedadPortada.last_voucher)">
+            <div class="ver-boleta">
+              <div class="ti-file"></div>
+                  Ver última boleta
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="alert" ui-sref="app.documentos-impagos({ propertyId : propiedadActiva })">
+            <h6>({{propiedadPortada.financieros.numeroDocumentosImpagos}}) documentos impagos <span class="ti-share"></span></h6>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-if="propiedadPortada.financieros.numeroDocumentosImpagos > 0">
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="iniciaPagoTotal()">
+            Pagar saldo pendiente
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="box">
+            <div class="row">
+              <div class="col-67">
+                  <p>Deuda Total</p>
+                  <p>Deuda Vencida</p>
+                  <p>Vencimiento documento más antigüo</p>
+                  <p>Monto Último Pago  </p>
+                  <p>Fecha Último Pago</p>
+                  <p class="total">TOTAL A PAGAR</p>
+              </div>
+              <div class="col-33">
+                  <p>{{propiedadPortada.financieros.deudaTotal | currency:"$":0}}</p>
+                  <p>{{propiedadPortada.financieros.deudaVencida | currency:"$":0}}</p>
+                  <p>{{propiedadPortada.financieros.fechaVencDocMasAntiguo}}</p>
+                  <p>{{propiedadPortada.financieros.montoUltimoPago | currency:"$":0}}</p>
+                  <p>{{propiedadPortada.financieros.fechaUltimoPago}} <br></p>
+                  <p class="total">{{propiedadPortada.financieros.deudaTotal | currency:"$":0}}</p>
+              </div>
+            </div>
+            <div class="text-center">
+              <p class="legend">Fecha corte por no pago: {{propiedadPortada.financieros.fechaCorte}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="btn-main center">
+            <div class="btn" ui-sref="app.documentos-pagados({ propertyId : propiedadActiva })">
+              <span class="ti-check"></span>
+              Registro de pagos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="box resumen">
+            <div class="chartTitle">Consumo Comparativo</div>
+            <div id="chartContainer" class="chartStyle"></div>
+            <div class="text-center">
+              <div class="chart-comp chart-actual">
+                <span class="icon-chart-actual"></span>
+                Año actual
+              </div>
+              <div class="chart-comp chart-anterior">
+              <span class="icon-chart-anterior"></span>
+                Año pasado
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="btn-main">
+            <div class="btn" nav-clear ui-sref="app.contactenos">
+              <span class="ti-mobile"></span>
+              Contáctenos
+            </div>
+            <div class="btn pull-right" ui-sref="app.oficinas">
+              <span class="ti-location-pin"></span>
+              Oficinas
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

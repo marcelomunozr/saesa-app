@@ -1,0 +1,32 @@
+<ion-view view-title="Perfil" enable-menu-with-back-views="true" hide-back-button="true">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+      <button class="button button-clear go-back" ng-click="goBack()">
+        <span class="ti-back-left"></span>
+      </button>
+      <button class="button button-clear go-homi" ui-sref="app.home">
+        <span class="ti-home"></span>
+      </button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="new-profile">
+      <h4>Editar datos</h4>
+      <form name="login" ng-submit="editarCuenta()">
+        <label class="item item-input">
+          <input type="text" ng-model="formdata.contact_name" ng-required="true">
+        </label>
+        <label class="item item-input disabled">
+          <input type="text" ng-model="formdata.rut" ng-required="true" disabled="disabled" ng-rut>
+        </label>
+        <label class="item item-input">
+          <input type="tel" ng-model="formdata.telephone" ng-required="true">
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="formdata.email" ng-required="true">
+        </label>
+        <button class="button button-block" type="submit">Guardar <span class="ti-arrow-right"></span></button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
