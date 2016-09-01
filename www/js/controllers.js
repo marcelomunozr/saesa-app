@@ -118,7 +118,8 @@ angular.module('starter.controllers', [])
       monto : "",
       documentos : [],
       empresa : $rootScope.propiedadPortada.empresa,
-      servicio : $rootScope.propiedadPortada.numCliente
+      servicio : $rootScope.propiedadPortada.numCliente,
+      origen : $state.current
     }
     Property.getOnlyDueDocuments($rootScope.propiedadActiva, true).then(function(res){
       //console.log("Los Impagos", res);
@@ -225,7 +226,7 @@ angular.module('starter.controllers', [])
   $scope.terminosCondiciones = "";
   $scope.getTerminos = function(){
     User.getTerminos().then(function(res){
-      console.log("Terminos y Condiciones", res);
+      //console.log("Terminos y Condiciones", res);
       $scope.terminosCondiciones = res.terminos.descripcion;
     }).catch(function(err){
 
@@ -387,7 +388,7 @@ angular.module('starter.controllers', [])
       $rootScope.textoModal = res.msg;
       $rootScope.openModal();
     }).catch(function(err){
-      console.log(err);
+      //console.log(err);
       $ionicLoading.hide();
       $rootScope.tituloModal = 'Error';
       $rootScope.textoModal = err.err;
@@ -412,9 +413,9 @@ angular.module('starter.controllers', [])
       $scope.formdata.contact_name = response.sesionUsuario.contact_name;
       $scope.formdata.email = response.sesionUsuario.email;
       $scope.formdata.telephone = response.sesionUsuario.telephone;
-      console.log("La Sesion del usuario de la wea de la wea: ", $rootScope.sesionUsuario);
+      //console.log("La Sesion del usuario de la wea de la wea: ", $rootScope.sesionUsuario);
     }).catch(function(err){
-      console.log('Error en Usuario', err);
+      //console.log('Error en Usuario', err);
     }).finally(function(){
       $ionicLoading.hide();
     });
@@ -632,6 +633,7 @@ angular.module('starter.controllers', [])
       $scope.cuenta.documentos = respuesta.detalle.unpaid;
       $scope.saldoTotal = 0;
       $scope.seleccionados = 0;
+      $scope.financieros = respuesta.detalle.financial;
       angular.forEach($scope.cuenta.documentos, function(value, key) {
         $scope.cuenta.documentos[key].seleccionado = false;
       })
@@ -646,7 +648,8 @@ angular.module('starter.controllers', [])
             monto : "",
             documentos : [],
             empresa : $rootScope.propiedadPortada.empresa,
-            servicio : $rootScope.propiedadPortada.numCliente
+            servicio : $rootScope.propiedadPortada.numCliente,
+            origen : $state.current
           }
           //console.log("El usuario: ", $rootScope.sesionUsuario);
           User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
