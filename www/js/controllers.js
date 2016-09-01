@@ -9,6 +9,7 @@ angular.module('starter.controllers', [])
   // }
   $scope.loginData = {};
   $rootScope.sesionUsuario = {};
+  $rootScope.statActual = 'app.home';
   if(angular.isDefined(laActiva) && laActiva != null){
     $rootScope.propiedadActiva = laActiva;
   }else{
@@ -84,12 +85,12 @@ angular.module('starter.controllers', [])
     }
   });
 
-  $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
-    //$cordovaInAppBrowser.close();
-  });
-
   $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){
-    $state.go('app.documentos-impagos', { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
+    if(!angular.isUndefined($rootScope.statActual) && ($rootScope.statActual !== 'app.home')){
+      $state.go($rootScope.statActual, { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
+    }else{
+      $state.go('app.documentos-impagos', { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
+    }
   })
 
   $rootScope.abrirExterna = function($direccion){
@@ -118,9 +119,10 @@ angular.module('starter.controllers', [])
       monto : "",
       documentos : [],
       empresa : $rootScope.propiedadPortada.empresa,
-      servicio : $rootScope.propiedadPortada.numCliente,
-      origen : $state.current
+      servicio : $rootScope.propiedadPortada.numCliente
     }
+    $rootScope.statActual = $state.current.name;
+    console.log("Anterior: ", $rootScope.statActual);
     Property.getOnlyDueDocuments($rootScope.propiedadActiva, true).then(function(res){
       //console.log("Los Impagos", res);
       var documentos = res.detalle.unpaid;
@@ -648,10 +650,10 @@ angular.module('starter.controllers', [])
             monto : "",
             documentos : [],
             empresa : $rootScope.propiedadPortada.empresa,
-            servicio : $rootScope.propiedadPortada.numCliente,
-            origen : $state.current
+            servicio : $rootScope.propiedadPortada.numCliente
           }
-          //console.log("El usuario: ", $rootScope.sesionUsuario);
+          $rootScope.statActual = $state.current.name;
+          console.log("Anterior: ", $rootScope.statActual);
           User.obtieneToken($rootScope.sesionUsuario.id).then(function(res){
             data.token = res.token;
             var creaLaOc = {
