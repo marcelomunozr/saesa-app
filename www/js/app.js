@@ -3,12 +3,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .run(function($ionicPlatform, $state, $rootScope, $log, localStorageService, $ionicPopup) {
   $ionicPlatform.ready(function() {
+    document.addEventListener("deviceready", function () {
+      var device = $cordovaDevice;
+      console.log(device);
+    }, false);
     var handleOpenURL = function(url) {
       alert("RECEIVED URL: " + url);
-      console.info(url);
-      console.info(typeof(url));
+      console.log(url);
+      console.log(typeof(url));
       var a  = url.replace(/[A-Za-z$-.:/]/g, "");
-      console.info(a);
+      console.log(a);
     };
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);

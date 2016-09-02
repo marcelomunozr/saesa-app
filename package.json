@@ -38,7 +38,8 @@
       },
       "locator": "cordova-plugin-customurlscheme",
       "id": "cordova-plugin-customurlscheme"
-    }
+    },
+    "cordova-plugin-device"
   ],
   "cordovaPlatforms": [
     "android",
