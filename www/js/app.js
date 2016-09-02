@@ -6,8 +6,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     document.addEventListener("deviceready", function () {
       var device = $cordovaDevice.getVersion();
       var platform = $cordovaDevice.getPlatform();
-      localStorageService.set('device.platform', platform);
-      localStorageService.set('device.version', device);
+      if(typeof localStorageService != 'undefined'){
+        localStorageService.set('device.platform', platform);
+        localStorageService.set('device.version', device);
+      }
     }, false);
     window.handleOpenURL = function handleOpenUrl(url) {
       var slug = url.replace("saesapp://", "")
