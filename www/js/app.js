@@ -1,18 +1,21 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule', 'ngRut', 'ngCordova', 'angularFileUpload'])
 
-.run(function($ionicPlatform, $state, $rootScope, $log, localStorageService, $ionicPopup) {
+.run(function($ionicPlatform, $state, $rootScope, $log, $ionicPopup, $cordovaDevice, localStorageService) {
   $ionicPlatform.ready(function() {
     document.addEventListener("deviceready", function () {
       var device = $cordovaDevice;
       console.log(device);
     }, false);
-    var handleOpenURL = function(url) {
-      alert("RECEIVED URL: " + url);
-      console.log(url);
-      console.log(typeof(url));
-      var a  = url.replace(/[A-Za-z$-.:/]/g, "");
-      console.log(a);
+    window.handleOpenURL = function handleOpenUrl(url) {
+      var slug = url.replace("saesapp://", "")
+      if(slug == 'app.impagos'){
+        if(!angular.isUndefined($rootScope.statActual) && ($rootScope.statActual !== 'app.home')){
+          $state.go($rootScope.statActual, { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
+        }else{
+          $state.go('app.documentos-impagos', { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
+        }
+      }
     };
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
