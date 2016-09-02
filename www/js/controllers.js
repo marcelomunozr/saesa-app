@@ -57,8 +57,8 @@ angular.module('starter.controllers', [])
     var url = laConfig.backend + "redireccionaTbk/";
     var defaultOptions = {
       location: 'yes',
-      clearcache: 'yes',
-      clearsessioncache: 'yes',
+      clearcache: 'no',
+      clearsessioncache: 'no',
       toolbar: 'yes',
       hardwareback : 'no',
       closebuttoncaption : 'Volver',
