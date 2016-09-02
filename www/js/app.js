@@ -3,9 +3,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .run(function($ionicPlatform, $state, $rootScope, $log, localStorageService, $ionicPopup) {
   $ionicPlatform.ready(function() {
-    function handleOpenURL(url) {
-      console.log("received url: " + url);
-    }
+    var handleOpenURL = function(url) {
+      alert("RECEIVED URL: " + url);
+      console.info(url);
+      console.info(typeof(url));
+      var a  = url.replace(/[A-Za-z$-.:/]/g, "");
+      console.info(a);
+    };
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     }
