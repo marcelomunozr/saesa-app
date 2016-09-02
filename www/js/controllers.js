@@ -66,12 +66,18 @@ angular.module('starter.controllers', [])
       zoom: 'no'
     };
     var os = localStorageService.get('deviceos');
+    var version = localStorageService.get('device.version');
     url += "?token=" + $data.token;
     url += "&monto=" + $data.monto;
     url += "&oc=" + $data.oc;
     url += "&empresa=" + $data.empresa;
     if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'ios'){
-      url += "&os=ios";
+      url += "&externo=1";
+      $cordovaInAppBrowser.open(url, '_system', defaultOptions)
+      .then(function(event) {})
+      .catch(function(event) {});
+    }else if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'android' && parseInt(version) <= 5.1){
+      url += "&externo=1";
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});

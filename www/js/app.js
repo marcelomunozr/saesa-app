@@ -4,8 +4,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 .run(function($ionicPlatform, $state, $rootScope, $log, $ionicPopup, $cordovaDevice, localStorageService) {
   $ionicPlatform.ready(function() {
     document.addEventListener("deviceready", function () {
-      var device = $cordovaDevice;
-      console.log(device);
+      var device = $cordovaDevice.getVersion();
+      var platform = $cordovaDevice.getPlatform();
+      localStorageService.set('device.platform', platform);
+      localStorageService.set('device.version', device);
     }, false);
     window.handleOpenURL = function handleOpenUrl(url) {
       var slug = url.replace("saesapp://", "")
@@ -15,6 +17,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }else{
           $state.go('app.documentos-impagos', { propertyId : $rootScope.propiedadActiva, fetch : true}, {location: true, inherit:false, reload:true});
         }
+      }else{
+        $state.go('app.home', {fetch : true}, {location: false, inherit:false, reload:false});
       }
     };
     if (window.cordova && window.cordova.plugins.Keyboard) {
