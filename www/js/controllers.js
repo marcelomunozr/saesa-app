@@ -76,7 +76,7 @@ angular.module('starter.controllers', [])
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
       .catch(function(event) {});
-    }else if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'android' && parseInt(version) <= 5.1){
+    }else if(!angular.isUndefined(ionic.Platform.platform()) && ionic.Platform.platform() == 'android' && parseInt(version) < 5.0){
       url += "&externo=1";
       $cordovaInAppBrowser.open(url, '_system', defaultOptions)
       .then(function(event) {})
