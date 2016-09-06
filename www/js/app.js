@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 
 .constant('laConfig', {
-    'backend' : 'http://api.multinet.cl/saesa/api/',
+    'backend' : 'http://saesa.multinetlabs.com/api/',
     'debug' : true
 })
 
