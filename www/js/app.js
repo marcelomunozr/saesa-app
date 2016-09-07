@@ -64,8 +64,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			});
 			push.on('error', function(e) {
         //console.log('error', e);
+        // alert('Push on error: ' + JSON.stringify(e));
 			});
 		} catch(err){
+      // alert('catch err:' + JSON.stringify(err));
 			$log.log(err);
 		}
     $ionicPlatform.registerBackButtonAction(function (event) {
