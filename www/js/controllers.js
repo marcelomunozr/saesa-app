@@ -105,13 +105,14 @@ angular.module('starter.controllers', [])
     }
   })
 
-  $rootScope.abrirExterna = function($direccion){
+  $rootScope.abrirExterna = function($direccion, $place){
+    $place = $place || '_system';
     var defaultOptions = {
       location: 'yes',
       clearcache: 'yes',
       toolbar: 'no'
     };
-    var ref = $cordovaInAppBrowser.open($direccion, '_system', defaultOptions)
+    var ref = $cordovaInAppBrowser.open($direccion, $place, defaultOptions)
     .then(function(event) {
       // success
     })
