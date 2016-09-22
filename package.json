@@ -18,9 +18,15 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "ionic-plugin-keyboard",
     "cordova-plugin-whitelist",
     "cordova-plugin-camera",
+    {
+      "variables": {
+        "URL_SCHEME": "saesapp"
+      },
+      "locator": "cordova-plugin-customurlscheme",
+      "id": "cordova-plugin-customurlscheme"
+    },
     {
       "variables": {
         "SENDER_ID": "1015297443872"
@@ -32,14 +38,9 @@
       "locator": "https://alejandro_multinet@bitbucket.org/multicueva/inappbrowser-con-cookies.git",
       "id": "cordova-plugin-inappbrowser"
     },
-    {
-      "variables": {
-        "URL_SCHEME": "saesapp"
-      },
-      "locator": "cordova-plugin-customurlscheme",
-      "id": "cordova-plugin-customurlscheme"
-    },
-    "cordova-plugin-device"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-device",
+    "cordova-plugin-google-analytics"
   ],
   "cordovaPlatforms": [
     "android",
