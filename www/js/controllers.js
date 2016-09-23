@@ -288,10 +288,15 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $stateParams, $ionicHistory, User, localStorageService){
+.controller('RegisterFormCtrl', function($scope, $rootScope, $sce, $compile, $state, $stateParams, $ionicHistory, User, localStorageService, ngRut){
 	$scope.regdata.paso = 1;
+  $scope.formatRut = function(rut){
+    return ngRut.format(rut);
+  }
   $scope.registerUser = function(){
     //console.log('paso', $scope.formdata);
+    $scope.formdata.rutContacto = ngRut.clean($scope.formdata.rutContacto);
+
     User.register($scope.formdata).then(function(response){
       $scope.idUsuario = response.idUsuario;
       localStorageService.set('user.id', response.idUsuario);
