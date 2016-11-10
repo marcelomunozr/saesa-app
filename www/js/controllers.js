@@ -313,7 +313,6 @@ angular.module('starter.controllers', [])
         }
         $rootScope.textoModal = labelError;
         $rootScope.openModal();
-
     }).finally();
   }
 
