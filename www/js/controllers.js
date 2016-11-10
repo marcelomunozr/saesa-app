@@ -966,11 +966,11 @@ angular.module('starter.controllers', [])
     };
     //console.log("Formulario Falla: ", falla);
     Fallas.reportarFalla(falla).then(function(res){
-      //console.log(res);
+      console.log(res);
       $ionicLoading.hide();
       $state.go('app.home');
-      $rootScope.tituloModal = 'Formulario enviado';
-      $rootScope.textoModal = 'Se ha enviado su informe de falla';
+      $rootScope.tituloModal = res.titulo;
+      $rootScope.textoModal = res.res.comentario;
       $rootScope.openModal();
     }).catch(function(err){
       //console.log(err);
