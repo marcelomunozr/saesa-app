@@ -71,4 +71,16 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
+    <plugin name="cordova-plugin-customurlscheme" spec="~4.2.0">
+        <variable name="URL_SCHEME" value="saesapp" />
+    </plugin>
+    <plugin name="phonegap-plugin-push" spec="~1.8.1">
+        <variable name="SENDER_ID" value="1015297443872" />
+    </plugin>
+    <plugin name="cordova-plugin-inappbrowser" spec="https://alejandro_multinet@bitbucket.org/multicueva/inappbrowser-con-cookies.git" />
+    <plugin name="cordova-plugin-google-analytics" spec="~1.7.1" />
+    <plugin name="cordova-plugin-camera" spec="~2.3.0">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="Necesitamos acceso a su cámara" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Necesitamos acceso a sus fotos" />
+    </plugin>
 </widget>
