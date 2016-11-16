@@ -19,7 +19,14 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
-    "cordova-plugin-camera",
+    {
+      "variables": {
+        "CAMERA_USAGE_DESCRIPTION": "Necesitamos acceso a su cámara",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "Necesitamos acceso a sus fotos"
+      },
+      "locator": "cordova-plugin-camera",
+      "id": "cordova-plugin-camera"
+    },
     {
       "variables": {
         "URL_SCHEME": "saesapp"
