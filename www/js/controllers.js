@@ -930,7 +930,9 @@ angular.module('starter.controllers', [])
   }
   //console.log("La Activa", $scope.activa);
   $scope.abrirDialogoSubida = function(){
+    console.log('diálogo salida');
     $ionicPlatform.ready(function(){
+      console.log('IonicPlatform ready');
       var options = {
         quality: 75,
         destinationType: Camera.DestinationType.DATA_URL,
